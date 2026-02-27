@@ -20,11 +20,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Darryl Yeng
+### Leung Poh Chi Lennon
 
-<img src="images/arkanian4.png" width="200px">
+<img src="images/lemonishi.png" width="200px">
 
-[[github](http://github.com/arkanian4)]
+[[github](http://github.com/lemonishi)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
@@ -40,11 +40,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Darryl Yeng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/arkanian4.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/arkanian4)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
