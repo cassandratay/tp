@@ -11,12 +11,11 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Damian Eng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/concentratedsulfuricacid.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/concentratedsulfuricacid)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
@@ -31,30 +30,31 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Cassandra Tay
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cassandratay.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/cassandratay)] 
+[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Darryl Yeng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/arkanian4.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/arkanian4)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Jaris Chow
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jaris2203.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/jaris2203)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
