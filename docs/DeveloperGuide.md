@@ -470,8 +470,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI (Command Line Interface)**: A text-based interface where users interact with the system by typing commands instead of using graphical controls.
+
+* **Subscriber**: A customer with an active subscription who is expected to receive  recurring deliveries.
+
+* **Subscription status**: The state indicating whether a customer currently has an active subscription.
+
+* **Delivery status**: The outcome of a delivery attempt (e.g., succeeded or failed).
+
+* **Startup owner**: The primary user of the system, typically a small business owner managing customer subscriptions and deliveries.
+
+* **Delivery driver**: A user responsible for carrying out deliveries using the information stored in the system.
+
+* **Mainstream OS**: A widely used operating system such as Windows, macOS, or Linux.
+
+* **Private contact detail**: Customer information that should only be accessible by the owner (e.g., phone numbers or addresses).
 
 --------------------------------------------------------------------------------------------------------------------
 
