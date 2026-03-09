@@ -3,14 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ORDER_DESCRIPTION_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,6 +46,10 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different expiry date -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withExpiryDate(VALID_EXPIRY_DATE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different order description -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withOrderDescription(VALID_ORDER_DESCRIPTION_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -70,6 +67,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", orderDescription="
+                + editPersonDescriptor.getExpiryDate().orElse(null) + ", expiryDate="
                 + editPersonDescriptor.getOrderDescription().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());

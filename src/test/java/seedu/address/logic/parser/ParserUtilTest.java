@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpiryDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OrderDescription;
 import seedu.address.model.person.Phone;
@@ -27,6 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ORDER_DESCRIPTION = "#special";
+    private static final String INVALID_EXPIRY_DATE = "31-12-2026";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -34,6 +36,7 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_ORDER_DESCRIPTION = "2 iced lattes";
+    private static final String VALID_EXPIRY_DATE = "2026-12-31";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -47,7 +50,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -152,11 +155,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
-    }
-
-    @Test
     public void parseOrderDescription_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseOrderDescription(null));
     }
@@ -177,6 +175,34 @@ public class ParserUtilTest {
         String orderDescriptionWithWhitespace = WHITESPACE + VALID_ORDER_DESCRIPTION + WHITESPACE;
         OrderDescription expectedOrderDescription = new OrderDescription(VALID_ORDER_DESCRIPTION);
         assertEquals(expectedOrderDescription, ParserUtil.parseOrderDescription(orderDescriptionWithWhitespace));
+    }
+
+    @Test
+    public void parseExpiryDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseExpiryDate(null));
+    }
+
+    @Test
+    public void parseExpiryDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExpiryDate(INVALID_EXPIRY_DATE));
+    }
+
+    @Test
+    public void parseExpiryDate_validValueWithoutWhitespace_returnsExpiryDate() throws Exception {
+        ExpiryDate expectedExpiryDate = new ExpiryDate(VALID_EXPIRY_DATE);
+        assertEquals(expectedExpiryDate, ParserUtil.parseExpiryDate(VALID_EXPIRY_DATE));
+    }
+
+    @Test
+    public void parseExpiryDate_validValueWithWhitespace_returnsTrimmedExpiryDate() throws Exception {
+        String expiryDateWithWhitespace = WHITESPACE + VALID_EXPIRY_DATE + WHITESPACE;
+        ExpiryDate expectedExpiryDate = new ExpiryDate(VALID_EXPIRY_DATE);
+        assertEquals(expectedExpiryDate, ParserUtil.parseExpiryDate(expiryDateWithWhitespace));
+    }
+
+    @Test
+    public void parseTag_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
     }
 
     @Test

@@ -252,7 +252,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("orderDescription", orderDescription)
-                    .add("expiry_date", expiryDate)
+                    .add("expiryDate", expiryDate)
                     .add("tags", tags)
                     .toString();
         }

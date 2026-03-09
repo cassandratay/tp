@@ -3,12 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.OrderDescription;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,12 +17,14 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ORDER_DESCRIPTION = "1 cake";
+    public static final String DEFAULT_EXPIRY_DATE = "2026-12-31";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private OrderDescription orderDescription;
+    private ExpiryDate expiryDate;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +36,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         orderDescription = new OrderDescription(DEFAULT_ORDER_DESCRIPTION);
+        expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
         tags = new HashSet<>();
     }
 
@@ -51,6 +49,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         orderDescription = personToCopy.getOrderDescription();
+        expiryDate = personToCopy.getExpiryDate();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -102,8 +101,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ExpiryDate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withExpiryDate(String expiryDate) {
+        this.expiryDate = new ExpiryDate(expiryDate);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, orderDescription, tags);
+        return new Person(name, phone, email, address, orderDescription, expiryDate, tags);
     }
 
 }

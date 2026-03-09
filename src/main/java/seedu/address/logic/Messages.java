@@ -44,6 +44,8 @@ public class Messages {
                 .append("; Address: ")
                 .append(person.getAddress())
                 .append("; Order Description: ")
+                .append("; Subscription End Date: ")
+                .append(person.getExpiryDate())
                 .append(person.getOrderDescription())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
