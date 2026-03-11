@@ -26,17 +26,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Package> packages = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  OrderDescription orderDescription, DeliveryStatus deliveryStatus, Set<Tag> tags) {
+                  Set<Package> packages, OrderDescription orderDescription, DeliveryStatus deliveryStatus, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, orderDescription, deliveryStatus, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.packages.addAll(packages);
         this.orderDescription = orderDescription;
         this.deliveryStatus = deliveryStatus;
         this.tags.addAll(tags);
@@ -107,6 +109,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && packages.equals(otherPerson.packages)
                 && orderDescription.equals(otherPerson.orderDescription)
                 && deliveryStatus.equals(otherPerson.deliveryStatus)
                 && tags.equals(otherPerson.tags);
@@ -125,6 +128,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("packages", packages)
                 .add("orderDescription", orderDescription)
                 .add("deliveryStatus", deliveryStatus)
                 .add("tags", tags)
