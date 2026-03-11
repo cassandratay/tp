@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OrderDescription;
@@ -109,6 +110,21 @@ public class ParserUtil {
             throw new ParseException(OrderDescription.MESSAGE_CONSTRAINTS);
         }
         return new OrderDescription(trimmedOrderDescription);
+    }
+
+    /**
+     * Parses a {@code String deliveryStatus} into a {@code DeliveryStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deliveryStatus} is invalid.
+     */
+    public static DeliveryStatus parseDeliveryStatus(String deliveryStatus) throws ParseException {
+        requireNonNull(deliveryStatus);
+        String trimmedDeliveryStatus = deliveryStatus.trim();
+        if (!DeliveryStatus.isValidDeliveryStatus(trimmedDeliveryStatus)) {
+            throw new ParseException(DeliveryStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new DeliveryStatus(trimmedDeliveryStatus);
     }
 
     /**

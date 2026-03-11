@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OrderDescription;
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String orderDescription;
+    private final String deliveryStatus;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -39,12 +41,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("orderDescription") String orderDescription,
+            @JsonProperty("deliveryStatus") String deliveryStatus,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.orderDescription = orderDescription;
+        this.deliveryStatus = deliveryStatus;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -59,6 +63,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         orderDescription = source.getOrderDescription().value;
+        deliveryStatus = source.getDeliveryStatus().deliveryStatus;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -116,8 +121,18 @@ class JsonAdaptedPerson {
         }
         final OrderDescription modelOrderDescription = new OrderDescription(orderDescription);
 
+        if (deliveryStatus == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryStatus.class.getSimpleName()));
+        }
+        if (!DeliveryStatus.isValidDeliveryStatus(deliveryStatus)) {
+            throw new IllegalValueException(DeliveryStatus.MESSAGE_CONSTRAINTS);
+        }
+        final DeliveryStatus modelDeliveryStatus = new DeliveryStatus(deliveryStatus);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelOrderDescription, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelOrderDescription,
+                modelDeliveryStatus, modelTags);
     }
 
 }

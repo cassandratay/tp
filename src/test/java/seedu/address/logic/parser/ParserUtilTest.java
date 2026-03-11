@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OrderDescription;
@@ -27,6 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ORDER_DESCRIPTION = "#special";
+    private static final String INVALID_DELIVERY_STATUS = "maybe";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -34,6 +36,7 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_ORDER_DESCRIPTION = "2 iced lattes";
+    private static final String VALID_DELIVERY_STATUS = "pending";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -177,6 +180,29 @@ public class ParserUtilTest {
         String orderDescriptionWithWhitespace = WHITESPACE + VALID_ORDER_DESCRIPTION + WHITESPACE;
         OrderDescription expectedOrderDescription = new OrderDescription(VALID_ORDER_DESCRIPTION);
         assertEquals(expectedOrderDescription, ParserUtil.parseOrderDescription(orderDescriptionWithWhitespace));
+    }
+
+    @Test
+    public void parseDeliveryStatus_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeliveryStatus(null));
+    }
+
+    @Test
+    public void parseDeliveryStatus_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryStatus(INVALID_DELIVERY_STATUS));
+    }
+
+    @Test
+    public void parseDeliveryStatus_validValueWithoutWhitespace_returnsName() throws Exception {
+        DeliveryStatus expectedDeliveryStatus = new DeliveryStatus(VALID_DELIVERY_STATUS);
+        assertEquals(expectedDeliveryStatus, ParserUtil.parseDeliveryStatus(VALID_DELIVERY_STATUS));
+    }
+
+    @Test
+    public void parseDeliveryStatus_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String deliveryStatusWithWhitespace = WHITESPACE + VALID_DELIVERY_STATUS + WHITESPACE;
+        DeliveryStatus expectedDeliveryStatus = new DeliveryStatus(VALID_DELIVERY_STATUS);
+        assertEquals(expectedDeliveryStatus, ParserUtil.parseDeliveryStatus(deliveryStatusWithWhitespace));
     }
 
     @Test

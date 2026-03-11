@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER_DESCRIPTION;
@@ -34,7 +35,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_ORDER_DESCRIPTION, PREFIX_TAG);
+                        PREFIX_ORDER_DESCRIPTION, PREFIX_DELIVERY_STATUS, PREFIX_TAG);
 
         Index index;
 
@@ -45,7 +46,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_ORDER_DESCRIPTION);
+                PREFIX_ORDER_DESCRIPTION, PREFIX_DELIVERY_STATUS);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -64,6 +65,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ORDER_DESCRIPTION).isPresent()) {
             editPersonDescriptor.setOrderDescription(
                     ParserUtil.parseOrderDescription(argMultimap.getValue(PREFIX_ORDER_DESCRIPTION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_DELIVERY_STATUS).isPresent()) {
+            editPersonDescriptor.setDeliveryStatus(
+                    ParserUtil.parseDeliveryStatus(argMultimap.getValue(PREFIX_DELIVERY_STATUS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER_DESCRIPTION;
@@ -23,6 +24,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OrderDescription;
@@ -46,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_ORDER_DESCRIPTION + "ORDER_DESCRIPTION] "
+            + "[" + PREFIX_DELIVERY_STATUS + "DELIVERY STATUS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -104,10 +107,12 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         OrderDescription updatedOrderDescription = editPersonDescriptor.getOrderDescription()
                 .orElse(personToEdit.getOrderDescription());
+        DeliveryStatus updatedDeliveryStatus = editPersonDescriptor.getDeliveryStatus()
+                .orElse(personToEdit.getDeliveryStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedOrderDescription, updatedTags);
+                updatedOrderDescription, updatedDeliveryStatus, updatedTags);
     }
 
     @Override
@@ -144,6 +149,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private OrderDescription orderDescription;
+        private DeliveryStatus deliveryStatus;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -158,6 +164,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setOrderDescription(toCopy.orderDescription);
+            setDeliveryStatus(toCopy.deliveryStatus);
             setTags(toCopy.tags);
         }
 
@@ -165,7 +172,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, orderDescription, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, orderDescription, deliveryStatus, tags);
         }
 
         public void setName(Name name) {
@@ -208,6 +215,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(orderDescription);
         }
 
+        public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
+            this.deliveryStatus = deliveryStatus;
+        }
+
+        public Optional<DeliveryStatus> getDeliveryStatus() {
+            return Optional.ofNullable(deliveryStatus);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -242,6 +257,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(orderDescription, otherEditPersonDescriptor.orderDescription)
+                    && Objects.equals(deliveryStatus, otherEditPersonDescriptor.deliveryStatus)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -253,6 +269,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("orderDescription", orderDescription)
+                    .add("deliveryStatus", deliveryStatus)
                     .add("tags", tags)
                     .toString();
         }

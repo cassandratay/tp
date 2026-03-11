@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.OrderDescription;
@@ -22,12 +23,14 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ORDER_DESCRIPTION = "1 cake";
+    public static final String DEFAULT_DELIVERY_STATUS = "pending";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private OrderDescription orderDescription;
+    private DeliveryStatus deliveryStatus;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +42,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         orderDescription = new OrderDescription(DEFAULT_ORDER_DESCRIPTION);
+        deliveryStatus = new DeliveryStatus(DEFAULT_DELIVERY_STATUS);
         tags = new HashSet<>();
     }
 
@@ -51,6 +55,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         orderDescription = personToCopy.getOrderDescription();
+        deliveryStatus = personToCopy.getDeliveryStatus();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -102,8 +107,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code DeliveryStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = new DeliveryStatus(deliveryStatus);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, orderDescription, tags);
+        return new Person(name, phone, email, address, orderDescription, deliveryStatus, tags);
     }
 
 }
