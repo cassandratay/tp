@@ -46,7 +46,7 @@ public class SampleDataUtil {
                 getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getBoxSet("box4"),d
+                getBoxSet("box4"),
                 new OrderDescription("4 chicken pies"),
                 new ExpiryDate("2026-12-27"),
                 DeliveryStatus.fromString("out-for-delivery"),

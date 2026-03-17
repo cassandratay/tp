@@ -99,7 +99,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code DeliveryStatus} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withDeliveryStatus(String deliveryStatus) {
-        descriptor.setDeliveryStatus(new DeliveryStatus(deliveryStatus));
+        descriptor.setDeliveryStatus(DeliveryStatus.fromString(deliveryStatus));
         return this;
     }
 

@@ -48,7 +48,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         orderDescription = new OrderDescription(DEFAULT_ORDER_DESCRIPTION);
         expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
-        deliveryStatus = new DeliveryStatus(DEFAULT_DELIVERY_STATUS);
+        deliveryStatus = DeliveryStatus.fromString(DEFAULT_DELIVERY_STATUS);
         tags = new HashSet<>();
         boxes = SampleDataUtil.getBoxSet("Box1");
     }
@@ -136,7 +136,7 @@ public class PersonBuilder {
      * Sets the {@code DeliveryStatus} of the {@code Person} that we are building.
      */
     public PersonBuilder withDeliveryStatus(String deliveryStatus) {
-        this.deliveryStatus = new DeliveryStatus(deliveryStatus);
+        this.deliveryStatus = DeliveryStatus.fromString(deliveryStatus);
         return this;
     }
 

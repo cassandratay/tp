@@ -220,14 +220,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseDeliveryStatus_validValueWithoutWhitespace_returnsName() throws Exception {
-        DeliveryStatus expectedDeliveryStatus = new DeliveryStatus(VALID_DELIVERY_STATUS);
+        DeliveryStatus expectedDeliveryStatus = DeliveryStatus.fromString(VALID_DELIVERY_STATUS);
         assertEquals(expectedDeliveryStatus, ParserUtil.parseDeliveryStatus(VALID_DELIVERY_STATUS));
     }
 
     @Test
     public void parseDeliveryStatus_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String deliveryStatusWithWhitespace = WHITESPACE + VALID_DELIVERY_STATUS + WHITESPACE;
-        DeliveryStatus expectedDeliveryStatus = new DeliveryStatus(VALID_DELIVERY_STATUS);
+        DeliveryStatus expectedDeliveryStatus = DeliveryStatus.fromString(VALID_DELIVERY_STATUS);
         assertEquals(expectedDeliveryStatus, ParserUtil.parseDeliveryStatus(deliveryStatusWithWhitespace));
     }
 

@@ -10,42 +10,21 @@ public class DeliveryStatusTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DeliveryStatus(null));
+        assertThrows(NullPointerException.class, () -> DeliveryStatus.fromString(null));
     }
 
     @Test
     public void constructor_invalidDeliveryStatus_throwsIllegalArgumentException() {
         String invalidDeliveryStatus = "maybe";
-        assertThrows(IllegalArgumentException.class, () -> new DeliveryStatus(invalidDeliveryStatus));
-    }
-
-    @Test
-    public void isValidDeliveryStatus() {
-        // null delivery status
-        assertThrows(NullPointerException.class, () -> DeliveryStatus.isValidDeliveryStatus(null));
-
-        // invalid delivery status
-        assertFalse(DeliveryStatus.isValidDeliveryStatus("")); // empty string
-        assertFalse(DeliveryStatus.isValidDeliveryStatus(" ")); // spaces only
-        assertFalse(DeliveryStatus.isValidDeliveryStatus("^")); // only non-alphanumeric characters
-        assertFalse(DeliveryStatus.isValidDeliveryStatus("pending*")); // contains non-alphanumeric characters
-        assertFalse(DeliveryStatus.isValidDeliveryStatus("Pending")); // wrong case
-        assertFalse(DeliveryStatus.isValidDeliveryStatus("DELIVERED")); // wrong case
-        assertFalse(DeliveryStatus.isValidDeliveryStatus("out_for_delivery")); // underscore instead of hyphen
-
-        // valid delivery status
-        assertTrue(DeliveryStatus.isValidDeliveryStatus("pending"));
-        assertTrue(DeliveryStatus.isValidDeliveryStatus("preparing"));
-        assertTrue(DeliveryStatus.isValidDeliveryStatus("out-for-delivery"));
-        assertTrue(DeliveryStatus.isValidDeliveryStatus("delivered"));
+        assertThrows(IllegalArgumentException.class, () -> DeliveryStatus.fromString(invalidDeliveryStatus));
     }
 
     @Test
     public void equals() {
-        DeliveryStatus deliveryStatus = new DeliveryStatus("delivered");
+        DeliveryStatus deliveryStatus = DeliveryStatus.fromString("delivered");
 
         // same values -> returns true
-        assertTrue(deliveryStatus.equals(new DeliveryStatus("delivered")));
+        assertTrue(deliveryStatus.equals(DeliveryStatus.fromString("delivered")));
 
         // same object -> returns true
         assertTrue(deliveryStatus.equals(deliveryStatus));
@@ -57,6 +36,9 @@ public class DeliveryStatusTest {
         assertFalse(deliveryStatus.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(deliveryStatus.equals(new DeliveryStatus("pending")));
+        assertFalse(deliveryStatus.equals(DeliveryStatus.fromString("pending")));
+
+        // different values -> returns false
+        assertFalse(deliveryStatus.equals(DeliveryStatus.fromString("preparing")));
     }
 }
