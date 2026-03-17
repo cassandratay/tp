@@ -171,5 +171,4 @@ class JsonAdaptedPerson {
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBoxes,
                 modelOrderDescription, modelExpiryDate, modelDeliveryStatus, modelTags);
     }
-
 }

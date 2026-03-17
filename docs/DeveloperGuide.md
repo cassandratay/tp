@@ -425,35 +425,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The subscriber list is empty.
 
    * 2a1. Client2Door displays no subscribers
-        
+
      Use case ends.
 
 ### Non-Functional Requirements
 
 **Environment Requirements**
-* The system should work on any _mainstream OS_ with Java `17` or above installed. 
-* The system should work without requiring an installer. 
+* The system should work on any _mainstream OS_ with Java `17` or above installed.
+* The system should work without requiring an installer.
 * The system should not depend on any remote server maintained by the development team.
 
 **Performance & Capacity Requirements**
-* The system should manage up to 1000 persons without noticeable performance degradation. 
+* The system should manage up to 1000 persons without noticeable performance degradation.
 * The system should respond to user commands within 1 second when managing up to 1000 persons.
 
 **Usability & Accessibility Requirements**
-* Users should be able to complete most tasks faster using commands than using a mouse. 
-* New users should be able to perform basic commands after reading the User Guide without external assistance. 
+* Users should be able to complete most tasks faster using commands than using a mouse.
+* New users should be able to perform basic commands after reading the User Guide without external assistance.
 * The GUI should display correctly without layout distortion at 1920×1080 (scaling 100 - 125%), and remain fully functional at 1280×720 (scaling up to 150%).
 
 **Data Requirements**
-* The system should support persistent local storage of user data. 
-* The system should restore previously saved data upon restart. 
-* The system should prevent corruption of stored data during unexpected shutdown. 
+* The system should support persistent local storage of user data.
+* The system should restore previously saved data upon restart.
+* The system should prevent corruption of stored data during unexpected shutdown.
 * The system should save data automatically after each modifying command.
 
 **Reliability & Error Handling**
-* The system should operate continuously without failure during normal usage sessions. 
-* Invalid commands should not cause the system to crash. 
-* The system should display informative error messages for invalid user inputs. 
+* The system should operate continuously without failure during normal usage sessions.
+* Invalid commands should not cause the system to crash.
+* The system should display informative error messages for invalid user inputs.
 * The system should handle unexpected or malformed input gracefully.
 
 **Maintainability & Extensibility**

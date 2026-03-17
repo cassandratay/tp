@@ -34,7 +34,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/cassandratay.png" width="200px">
 
-[[github](http://github.com/cassandratay)] 
+[[github](http://github.com/cassandratay)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
