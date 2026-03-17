@@ -152,16 +152,18 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX` OR `delete EMAIL`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the person at the specified `INDEX`or `EMAIL`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The email must be an existing email in the subscribers list.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+=======
 ### Marking a person as delivered : `markdelivered`
 
 Marks the specified person's delivery status as delivered.
@@ -228,7 +230,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/BOX [o/REMARK] ex/EXPIRY_DATE s/DELIVERY_STATUS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/box-1 ex/2026-12-31 s/pending t/friend`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX` or `delete EMAIL`<br> e.g., `delete 3` `delete test@example.com`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BOX] [o/REMARK] [ex/EXPIRY_DATE] [s/DELIVERY_STATUS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee o/prefers morning delivery`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Mark Delivered** | `markdelivered INDEX`<br> e.g., `markdelivered 1`
