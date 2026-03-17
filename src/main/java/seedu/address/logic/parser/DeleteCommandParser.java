@@ -18,7 +18,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        if (Email.isValidEmail(args)) {
+        if (Email.isValidEmail(args.trim())) {
             try {
                 Email email = ParserUtil.parseEmail(args);
                 return new DeleteCommand(email);

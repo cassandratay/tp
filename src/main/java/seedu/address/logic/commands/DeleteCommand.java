@@ -30,11 +30,19 @@ public class DeleteCommand extends Command {
     private final Index targetIndex;
     private final Email targetEmail;
 
+    /**
+     * Creates a DeleteCommand for a given index
+     * @param targetIndex
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetEmail = null;
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Creates a DeleteCommand for a given email
+     * @param targetEmail
+     */
     public DeleteCommand(Email targetEmail) {
         this.targetIndex = null;
         this.targetEmail = targetEmail;
@@ -83,8 +91,11 @@ public class DeleteCommand extends Command {
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
 
-        return targetIndex.equals(otherDeleteCommand.targetIndex)
-                && targetEmail.equals(otherDeleteCommand.targetEmail);
+        if (isNull(targetIndex)) {
+            return targetEmail.equals(otherDeleteCommand.targetEmail);
+        } else {
+            return targetIndex.equals(otherDeleteCommand.targetIndex);
+        }
     }
 
     @Override
