@@ -85,14 +85,6 @@ public class Person {
     }
 
     /**
-     * Returns an immutable box set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Box> getBoxes() {
-        return Collections.unmodifiableSet(boxes);
-    }
-
-    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
