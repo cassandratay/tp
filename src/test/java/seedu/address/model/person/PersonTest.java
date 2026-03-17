@@ -138,8 +138,12 @@ public class PersonTest {
                 + ", orderDescription=" + ALICE.getOrderDescription()
 =======
                 + ", boxes=" + ALICE.getBoxes()
+<<<<<<< HEAD
                 + ", Remark=" + ALICE.getRemark()
 >>>>>>> da280918 (Refactor order description)
+=======
+                + ", remark=" + ALICE.getRemark()
+>>>>>>> 94947bb1 (Fix style)
                 + ", expiryDate=" + ALICE.getExpiryDate()
                 + ", deliveryStatus=" + ALICE.getDeliveryStatus()
                 + ", boxes=" + ALICE.getBoxes()

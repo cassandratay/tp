@@ -39,22 +39,22 @@ public class RemarkTest {
 
     @Test
     public void equals() {
-        Remark Remark = new Remark("2 cakes");
+        Remark remark = new Remark("2 cakes");
 
         // same values -> returns true
-        assertTrue(Remark.equals(new Remark("2 cakes")));
+        assertTrue(remark.equals(new Remark("2 cakes")));
 
         // same object -> returns true
-        assertTrue(Remark.equals(Remark));
+        assertTrue(remark.equals(remark));
 
         // null -> returns false
-        assertFalse(Remark.equals(null));
+        assertFalse(remark.equals(null));
 
         // different types -> returns false
-        assertFalse(Remark.equals(5.0f));
+        assertFalse(remark.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(Remark.equals(new Remark("3 cakes")));
+        assertFalse(remark.equals(new Remark("3 cakes")));
     }
 
     @Test

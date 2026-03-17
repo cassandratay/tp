@@ -19,8 +19,8 @@ import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ExpiryDate;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -175,9 +175,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseRemark_validValueWithWhitespace_returnsTrimmedRemark() throws Exception {
-        String RemarkWithWhitespace = WHITESPACE + VALID_ORDER_DESCRIPTION + WHITESPACE;
+        String remarkWithWhitespace = WHITESPACE + VALID_ORDER_DESCRIPTION + WHITESPACE;
         Remark expectedRemark = new Remark(VALID_ORDER_DESCRIPTION);
-        assertEquals(expectedRemark, ParserUtil.parseRemark(RemarkWithWhitespace));
+        assertEquals(expectedRemark, ParserUtil.parseRemark(remarkWithWhitespace));
     }
 
     @Test

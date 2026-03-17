@@ -61,8 +61,8 @@ public class PersonUtil {
         descriptor.getAddress()
                 .ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getRemark()
-                .ifPresent(Remark -> sb.append(PREFIX_ORDER_DESCRIPTION)
-                        .append(Remark.value).append(" "));
+                .ifPresent(remark -> sb.append(PREFIX_ORDER_DESCRIPTION)
+                        .append(remark.value).append(" "));
         descriptor.getExpiryDate().ifPresent(expiryDate ->
                 sb.append(PREFIX_EXPIRY_DATE).append(expiryDate.value).append(" "));
         descriptor.getDeliveryStatus()
