@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
@@ -53,6 +54,9 @@ public class MarkCommand extends Command {
 
         Person personToMark = lastShownList.get(targetIndex.getZeroBased());
         Person markedPerson = setStatusOf(personToMark);
+
+        model.setPerson(personToMark, markedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         String MESSAGE = switch (newDeliveryStatus) {
             case PENDING -> MESSAGE_MARK_PENDING;
