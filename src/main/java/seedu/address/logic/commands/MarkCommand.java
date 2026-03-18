@@ -51,7 +51,7 @@ public class MarkCommand extends Command {
      * <p>
      * Example usage:
      * <pre>
-     *     {@code mark 1}   // Marks the first person in the list as DELIVERED
+     *     {@code mark 1 delivered}   // Marks the first person in the list as DELIVERED
      * </pre>
      * <p>
      * The command returns a {@link CommandResult} containing a feedback message
