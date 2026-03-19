@@ -6,11 +6,11 @@ package seedu.address.model.person;
  */
 public enum DeliveryStatus {
     PENDING("Pending"),
-    PACKING("Packing"),
+    PACKED("Packed"),
     DELIVERED("Delivered");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Delivery status should be one of the following: 'Pending', 'Packing', 'Delivered'";
+            "Delivery status should be one of the following: 'Pending', 'Packed', 'Delivered'";
 
     public final String deliveryStatus;
 

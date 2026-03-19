@@ -42,7 +42,7 @@ public class SampleDataUtil {
                 getBoxSet("box-3"),
                 new Remark("1 vanilla cake"),
                 new ExpiryDate("2026-12-29"),
-                DeliveryStatus.fromString("packing"),
+                DeliveryStatus.fromString("packed"),
                 getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
