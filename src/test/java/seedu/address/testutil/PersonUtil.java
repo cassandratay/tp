@@ -68,10 +68,6 @@ public class PersonUtil {
         descriptor.getDeliveryStatus()
                 .ifPresent(deliveryStatus -> sb.append(PREFIX_DELIVERY_STATUS)
                         .append(deliveryStatus.deliveryStatus).append(" "));
-        descriptor.getBoxes()
-                .ifPresent(boxSet -> boxSet.forEach(
-                        b -> sb.append(PREFIX_BOX).append(b.boxName).append(" ")
-                ));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

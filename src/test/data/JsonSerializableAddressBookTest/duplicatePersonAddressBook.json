@@ -8,7 +8,10 @@
     "expiryDate": "2026-11-11",
     "deliveryStatus": "pending",
     "tags": [ "friends" ],
-    "boxes": [ "box-1" ]
+    "boxes": [ {
+      "boxName": "box-1",
+      "expiryDate": "2026-12-31"
+    } ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -17,6 +20,9 @@
     "remark": "1 cake",
     "expiryDate": "2026-11-11",
     "deliveryStatus": "pending",
-    "boxes": [ "box-1" ]
+    "boxes": [ {
+      "boxName": "box-1",
+      "expiryDate": "2026-12-31"
+    } ]
   } ]
 }

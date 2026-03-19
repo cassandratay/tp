@@ -1,10 +1,11 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Box;
+import seedu.address.model.person.ExpiryDate;
 
 /**
  * Jackson-friendly version of {@link Box}
@@ -12,13 +13,16 @@ import seedu.address.model.person.Box;
 public class JsonAdaptedBox {
 
     private final String boxName;
+    private final String expiryDate;
 
     /**
      * Constructs a {@code JsonAdaptedBox} with the given {@code boxName}.
      */
     @JsonCreator
-    public JsonAdaptedBox(String boxName) {
+    public JsonAdaptedBox(@JsonProperty("boxName") String boxName,
+                          @JsonProperty("expiryDate") String expiryDate) {
         this.boxName = boxName;
+        this.expiryDate = expiryDate;
     }
 
     /**
@@ -26,11 +30,15 @@ public class JsonAdaptedBox {
      */
     public JsonAdaptedBox(Box source) {
         boxName = source.boxName;
+        expiryDate = source.expiryDate.value;
     }
 
-    @JsonValue
     public String getBoxName() {
         return boxName;
+    }
+
+    public String getExpiryDate() {
+        return expiryDate;
     }
 
     /**
@@ -42,6 +50,9 @@ public class JsonAdaptedBox {
         if (!Box.isValidBoxName(boxName)) {
             throw new IllegalValueException(Box.MESSAGE_CONSTRAINTS);
         }
-        return new Box(boxName);
+        if (!ExpiryDate.isValidExpiryDate(expiryDate)) {
+            throw new IllegalValueException(ExpiryDate.MESSAGE_CONSTRAINTS);
+        }
+        return new Box(boxName, new ExpiryDate(expiryDate));
     }
 }

@@ -184,7 +184,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidBoxes_throwsIllegalValueException() {
         List<JsonAdaptedBox> invalidBoxes = new ArrayList<>(VALID_BOXES);
-        invalidBoxes.add(new JsonAdaptedBox(INVALID_BOX));
+        invalidBoxes.add(new JsonAdaptedBox(INVALID_BOX, INVALID_EXPIRY_DATE));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
                         VALID_ORDER_DESCRIPTION, VALID_EXPIRY_DATE, VALID_DELIVERY_STATUS, invalidBoxes);

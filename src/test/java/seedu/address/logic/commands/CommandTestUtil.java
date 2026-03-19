@@ -94,14 +94,12 @@ public class CommandTestUtil {
                 .withExpiryDate(VALID_EXPIRY_DATE_AMY)
                 .withRemark(VALID_ORDER_DESCRIPTION_AMY)
                 .withDeliveryStatus(VALID_DELIVERY_STATUS_AMY)
-                .withBoxes(VALID_BOX_BOX1)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withExpiryDate(VALID_EXPIRY_DATE_BOB)
                 .withRemark(VALID_ORDER_DESCRIPTION_BOB)
                 .withDeliveryStatus(VALID_DELIVERY_STATUS_BOB)
-                .withBoxes(VALID_BOX_BOX1)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

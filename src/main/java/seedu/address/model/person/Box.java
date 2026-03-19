@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 /**
  * Represents a Box in Client2Door
  */
@@ -20,11 +22,12 @@ public class Box {
      *
      * @param boxName A valid box name.
      */
-    public Box(String boxName) {
+    public Box(String boxName, ExpiryDate expiryDate) {
         requireNonNull(boxName);
+        requireNonNull(expiryDate);
         checkArgument(isValidBoxName(boxName), MESSAGE_CONSTRAINTS);
         this.boxName = boxName;
-        this.expiryDate = new ExpiryDate("2026-12-31");
+        this.expiryDate = expiryDate;
     }
 
     public static boolean isValidBoxName(String test) {
@@ -43,12 +46,12 @@ public class Box {
         }
 
         Box otherBox = (Box) other;
-        return boxName.equals(otherBox.boxName);
+        return boxName.equals(otherBox.boxName) && expiryDate.equals(otherBox.expiryDate);
     }
 
     @Override
     public int hashCode() {
-        return boxName.hashCode();
+        return Objects.hash(boxName, expiryDate);
     }
 
     /**
@@ -57,6 +60,6 @@ public class Box {
      */
     @Override
     public String toString() {
-        return '[' + boxName + ']';
+        return '[' + boxName + "|" + expiryDate + ']';
     }
 }

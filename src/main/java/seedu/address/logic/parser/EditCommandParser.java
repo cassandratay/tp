@@ -21,7 +21,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Box;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -78,7 +77,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                     ParserUtil.parseDeliveryStatus(argMultimap.getValue(PREFIX_DELIVERY_STATUS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-        parseBoxesForEdit(argMultimap.getAllValues(PREFIX_BOX)).ifPresent(editPersonDescriptor::setBoxes);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -101,15 +99,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
-    private Optional<Set<Box>> parseBoxesForEdit(Collection<String> boxes) throws ParseException {
-        assert boxes != null;
-
-        if (boxes.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> boxSet = boxes.size() == 1 && boxes.contains("") ? Collections.emptySet() : boxes;
-        return Optional.of(ParserUtil.parseBoxes(boxSet));
-    }
-
 }

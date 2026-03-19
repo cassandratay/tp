@@ -182,23 +182,25 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code box} is invalid.
      */
-    public static Box parseBox(String box) throws ParseException {
+    public static Box parseBox(String box, ExpiryDate expiryDate) throws ParseException {
         requireNonNull(box);
+        requireNonNull(expiryDate);
         String trimmedBox = box.trim();
         if (!Box.isValidBoxName(trimmedBox)) {
             throw new ParseException(Box.MESSAGE_CONSTRAINTS);
         }
-        return new Box(trimmedBox);
+        return new Box(trimmedBox, expiryDate);
     }
 
     /**
      * Parses {@code Collection<String> boxes} into a {@code Set<Box>}
      */
-    public static Set<Box> parseBoxes(Collection<String> boxes) throws ParseException {
+    public static Set<Box> parseBoxes(Collection<String> boxes, ExpiryDate expiryDate) throws ParseException {
         requireNonNull(boxes);
+        requireNonNull(expiryDate);
         final Set<Box> boxSet = new HashSet<>();
         for (String boxName: boxes) {
-            boxSet.add(parseBox(boxName));
+            boxSet.add(parseBox(boxName, expiryDate));
         }
         return boxSet;
     }

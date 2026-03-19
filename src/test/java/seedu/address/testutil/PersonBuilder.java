@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Box;
@@ -50,7 +51,7 @@ public class PersonBuilder {
         expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
         deliveryStatus = DeliveryStatus.fromString(DEFAULT_DELIVERY_STATUS);
         tags = new HashSet<>();
-        boxes = SampleDataUtil.getBoxSet("box-1");
+        boxes = SampleDataUtil.getBoxSet(expiryDate, "box-1");
     }
 
     /**
@@ -88,7 +89,7 @@ public class PersonBuilder {
      * Parses the {@code boxes} into a {@code Set<Box>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withBoxes(String ... boxes) {
-        this.boxes = SampleDataUtil.getBoxSet(boxes);
+        this.boxes = SampleDataUtil.getBoxSet(this.expiryDate, boxes);
         return this;
     }
 
@@ -129,6 +130,9 @@ public class PersonBuilder {
      */
     public PersonBuilder withExpiryDate(String expiryDate) {
         this.expiryDate = new ExpiryDate(expiryDate);
+        this.boxes = this.boxes.stream()
+                .map(box -> new Box(box.boxName, this.expiryDate))
+                .collect(Collectors.toSet());
         return this;
     }
 
