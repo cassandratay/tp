@@ -63,10 +63,6 @@ public class PersonUtil {
                         .append(remark.value).append(" "));
         descriptor.getExpiryDate().ifPresent(expiryDate ->
                 sb.append(PREFIX_EXPIRY_DATE).append(expiryDate.value).append(" "));
-        descriptor.getBoxes()
-                .ifPresent(boxSet -> boxSet.forEach(
-                        b -> sb.append(PREFIX_BOX).append(b.boxName).append(" ")
-                ));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
