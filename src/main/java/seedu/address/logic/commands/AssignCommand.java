@@ -18,18 +18,24 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 public class AssignCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "assign";
 
     public static final String MESSAGE_DUPLICATE_DRIVER = "There are duplicate drivers!";
     public static final String MESSAGE_SUCCESS = "Drivers added and assigned successfully!";
     public static final String MESSAGE_FAIL = "Assignment of drivers failed!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Assigns drivers to subscriber clusters.\n"
+            + "Parameters: n/NAME p/PHONE [n/NAME p/PHONE]...\n"
+            + "Example: " + COMMAND_WORD + " n/John Doe p/91234567 n/Jane Tan p/98765432";
     
-    private Driver[] drivers;
+    private final Driver[] drivers;
 
     /**
      * Creates an AssignCommand to tag all {@code Person}s to a {@code Driver}
      */
     public AssignCommand(Driver... inputDrivers) throws CommandException {
+        this.drivers = new Driver[inputDrivers.length];
+
         for (int i = 0; i < inputDrivers.length; i++) {
             Driver toAdd = inputDrivers[i];
             if (inputHasDuplicate(toAdd)) {
@@ -84,7 +90,7 @@ public class AssignCommand extends Command {
         Remark remarkCopy = personToAssign.getRemark();
         Set<Tag> tagsCopy = personToAssign.getTags();
         ExpiryDate expiryCopy = personToAssign.getExpiryDate();
-        Tag driverTag = new Tag(driver.getName() + ":" + driver.getNumber());
+        Tag driverTag = new Tag(assignedDriver.getName() + ":" + assignedDriver.getNumber());
 
         // Add driverTag to tags
         // TODO: Possibly have a specific UI to differentiate driver tags
