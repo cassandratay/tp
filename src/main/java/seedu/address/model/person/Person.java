@@ -103,7 +103,7 @@ public class Person {
 
         return otherPerson != null
                 && (otherPerson.getName().equals(getName())
-                    || otherPerson.getEmail().equals(getEmail())); // if name or email is the same, we consider same person
+                    || otherPerson.getEmail().equals(getEmail())); // if name or email is same, consider same person
     }
 
     /**
