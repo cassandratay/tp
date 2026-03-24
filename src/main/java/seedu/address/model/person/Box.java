@@ -34,6 +34,10 @@ public class Box {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getBoxName() {
+        return boxName;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
