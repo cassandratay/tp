@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BOX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPIRY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -53,7 +53,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_REMARKS + "REMARKS] "
             + "[" + PREFIX_EXPIRY_DATE + "EXPIRY_DATE] "
-            + "[" + PREFIX_DELIVERY_STATUS + "DELIVERY STATUS] "
+            + "[" + PREFIX_BOX + "BOX] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -110,13 +110,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Set<Box> updatedBoxes = editPersonDescriptor.getBoxes().orElse(personToEdit.getBoxes());
         Remark updatedRemark = editPersonDescriptor.getRemark()
                 .orElse(personToEdit.getRemark());
         DeliveryStatus updatedDeliveryStatus = editPersonDescriptor.getDeliveryStatus()
                 .orElse(personToEdit.getDeliveryStatus());
-        ExpiryDate updatedExpiry = editPersonDescriptor.getExpiryDate().orElse(personToEdit.getExpiryDate());
-        Set<Box> updatedBoxes = personToEdit.getBoxes();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        ExpiryDate updatedExpiry = editPersonDescriptor.getExpiryDate().orElse(personToEdit.getExpiryDate());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBoxes,
                 updatedRemark, updatedExpiry, updatedDeliveryStatus, updatedTags);
 
@@ -158,6 +158,7 @@ public class EditCommand extends Command {
         private Remark remark;
         private ExpiryDate expiryDate;
         private DeliveryStatus deliveryStatus;
+        private Set<Box> boxes;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -172,8 +173,10 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setExpiryDate(toCopy.expiryDate);
+            setBoxes(toCopy.boxes);
             setRemark(toCopy.remark);
             setDeliveryStatus(toCopy.deliveryStatus);
+            setBoxes(toCopy.boxes);
             setTags(toCopy.tags);
         }
 
@@ -181,7 +184,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, remark, deliveryStatus, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, remark, deliveryStatus, tags,
+                    boxes);
         }
 
         public void setName(Name name) {
@@ -222,6 +226,19 @@ public class EditCommand extends Command {
 
         public Optional<ExpiryDate> getExpiryDate() {
             return Optional.ofNullable(expiryDate);
+        }
+
+        public void setBoxes(Set<Box> boxes) {
+            this.boxes = (boxes != null) ? new HashSet<>(boxes) : null;
+        }
+
+        /**
+         * Returns an unmodifiable box set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code boxes} is null.
+         */
+        public Optional<Set<Box>> getBoxes() {
+            return (boxes != null) ? Optional.of(Collections.unmodifiableSet(boxes)) : Optional.empty();
         }
 
         public void setRemark(Remark remark) {
@@ -274,6 +291,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(expiryDate, otherEditPersonDescriptor.expiryDate)
+                    && Objects.equals(boxes, otherEditPersonDescriptor.boxes)
                     && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(deliveryStatus, otherEditPersonDescriptor.deliveryStatus)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
@@ -286,6 +304,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("boxes", boxes)
                     .add("remark", remark)
                     .add("expiryDate", expiryDate)
                     .add("deliveryStatus", deliveryStatus)
