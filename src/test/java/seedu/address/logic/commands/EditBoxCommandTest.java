@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -26,6 +28,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.EditBoxDescriptorBuilder;
 
 public class EditBoxCommandTest {
 
@@ -99,6 +102,50 @@ public class EditBoxCommandTest {
         EditBoxCommand editBoxCommand = new EditBoxCommand(targetPerson.getName(), "box-5", descriptor);
 
         assertCommandFailure(editBoxCommand, model, EditBoxCommand.MESSAGE_BOX_NOT_FOUND);
+    }
+
+    @Test
+    public void equals() {
+        final EditBoxDescriptor descriptor = new EditBoxDescriptorBuilder()
+                .withBoxName("box-1")
+                .withExpiryDate("2026-12-31")
+                .build();
+        final EditBoxDescriptor differentDescriptor = new EditBoxDescriptorBuilder()
+                .withBoxName("box-2")
+                .withExpiryDate("2026-01-01")
+                .build();
+        final EditBoxCommand standardCommand = new EditBoxCommand(new Name("AMY"), "box-1",
+                descriptor);
+
+        // same values -> returns true
+        EditBoxDescriptor copyDescriptor = new EditBoxDescriptor(descriptor);
+        EditBoxCommand commandWithSameValues = new EditBoxCommand(new Name("AMY"), "box-1", copyDescriptor);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different subscriberName -> returns false
+        assertFalse(standardCommand.equals(new EditBoxCommand(new Name("BOB"), "box-1", copyDescriptor)));
+
+        // different descriptor -> returns false
+        assertFalse(standardCommand.equals(new EditBoxCommand(new Name("AMY"), "box-1", differentDescriptor)));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Name subscriberName = new Name("AMY");
+        EditBoxDescriptor editBoxDescriptor = new EditBoxDescriptor();
+        EditBoxCommand editBoxCommand = new EditBoxCommand(subscriberName, "box-1", editBoxDescriptor);
+        String expected = EditBoxCommand.class.getCanonicalName() + "{subscriberName=" + subscriberName
+                + ", boxName=box-1" + ", editBoxDescriptor=" + editBoxDescriptor + "}";
+        assertEquals(expected, editBoxCommand.toString());
     }
 
     private static Person createEditedPerson(Person personToEdit, String oldBoxName, Box editedBox) {
