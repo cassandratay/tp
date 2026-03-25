@@ -22,7 +22,7 @@ public class DriverAssignedToPersonPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(DeliveryAssignmentHashMap.getInstance()
-                .getDriverForPerson(person).fullName, keyword));
+                .getDriverForPerson(person).getName(), keyword));
     }
 
     @Override
