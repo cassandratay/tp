@@ -75,7 +75,8 @@ public class DeleteBoxCommand extends Command {
                 .filter(boxName -> !existingBoxNames.contains(boxName))
                 .collect(Collectors.toSet());
         if (!nonExistentBoxNames.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_BOX_NOT_FOUND, personToEdit, nonExistentBoxNames));
+            throw new CommandException(String.format(MESSAGE_BOX_NOT_FOUND, personToEdit.getName(),
+                    nonExistentBoxNames));
         }
 
         Set<Box> updatedBoxes = personToEdit.getBoxes().stream()
