@@ -9,13 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS_BLANK = "Address should not be blank.";
+    public static final String MESSAGE_CONSTRAINTS_POSTAL_CODE = "Address must contain a 6-digit postal code.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * The address must also contain a 6-digit postal code.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    private static final String VALIDATION_REGEX = "^(?=.*\\b\\d{6}\\b).+$";
 
     public final String value;
 
@@ -26,15 +28,30 @@ public class Address {
      */
     public Address(String address) {
         requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAddress(address), getValidationMessage(address));
         value = address;
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid address.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test != null && test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns specific validation error message based on the given address.
+     */
+    public static String getValidationMessage(String address) {
+        if (address == null || address.isBlank()) {
+            return MESSAGE_CONSTRAINTS_BLANK;
+        }
+
+        if (!address.matches(VALIDATION_REGEX)) {
+            return MESSAGE_CONSTRAINTS_POSTAL_CODE;
+        }
+
+        return null;
     }
 
     @Override

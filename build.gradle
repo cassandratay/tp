@@ -69,4 +69,9 @@ shadowJar {
     archiveFileName = 'Client2Door.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
+
 defaultTasks 'clean', 'test'

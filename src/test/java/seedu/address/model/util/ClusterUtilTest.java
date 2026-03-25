@@ -89,9 +89,10 @@ public class ClusterUtilTest {
 
     @Test
     public void getPostalPrefixFromPerson_personWithInvalidAddress_throwsException() {
-        Person person = new PersonBuilder().withAddress("Sengkang").build();
-        assertThrows(IllegalStateException.class, () ->
-                ClusterUtil.getPostalPrefixFromPerson(person));
+        assertThrows(IllegalArgumentException.class, () -> {
+            Person person = new PersonBuilder().withAddress("Sengkang").build();
+            ClusterUtil.getPostalPrefixFromPerson(person);
+        });
     }
 
     @Test
