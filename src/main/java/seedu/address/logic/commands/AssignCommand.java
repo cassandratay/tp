@@ -12,10 +12,10 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.driver.Driver;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Box;
 import seedu.address.model.person.DeliveryStatus;
+import seedu.address.model.person.Driver;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ExpiryDate;
 import seedu.address.model.person.Name;
@@ -102,7 +102,7 @@ public class AssignCommand extends Command {
         Remark remarkCopy = personToAssign.getRemark();
         Set<Tag> tagsCopy = new HashSet<>(personToAssign.getTags()); // have modifiable tags
         ExpiryDate expiryCopy = personToAssign.getExpiryDate();
-        Tag driverTag = new Tag(assignedDriver.getName() + ":" + assignedDriver.getNumber());
+        Tag driverTag = new Tag(assignedDriver.getName() + ":" + assignedDriver.getPhone());
 
         // Add driverTag to tags
         // TODO: Possibly have a specific UI to differentiate driver tags
