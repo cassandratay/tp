@@ -2,10 +2,12 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a Driver in Clien2Door.
+ * Represents a Driver in Client2Door.
  * A Driver is identified by a {@link Name} and a {@link Phone} number.
  * This class is immutable.
  */
@@ -68,5 +70,10 @@ public class Driver {
                 .add("name", this.name)
                 .add("phone", this.phone)
                 .toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, phone);
     }
 }
