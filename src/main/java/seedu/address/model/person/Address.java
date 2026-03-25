@@ -11,8 +11,6 @@ public class Address {
 
     public static final String MESSAGE_CONSTRAINTS_BLANK = "Address should not be blank.";
     public static final String MESSAGE_CONSTRAINTS_POSTAL_CODE = "Address must contain a 6-digit postal code.";
-    public static final String MESSAGE_CONSTRAINTS = "Address should not be blank and must contain a 6-digit "
-            + "postal code.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -53,7 +51,7 @@ public class Address {
             return MESSAGE_CONSTRAINTS_POSTAL_CODE;
         }
 
-        return MESSAGE_CONSTRAINTS;
+        return null;
     }
 
     @Override
