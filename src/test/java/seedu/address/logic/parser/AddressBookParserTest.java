@@ -9,10 +9,12 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddBoxCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -46,6 +48,15 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_addBox() throws Exception {
+        Person person = new PersonBuilder().build();
+        AddBoxCommand command = (AddBoxCommand) parser.parseCommand(AddBoxCommand.COMMAND_WORD + " "
+            + "n/Amy b/box-1 ex/2026-12-31");
+        assertEquals(new AddBoxCommand(new Name("Amy"), Set.of(new Box("box-1",
+                new ExpiryDate("2026-12-31")))), command);
     }
 
     @Test
