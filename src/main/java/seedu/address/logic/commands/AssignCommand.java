@@ -73,7 +73,6 @@ public class AssignCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // TODO: Integrate resetting of sorted subscribers (might have previously been sorted)
         List<List<Person>> sortedSubscribers = ClusterUtil.groupIntoClusters(
                     model.getFilteredPersonList(),
                     drivers.length);
@@ -108,8 +107,6 @@ public class AssignCommand extends Command {
         ExpiryDate expiryCopy = personToAssign.getExpiryDate();
         DriverTag driverTag = new DriverTag(assignedDriver.getName() + ":" + assignedDriver.getPhone());
 
-
-        // TODO: Possibly have a specific UI to differentiate driver tags
         // Negate prior assignments
         removeExistingDriverTag(tagsCopy);
         // Add driverTag to tags
