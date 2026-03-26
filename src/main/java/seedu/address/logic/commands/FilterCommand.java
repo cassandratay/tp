@@ -21,8 +21,8 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Filters the list of persons based on the boxes ordered or drivers assigned.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " box1";
+            + "Parameters: KEYWORD [MORE_KEYWORDS]... or d/DRIVER [d/MORE_DRIVERS]...\n"
+            + "Example: " + COMMAND_WORD + " box1 or " + COMMAND_WORD + " d/Alex";
 
     private final Predicate<Person> predicate;
 

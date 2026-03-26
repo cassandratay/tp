@@ -6,9 +6,10 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.delivery.DeliveryAssignmentHashMap;
+import seedu.address.model.delivery.exceptions.DriverNotFoundException;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given., placeholder
+ * Tests that a {@code Person}'s assigned {@code Driver} matches any of the keywords given.
  */
 public class DriverAssignedToPersonPredicate implements Predicate<Person> {
     private final List<String> keywords;
@@ -19,9 +20,12 @@ public class DriverAssignedToPersonPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(DeliveryAssignmentHashMap.getInstance()
-                .getDriverForPerson(person).getName().fullName, keyword));
+        try {
+            String driverName = DeliveryAssignmentHashMap.getInstance().getDriverForPerson(person).getName().fullName;
+            return keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(driverName, keyword));
+        } catch (DriverNotFoundException e) {
+            return false;
+        }
     }
 
     @Override
