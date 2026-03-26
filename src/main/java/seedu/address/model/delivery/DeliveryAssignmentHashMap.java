@@ -54,7 +54,11 @@ public class DeliveryAssignmentHashMap {
      * @param p the {@code Person} to be assigned
      */
     public void assign(Driver d, Person p) {
-        assignments.computeIfAbsent(d, k -> new ArrayList<>()).add(p);
+        List<Person> list = assignments.computeIfAbsent(d, k -> new ArrayList<>());
+
+        if (!list.contains(p)) {
+            list.add(p);
+        }
     }
 
     /**
@@ -88,6 +92,30 @@ public class DeliveryAssignmentHashMap {
         } else {
             throw new DriverNotFoundException();
         }
+    }
+
+    public static boolean isExportable() {
+        return !assignments.isEmpty();
+    }
+
+    /**
+    * Returns the {@code Driver} assigned to the specified {@code Person}.
+    *
+    * <p>If the person is not assigned to any driver, a {@link DriverNotFoundException}
+    * is thrown.</p>
+    *
+    * @param p the {@code Person} whose assigned driver is to be retrieved
+    * @return the {@code Driver} assigned to the person
+    * @throws DriverNotFoundException if the person is not assigned to any driver
+    */
+
+    public Driver getDriverForPerson(Person p) {
+        for (Map.Entry<Driver, List<Person>> entry : assignments.entrySet()) {
+            if (entry.getValue().contains(p)) {
+                return entry.getKey();
+            }
+        }
+        throw new DriverNotFoundException();
     }
 
     /**

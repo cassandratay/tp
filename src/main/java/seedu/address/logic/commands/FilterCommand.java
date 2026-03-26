@@ -2,9 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.DriverAssignedToPersonPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonHasBoxPredicate;
 
 /**
@@ -20,10 +24,29 @@ public class FilterCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " box1";
 
-    private final PersonHasBoxPredicate predicate;
+    private final Predicate<Person> predicate;
 
+    private final String predicateLabel;
+
+    /**
+     * Creates a filter command using a box predicate.
+     */
     public FilterCommand(PersonHasBoxPredicate predicate) {
+        this(predicate, "boxPredicate");
+    }
+
+    /**
+     * Creates a filter command using a driver-assignment predicate.
+     */
+    public FilterCommand(DriverAssignedToPersonPredicate driverPredicate) {
+        this(driverPredicate, "driverPredicate");
+    }
+
+    private FilterCommand(Predicate<Person> predicate, String predicateLabel) {
+        requireNonNull(predicate);
+        requireNonNull(predicateLabel);
         this.predicate = predicate;
+        this.predicateLabel = predicateLabel;
     }
 
     @Override
@@ -52,7 +75,7 @@ public class FilterCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add(predicateLabel, predicate)
                 .toString();
     }
 }
