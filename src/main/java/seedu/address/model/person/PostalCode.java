@@ -56,10 +56,16 @@ public class PostalCode {
         throw new IllegalArgumentException("No valid postal code found in: " + address);
     }
 
+    /**
+     * Returns the postal code value as an integer.
+     */
     public int getValue() {
         return Integer.parseInt(value);
     }
 
+    /**
+     * Returns the postal code prefix, which is the first 2 digits of the postal code, as an integer.
+     */
     public int getPostalPrefix() {
         return Integer.parseInt(value.substring(0, 2));
     }
