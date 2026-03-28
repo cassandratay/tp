@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditBoxCommand;
 import seedu.address.logic.commands.EditBoxCommand.EditBoxDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.commons.name.Name;
 
 /**
  * Parses input arguments and creates a new EditBoxCommand object

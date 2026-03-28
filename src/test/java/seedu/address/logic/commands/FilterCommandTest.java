@@ -22,12 +22,12 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.commons.name.Name;
+import seedu.address.model.commons.phone.Phone;
 import seedu.address.model.delivery.DeliveryAssignmentHashMap;
 import seedu.address.model.delivery.Driver;
 import seedu.address.model.person.DriverAssignedToPersonPredicate;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.PersonHasBoxPredicate;
-import seedu.address.model.person.Phone;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
