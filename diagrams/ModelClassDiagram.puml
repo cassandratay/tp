@@ -18,7 +18,17 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class Remark
 Class Tag
+Class Box
+
+enum DeliveryStatus <<enumeration>> {
+    PENDING
+    PACKED
+    DELIVERED
+}
+
+show DeliveryStatus members
 
 Class I #FFFFFF
 }
@@ -41,7 +51,10 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Remark
+Person --> "1" DeliveryStatus
 Person *--> "*" Tag
+Person *--> "1..*" Box
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
