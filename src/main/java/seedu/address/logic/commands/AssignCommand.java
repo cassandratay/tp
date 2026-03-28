@@ -24,7 +24,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.DriverTag;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.ClusterUtil;
+import seedu.address.model.delivery.ClusterAssigner;
 
 /**
  * Assigned declared drivers to existing subscribers in the address book.
@@ -76,7 +76,7 @@ public class AssignCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        List<List<Person>> sortedSubscribers = ClusterUtil.groupIntoClusters(
+        List<List<Person>> sortedSubscribers = ClusterAssigner.groupIntoClusters(
                     model.getFilteredPersonList(),
                     drivers.length);
 

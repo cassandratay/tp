@@ -1,4 +1,4 @@
-package seedu.address.model.util;
+package seedu.address.model.delivery;
 
 import static java.util.regex.Pattern.compile;
 
