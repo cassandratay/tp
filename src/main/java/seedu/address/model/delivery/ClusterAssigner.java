@@ -1,12 +1,9 @@
 package seedu.address.model.delivery;
 
-import static java.util.regex.Pattern.compile;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.person.Person;
-
 
 /**
  * Assigns persons to balanced clusters based on postal code prefixes.

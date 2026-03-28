@@ -3,11 +3,13 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import static java.util.regex.Pattern.compile;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a postal code extracted from an address.
+ * Guarantees: immutable; is valid as declared in {@link #isValidPostalCode(String)}
+ */
 public class PostalCode {
 
     public static final String MESSAGE_CONSTRAINTS = "Postal code must be a 6-digit number.";

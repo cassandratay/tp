@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.commons.phone.Phone;
+import seedu.address.model.delivery.ClusterAssigner;
 import seedu.address.model.delivery.DeliveryAssignmentHashMap;
 import seedu.address.model.delivery.Driver;
 import seedu.address.model.person.Address;
@@ -24,7 +25,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.DriverTag;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.delivery.ClusterAssigner;
 
 /**
  * Assigned declared drivers to existing subscribers in the address book.
