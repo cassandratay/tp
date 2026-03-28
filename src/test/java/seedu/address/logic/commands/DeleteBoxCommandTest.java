@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.commons.name.Name;
 import seedu.address.model.person.Box;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 public class DeleteBoxCommandTest {

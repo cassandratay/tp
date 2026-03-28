@@ -10,9 +10,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddBoxCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.commons.name.Name;
 import seedu.address.model.person.Box;
 import seedu.address.model.person.ExpiryDate;
-import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new AddBoxCommand object

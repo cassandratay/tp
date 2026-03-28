@@ -13,7 +13,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteBoxCommand;
-import seedu.address.model.person.Name;
+import seedu.address.model.commons.name.Name;
 
 public class DeleteBoxCommandParserTest {
 

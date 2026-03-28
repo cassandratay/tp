@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.commons.name.Name;
+import seedu.address.model.commons.phone.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
