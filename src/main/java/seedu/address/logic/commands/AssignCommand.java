@@ -81,13 +81,13 @@ public class AssignCommand extends Command {
                     drivers.length);
 
         if (sortedSubscribers.size() != drivers.length) {
-            // Algorithm wrong
+            // End here is algorithm is wrong (mapped to wrong no. of drivers)
             return new CommandResult(MESSAGE_FAIL);
         }
         for (int i = 0; i < sortedSubscribers.size(); i++) {
             Driver assignedDriver = drivers[i];
             for (Person personInSameCluster : sortedSubscribers.get(i)) {
-                Person assignedPerson = assignDriver(personInSameCluster, assignedDriver);
+                Person assignedPerson = createPersonWithDriver(personInSameCluster, assignedDriver);
                 model.setPerson(personInSameCluster, assignedPerson);
                 // TODO: Update partitioned list in AddressBook store for export/filter command
             }
@@ -98,7 +98,7 @@ public class AssignCommand extends Command {
 
     }
 
-    private Person assignDriver(Person personToAssign, Driver assignedDriver) {
+    private Person createPersonWithDriver(Person personToAssign, Driver assignedDriver) {
         Name nameCopy = personToAssign.getName();
         Phone phoneCopy = personToAssign.getPhone();
         Email emailCopy = personToAssign.getEmail();
