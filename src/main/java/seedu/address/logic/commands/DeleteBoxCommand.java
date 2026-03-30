@@ -70,9 +70,15 @@ public class DeleteBoxCommand extends Command {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
 
-        if (!getNonExistentBoxNames(personToEdit, targetBoxNames).isEmpty()) {
+        Set<String> existingBoxNames = personToEdit.getBoxes().stream()
+                .map(box -> box.boxName)
+                .collect(Collectors.toSet());
+        Set<String> nonExistentBoxNames = targetBoxNames.stream()
+                .filter(boxName -> !existingBoxNames.contains(boxName))
+                .collect(Collectors.toSet());
+        if (!nonExistentBoxNames.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_BOX_NOT_FOUND, personToEdit.getName(),
-                    getNonExistentBoxNames(personToEdit, targetBoxNames)));
+                    nonExistentBoxNames));
         }
 
         Set<Box> updatedBoxes = personToEdit.getBoxes().stream()
@@ -96,16 +102,6 @@ public class DeleteBoxCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_BOXES_SUCCESS, targetBoxNames, editedPerson.getName()));
-    }
-
-    public Set<String> getNonExistentBoxNames(Person personToEdit, Set<String> targetBoxNames) {
-        Set<String> existingBoxNames = personToEdit.getBoxes().stream()
-                .map(box -> box.boxName)
-                .collect(Collectors.toSet());
-
-        return targetBoxNames.stream()
-                .filter(boxName -> !existingBoxNames.contains(boxName))
-                .collect(Collectors.toSet());
     }
 
     public Person getPersonByName(List<Person> persons, Name name) {
