@@ -4,10 +4,10 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Client2Door User Guide
 
 
-CLient2Door is a **lightweight desktop address management app, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It will  that helps users keep track of subscriber deliveries and related operational details. If you can type fast, Client2Door can get your contact management tasks done faster than traditional GUI apps.
+Client2Door is a **lightweight desktop address management app, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). It will  that helps users keep track of subscriber deliveries and related operational details. If you can type fast, Client2Door can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -21,18 +21,18 @@ CLient2Door is a **lightweight desktop address management app, optimized for use
 
 2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your Client2Door app.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Client2Door.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Release1.4-New_UI.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/box-1 ex/2026-12-31` : Adds a person with a box, default remark, expiry date, and "Pending" delivery status.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 Singapore 012345 b/box-1 ex/2026-12-31` : Adds a person with a box, default remark, expiry date, and "Pending" delivery status.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
