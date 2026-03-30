@@ -12,6 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.commons.phone.Phone;
 import seedu.address.model.delivery.Driver;
+import seedu.address.model.delivery.exceptions.DriverNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -181,6 +182,13 @@ public class Person {
 
     public boolean hasDriver() {
         return !Objects.isNull(this.assignedDriver);
+    }
+
+    public Driver getAssignedDriver() {
+        if (!hasDriver()) {
+            throw new DriverNotFoundException();
+        }
+        return new Driver(this.assignedDriver.getName(), this.assignedDriver.getPhone());
     }
 
     /**

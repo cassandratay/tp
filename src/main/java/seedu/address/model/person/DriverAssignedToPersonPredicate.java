@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.delivery.DeliveryAssignmentHashMap;
 import seedu.address.model.delivery.exceptions.DriverNotFoundException;
 
 /**
@@ -21,7 +20,7 @@ public class DriverAssignedToPersonPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         try {
-            String driverName = DeliveryAssignmentHashMap.getInstance().getDriverForPerson(person).getName().fullName;
+            String driverName = person.getAssignedDriver().getName().fullName;
             return keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(driverName, keyword));
         } catch (DriverNotFoundException e) {
             return false;

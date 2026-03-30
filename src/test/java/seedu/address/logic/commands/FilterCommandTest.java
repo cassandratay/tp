@@ -22,12 +22,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.commons.name.Name;
-import seedu.address.model.commons.phone.Phone;
-import seedu.address.model.delivery.DeliveryAssignmentHashMap;
-import seedu.address.model.delivery.Driver;
 import seedu.address.model.person.DriverAssignedToPersonPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonHasBoxPredicate;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
@@ -38,7 +36,6 @@ public class FilterCommandTest {
 
     @BeforeEach
     public void setUp() {
-        DeliveryAssignmentHashMap.clearAssignments();
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
@@ -85,10 +82,12 @@ public class FilterCommandTest {
 
     @Test
     public void execute_driverKeyword_multiplePersonsFound() {
-        Driver alex = new Driver(new Name("Alex Tan"), new Phone("91234567"));
-        DeliveryAssignmentHashMap assignments = DeliveryAssignmentHashMap.getInstance();
-        assignments.assign(alex, ALICE);
-        assignments.assign(alex, CARL);
+        Person assignedAlice = new PersonBuilder(ALICE).withDriver("Alex Tan", "91234567").build();
+        Person assignedCarl = new PersonBuilder(CARL).withDriver("Alex Tan", "91234567").build();
+        model.setPerson(ALICE, assignedAlice);
+        model.setPerson(CARL, assignedCarl);
+        expectedModel.setPerson(ALICE, assignedAlice);
+        expectedModel.setPerson(CARL, assignedCarl);
 
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         DriverAssignedToPersonPredicate predicate =
@@ -96,7 +95,7 @@ public class FilterCommandTest {
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, CARL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(assignedAlice, assignedCarl), model.getFilteredPersonList());
     }
 
     @Test

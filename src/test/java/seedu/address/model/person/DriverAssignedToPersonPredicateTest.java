@@ -8,21 +8,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.commons.name.Name;
-import seedu.address.model.commons.phone.Phone;
-import seedu.address.model.delivery.DeliveryAssignmentHashMap;
-import seedu.address.model.delivery.Driver;
 import seedu.address.testutil.PersonBuilder;
 
 public class DriverAssignedToPersonPredicateTest {
-
-    @BeforeEach
-    public void setUp() {
-        DeliveryAssignmentHashMap.clearAssignments();
-    }
 
     @Test
     public void equals() {
@@ -47,9 +37,10 @@ public class DriverAssignedToPersonPredicateTest {
 
     @Test
     public void test_driverContainsKeywords_returnsTrue() {
-        Person assignedPerson = new PersonBuilder().withName("Alice Bob").build();
-        Driver alex = new Driver(new Name("Alex Tan"), new Phone("91234567"));
-        DeliveryAssignmentHashMap.getInstance().assign(alex, assignedPerson);
+        Person assignedPerson = new PersonBuilder()
+                .withName("Alice Bob")
+                .withDriver("Alex Tan", "91234567")
+                .build();
 
         DriverAssignedToPersonPredicate predicate =
                 new DriverAssignedToPersonPredicate(Collections.singletonList("Alex"));
