@@ -15,8 +15,13 @@ import seedu.address.model.Model;
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.commons.phone.Phone;
 import seedu.address.model.delivery.DeliveryAssignmentHashMap;
-import seedu.address.model.delivery.Driver;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Box;
+import seedu.address.model.person.DeliveryStatus;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.ExpiryDate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
