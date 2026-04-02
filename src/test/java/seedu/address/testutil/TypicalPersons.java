@@ -26,59 +26,52 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111, Singapore 123456").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withExpiryDate("2026-12-31")
             .withTags("friends")
-            .withBoxes("box-1").build();
+            .withBoxes("box-1:2026-12-31").build();
 
     public static final Person BENSON = new PersonBuilder()
             .withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25, Singapore 546311")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
-            .withExpiryDate("2026-12-31")
             .withTags("owesMoney", "friends")
-            .withBoxes("box-1", "box-2").build();
+            .withBoxes("box-1:2026-12-31", "box-2:2026-12-31").build();
 
     public static final Person CARL = new PersonBuilder()
             .withName("Carl Kurz")
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withAddress("wall street 111111")
-            .withExpiryDate("2026-12-31")
-            .withBoxes("box-3").build();
+            .withBoxes("box-3:2026-12-31").build();
 
     public static final Person DANIEL = new PersonBuilder()
             .withName("Daniel Meier")
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withAddress("10th street 012345")
-            .withExpiryDate("2026-12-31")
             .withTags("friends")
-            .withBoxes("box-2", "box-3").build();
+            .withBoxes("box-2:2026-12-31", "box-3:2026-12-31").build();
 
     public static final Person ELLE = new PersonBuilder()
             .withName("Elle Meyer")
-            .withExpiryDate("2026-12-31")
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withAddress("michegan ave 642901")
-            .withBoxes("box-2").build();
+            .withBoxes("box-2:2026-12-31").build();
 
     public static final Person FIONA = new PersonBuilder()
             .withName("Fiona Kunz")
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo 654312")
-            .withExpiryDate("2026-12-31")
-            .withBoxes("box-1", "box-3").build();
+            .withBoxes("box-1:2026-12-31", "box-3:2026-12-31").build();
 
     public static final Person GEORGE = new PersonBuilder()
             .withName("George Best")
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withAddress("4th street 746293")
-            .withExpiryDate("2026-12-31")
-            .withBoxes("box-3").build();
+            .withBoxes("box-3:2026-12-31").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

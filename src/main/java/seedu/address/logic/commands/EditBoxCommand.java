@@ -145,7 +145,6 @@ public class EditBoxCommand extends Command {
         Address address = personToEdit.getAddress();
         Remark remark = personToEdit.getRemark();
         DeliveryStatus deliveryStatus = personToEdit.getDeliveryStatus();
-        ExpiryDate personExpiryDate = personToEdit.getExpiryDate();
         Set<Tag> tags = personToEdit.getTags();
 
         Set<Box> updatedBoxes = new TreeSet<>(personToEdit.getBoxes());
@@ -158,8 +157,7 @@ public class EditBoxCommand extends Command {
         }
 
         updatedBoxes.add(editedBox);
-        return new Person(name, phone, email, address, updatedBoxes, remark,
-                personExpiryDate, deliveryStatus, tags);
+        return new Person(name, phone, email, address, updatedBoxes, remark, deliveryStatus, tags);
     }
 
     @Override

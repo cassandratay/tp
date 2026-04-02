@@ -37,8 +37,8 @@ public class DeleteBoxCommandTest {
                 .collect(Collectors.toSet());
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), updatedBoxes, personToEdit.getRemark(), personToEdit.getExpiryDate(),
-                personToEdit.getDeliveryStatus(), personToEdit.getTags());
+                personToEdit.getAddress(), updatedBoxes, personToEdit.getRemark(), personToEdit.getDeliveryStatus(),
+                personToEdit.getTags());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);

@@ -154,7 +154,6 @@ public class EditBoxCommandTest {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Remark updatedRemark = personToEdit.getRemark();
-        ExpiryDate updatedPersonExpiryDate = personToEdit.getExpiryDate();
         DeliveryStatus updatedDeliveryStatus = personToEdit.getDeliveryStatus();
         Set<Tag> updatedTags = personToEdit.getTags();
 
@@ -167,6 +166,6 @@ public class EditBoxCommandTest {
         updatedBoxes.add(editedBox);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBoxes,
-                updatedRemark, updatedPersonExpiryDate, updatedDeliveryStatus, updatedTags);
+                updatedRemark, updatedDeliveryStatus, updatedTags);
     }
 }

@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.BOX_DESC_BOX1;
-import static seedu.address.logic.commands.CommandTestUtil.BOX_DESC_BOX2;
+import static seedu.address.logic.commands.CommandTestUtil.BOX_NAME_DESC_BOX1;
+import static seedu.address.logic.commands.CommandTestUtil.BOX_NAME_DESC_BOX2;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -23,7 +23,7 @@ public class DeleteBoxCommandParserTest {
     public void parse_allFieldsValid_success() {
         Name targetName = new Name("Amy Bee");
         Set<String> targetBoxNames = Set.of("box-1");
-        String userInput = PREAMBLE_WHITESPACE + NAME_DESC_AMY + BOX_DESC_BOX1;
+        String userInput = PREAMBLE_WHITESPACE + NAME_DESC_AMY + BOX_NAME_DESC_BOX1;
         DeleteBoxCommand expectedCommand = new DeleteBoxCommand(targetName, targetBoxNames);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -32,14 +32,14 @@ public class DeleteBoxCommandParserTest {
     public void parse_multipleBoxes_success() {
         Name targetName = new Name("Amy Bee");
         Set<String> targetBoxNames = Set.of("box-1", "box-2");
-        String userInput = PREAMBLE_WHITESPACE + NAME_DESC_AMY + BOX_DESC_BOX1 + BOX_DESC_BOX2;
+        String userInput = PREAMBLE_WHITESPACE + NAME_DESC_AMY + BOX_NAME_DESC_BOX1 + BOX_NAME_DESC_BOX2;
         DeleteBoxCommand expectedCommand = new DeleteBoxCommand(targetName, targetBoxNames);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_missingName_failure() {
-        String userInput = PREAMBLE_WHITESPACE + BOX_DESC_BOX1;
+        String userInput = PREAMBLE_WHITESPACE + BOX_NAME_DESC_BOX1;
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteBoxCommand.MESSAGE_USAGE));
     }

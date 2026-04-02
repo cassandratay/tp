@@ -36,8 +36,8 @@ public class AddBoxCommandTest {
         updatedBoxes.addAll(boxesToAdd);
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), updatedBoxes, personToEdit.getRemark(), personToEdit.getExpiryDate(),
-                personToEdit.getDeliveryStatus(), personToEdit.getTags()
+                personToEdit.getAddress(), updatedBoxes, personToEdit.getRemark(), personToEdit.getDeliveryStatus(),
+                personToEdit.getTags()
         );
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());

@@ -17,7 +17,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Box;
 import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.ExpiryDate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
@@ -97,11 +96,9 @@ public class MarkCommand extends Command {
         Set<Box> boxesCopy = personToMark.getBoxes();
         Remark remarkCopy = personToMark.getRemark();
         Set<Tag> tagsCopy = personToMark.getTags();
-        ExpiryDate expiryCopy = personToMark.getExpiryDate();
 
         return new Person(nameCopy, phoneCopy, emailCopy, addressCopy,
-                boxesCopy, remarkCopy, expiryCopy,
-                newDeliveryStatus, tagsCopy);
+                boxesCopy, remarkCopy, newDeliveryStatus, tagsCopy);
     }
 
     @Override

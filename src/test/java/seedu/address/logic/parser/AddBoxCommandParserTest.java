@@ -20,7 +20,7 @@ public class AddBoxCommandParserTest {
 
     @Test
     public void execute_allFieldsPresent_success() {
-        String userInput = " n/Amy b/box-1 ex/2026-12-31";
+        String userInput = " n/Amy b/box-1:2026-12-31";
         AddBoxCommand expectedCommand = new AddBoxCommand(new Name("Amy"),
                 Set.of(new Box("box-1", new ExpiryDate("2026-12-31"))));
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -28,7 +28,7 @@ public class AddBoxCommandParserTest {
 
     @Test
     public void execute_duplicateName_failure() {
-        String userInput = PREAMBLE_WHITESPACE + "n/Amy n/Bob b/box-1 ex/2026-12-31";
+        String userInput = PREAMBLE_WHITESPACE + "n/Amy n/Bob b/box-1:2026-12-31";
         assertParseFailure(parser, userInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBoxCommand.MESSAGE_USAGE));
     }

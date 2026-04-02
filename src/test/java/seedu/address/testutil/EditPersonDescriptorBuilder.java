@@ -40,7 +40,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
-        descriptor.setExpiryDate(person.getExpiryDate());
     }
 
     /**

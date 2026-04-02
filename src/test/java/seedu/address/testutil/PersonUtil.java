@@ -38,12 +38,15 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_REMARKS + person.getRemark().value + " ");
-        sb.append(PREFIX_EXPIRY_DATE + person.getExpiryDate().value + " ");
+        person.getBoxes().stream().forEach(
+                b -> sb.append(PREFIX_BOX)
+                        .append(b.getBoxName())
+                        .append(":")
+                        .append(b.getExpiryDate().value)
+                        .append(" ")
+        );
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
-        person.getBoxes().stream().forEach(
-                b -> sb.append(PREFIX_BOX + b.boxName + " ")
         );
         return sb.toString();
     }

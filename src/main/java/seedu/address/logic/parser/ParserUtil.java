@@ -220,4 +220,39 @@ public class ParserUtil {
         }
         return boxSet;
     }
+
+    /**
+     * Parses {@code String boxWithExpiry} into a {@code Box}
+     */
+    public static Box parseBoxWithExpiry(String boxWithExpiry) throws ParseException {
+        requireNonNull(boxWithExpiry);
+        String trimmed = boxWithExpiry.trim();
+
+        int separatorIndex = trimmed.lastIndexOf(":");
+        if (separatorIndex <= 0 || separatorIndex == trimmed.length() - 1) {
+            throw new ParseException(Box.MESSAGE_INVALID_BOX_WITH_EXPIRY_FORMAT);
+        }
+
+        String boxName = trimmed.substring(0, separatorIndex).trim();
+        String expiryDateString = trimmed.substring(separatorIndex + 1).trim();
+
+        if (!Box.isValidBoxName(boxName)) {
+            throw new ParseException(Box.MESSAGE_CONSTRAINTS);
+        }
+
+        ExpiryDate expiryDate = parseExpiryDate(expiryDateString);
+        return new Box(boxName, expiryDate);
+    }
+
+    /**
+     * Parses {@code Collection<String> boxes} into a {@code Set<Box>}
+     */
+    public static Set<Box> parseBoxesWithExpiry(Collection<String> boxesWithExpiry) throws ParseException {
+        requireNonNull(boxesWithExpiry);
+        final Set<Box> boxSet = new TreeSet<>();
+        for (String boxWithExpiry : boxesWithExpiry) {
+            boxSet.add(parseBoxWithExpiry(boxWithExpiry));
+        }
+        return boxSet;
+    }
 }

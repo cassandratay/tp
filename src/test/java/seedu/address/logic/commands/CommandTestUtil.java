@@ -43,8 +43,10 @@ public class CommandTestUtil {
     public static final String VALID_EXPIRY_DATE_BOB = "2026-12-30";
     public static final String VALID_DELIVERY_STATUS_AMY = "pending";
     public static final String VALID_DELIVERY_STATUS_BOB = "delivered";
-    public static final String VALID_BOX_BOX1 = "box-1";
-    public static final String VALID_BOX_BOX2 = "box-2";
+    public static final String VALID_BOX_BOX1 = "box-1:2026-12-31";
+    public static final String VALID_BOX_BOX2 = "box-2:2026-01-01";
+    public static final String VALID_BOX_NAME_BOX1 = "box-1";
+    public static final String VALID_BOX_NAME_BOX2 = "box-2";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -61,9 +63,10 @@ public class CommandTestUtil {
     public static final String ORDER_DESCRIPTION_DESC_BOB =
             " " + PREFIX_REMARKS + VALID_ORDER_DESCRIPTION_BOB;
     public static final String EXPIRY_DATE_DESC_AMY = " " + PREFIX_EXPIRY_DATE + VALID_EXPIRY_DATE_AMY;
-    public static final String EXPIRY_DATE_DESC_BOB = " " + PREFIX_EXPIRY_DATE + VALID_EXPIRY_DATE_BOB;
     public static final String BOX_DESC_BOX1 = " " + PREFIX_BOX + VALID_BOX_BOX1;
     public static final String BOX_DESC_BOX2 = " " + PREFIX_BOX + VALID_BOX_BOX2;
+    public static final String BOX_NAME_DESC_BOX1 = " " + PREFIX_BOX + VALID_BOX_NAME_BOX1;
+    public static final String BOX_NAME_DESC_BOX2 = " " + PREFIX_BOX + VALID_BOX_NAME_BOX2;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -72,7 +75,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS + "sengkang"; // missing 6-digit postal code
     public static final String INVALID_ORDER_DESCRIPTION_DESC = " " + PREFIX_REMARKS + "#cake";
-    public static final String INVALID_EXPIRY_DATE_DESC = " " + PREFIX_EXPIRY_DATE;
+    public static final String INVALID_EXPIRY_DATE_DESC = " " + PREFIX_EXPIRY_DATE + "2026-40-40";
     public static final String INVALID_BOX_DESC = " " + PREFIX_BOX + "box*"; // '*' not allowed in boxes
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 

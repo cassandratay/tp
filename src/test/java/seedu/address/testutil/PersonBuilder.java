@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.commons.phone.Phone;
@@ -12,7 +11,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Box;
 import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.ExpiryDate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
@@ -28,7 +26,6 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111, Singapore 123456";
     public static final String DEFAULT_ORDER_DESCRIPTION = "1 cake";
-    public static final String DEFAULT_EXPIRY_DATE = "2026-12-31";
     public static final String DEFAULT_DELIVERY_STATUS = "pending";
 
     private Name name;
@@ -36,7 +33,6 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Remark remark;
-    private ExpiryDate expiryDate;
     private DeliveryStatus deliveryStatus;
     private Set<Tag> tags;
     private Set<Box> boxes;
@@ -51,10 +47,9 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         remark = new Remark(DEFAULT_ORDER_DESCRIPTION);
-        expiryDate = new ExpiryDate(DEFAULT_EXPIRY_DATE);
         deliveryStatus = DeliveryStatus.fromString(DEFAULT_DELIVERY_STATUS);
         tags = new HashSet<>();
-        boxes = SampleDataUtil.getBoxSet(expiryDate, "box-1");
+        boxes = SampleDataUtil.getBoxSet("box-1:2026-12-31");
         assignedDriver = null;
     }
 
@@ -67,7 +62,6 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
-        expiryDate = personToCopy.getExpiryDate();
         deliveryStatus = personToCopy.getDeliveryStatus();
         tags = new HashSet<>(personToCopy.getTags());
         boxes = new TreeSet<>(personToCopy.getBoxes());
@@ -94,7 +88,7 @@ public class PersonBuilder {
      * Parses the {@code boxes} into a {@code Set<Box>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withBoxes(String ... boxes) {
-        this.boxes = SampleDataUtil.getBoxSet(this.expiryDate, boxes);
+        this.boxes = SampleDataUtil.getBoxSet(boxes);
         return this;
     }
 
@@ -131,17 +125,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code ExpiryDate} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withExpiryDate(String expiryDate) {
-        this.expiryDate = new ExpiryDate(expiryDate);
-        this.boxes = this.boxes.stream()
-                .map(box -> new Box(box.boxName, this.expiryDate))
-                .collect(Collectors.toSet());
-        return this;
-    }
-
-    /**
      * Sets the {@code DeliveryStatus} of the {@code Person} that we are building.
      */
     public PersonBuilder withDeliveryStatus(String deliveryStatus) {
@@ -162,10 +145,10 @@ public class PersonBuilder {
      */
     public Person build() {
         if (assignedDriver != null) {
-            return new Person(name, phone, email, address, boxes, remark, expiryDate,
+            return new Person(name, phone, email, address, boxes, remark,
                     deliveryStatus, tags, assignedDriver);
         }
-        return new Person(name, phone, email, address, boxes, remark, expiryDate, deliveryStatus, tags);
+        return new Person(name, phone, email, address, boxes, remark, deliveryStatus, tags);
     }
 
 }

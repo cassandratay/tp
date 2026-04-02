@@ -20,7 +20,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Box;
 import seedu.address.model.person.DeliveryStatus;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.ExpiryDate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
@@ -111,12 +110,10 @@ public class AssignCommand extends Command {
         Set<Box> boxesCopy = personToAssign.getBoxes();
         Remark remarkCopy = personToAssign.getRemark();
         Set<Tag> tagsCopy = new HashSet<>(personToAssign.getTags()); // have modifiable tags
-        ExpiryDate expiryCopy = personToAssign.getExpiryDate();
 
         // Create new instance with Driver
         Person assignedPerson = new Person(nameCopy, phoneCopy, emailCopy, addressCopy,
-                boxesCopy, remarkCopy, expiryCopy,
-                statusCopy, tagsCopy, assignedDriver);
+                boxesCopy, remarkCopy, statusCopy, tagsCopy, assignedDriver);
 
         // Keep the assignment store in sync with the updated Person instance in the model.
         assignments.assign(assignedDriver, assignedPerson);

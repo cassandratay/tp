@@ -40,7 +40,6 @@ public class MarkCommandTest {
                 personToMark.getAddress(),
                 personToMark.getBoxes(),
                 personToMark.getRemark(),
-                personToMark.getExpiryDate(),
                 DeliveryStatus.DELIVERED,
                 personToMark.getTags()
         );
@@ -79,7 +78,6 @@ public class MarkCommandTest {
                 personToMark.getAddress(),
                 personToMark.getBoxes(),
                 personToMark.getRemark(),
-                personToMark.getExpiryDate(),
                 DeliveryStatus.DELIVERED,
                 personToMark.getTags()
         );

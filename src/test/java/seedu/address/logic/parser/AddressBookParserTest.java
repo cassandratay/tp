@@ -57,7 +57,7 @@ public class AddressBookParserTest {
     public void parseCommand_addBox() throws Exception {
         Person person = new PersonBuilder().build();
         AddBoxCommand command = (AddBoxCommand) parser.parseCommand(AddBoxCommand.COMMAND_WORD + " "
-            + "n/Amy b/box-1 ex/2026-12-31");
+            + "n/Amy b/box-1:2026-12-31");
         assertEquals(new AddBoxCommand(new Name("Amy"), Set.of(new Box("box-1",
                 new ExpiryDate("2026-12-31")))), command);
     }

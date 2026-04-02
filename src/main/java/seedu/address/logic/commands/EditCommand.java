@@ -113,10 +113,9 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getDeliveryStatus());
         Set<Box> updatedBoxes = personToEdit.getBoxes();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        ExpiryDate updatedExpiry = editPersonDescriptor.getExpiryDate().orElse(personToEdit.getExpiryDate());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBoxes,
-                updatedRemark, updatedExpiry, updatedDeliveryStatus, updatedTags);
+                updatedRemark, updatedDeliveryStatus, updatedTags);
     }
 
     @Override

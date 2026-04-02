@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ORDER_DESCRIPTION_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -41,7 +40,6 @@ public class PersonTest {
                 .withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB)
                 .withRemark(VALID_ORDER_DESCRIPTION_BOB)
-                .withExpiryDate(VALID_EXPIRY_DATE_BOB)
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
@@ -98,10 +96,6 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withRemark(VALID_ORDER_DESCRIPTION_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different expiry date -> returns false
-        editedAlice = new PersonBuilder(ALICE).withExpiryDate(VALID_EXPIRY_DATE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different delivery status -> returns false
         editedAlice = new PersonBuilder(ALICE).withDeliveryStatus(VALID_DELIVERY_STATUS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -125,18 +119,11 @@ public class PersonTest {
     }
 
     @Test
-    public void hashCode_differentExpiryDate_differentHashCode() {
-        Person editedAlice = new PersonBuilder(ALICE).withExpiryDate(VALID_EXPIRY_DATE_BOB).build();
-        assertFalse(ALICE.hashCode() == editedAlice.hashCode());
-    }
-
-    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
                 + ", boxes=" + ALICE.getBoxes()
                 + ", remark=" + ALICE.getRemark()
-                + ", expiryDate=" + ALICE.getExpiryDate()
                 + ", deliveryStatus=" + ALICE.getDeliveryStatus()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());

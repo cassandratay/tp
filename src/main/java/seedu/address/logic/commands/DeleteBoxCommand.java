@@ -95,8 +95,7 @@ public class DeleteBoxCommand extends Command {
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getAddress(),
-                updatedBoxes, personToEdit.getRemark(), personToEdit.getExpiryDate(), personToEdit.getDeliveryStatus(),
-                personToEdit.getTags()
+                updatedBoxes, personToEdit.getRemark(), personToEdit.getDeliveryStatus(), personToEdit.getTags()
         );
 
         model.setPerson(personToEdit, editedPerson);
