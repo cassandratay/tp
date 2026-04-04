@@ -51,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label deliveryStatus;
     @FXML
+    private Label driver;
+    @FXML
     private FlowPane tags;
     @FXML
     private FlowPane boxes;
@@ -88,21 +90,26 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
                     Label tagLabel = new Label(tag.tagName);
-                    if (tag.tagName.startsWith("DRIVER:")) {
-                        Image driverImage = new Image(getClass().getResourceAsStream("/images/driver_icon.png"));
-                        ImageView driverIcon = new ImageView(driverImage);
-                        driverIcon.setFitWidth(16);
-                        driverIcon.setFitHeight(16);
-                        tagLabel.setGraphic(driverIcon);
-                        tagLabel.setGraphicTextGap(2);
-                        tagLabel.getStyleClass().add("driver-tag");
-                    } else {
-                        tagLabel.getStyleClass().add("tag");
-                    }
+                    tagLabel.getStyleClass().add("tag");
                     tags.getChildren().add(tagLabel);
                 });
-
+        // Driver
+        if (person.hasDriver()) {
+            Image driverImage = new Image(getClass().getResourceAsStream("/images/driver_icon.png"));
+            ImageView driverIcon = new ImageView(driverImage);
+            driverIcon.setFitWidth(16);
+            driverIcon.setFitHeight(16);
+            driver.setGraphic(driverIcon);
+            driver.setGraphicTextGap(2);
+            driver.getStyleClass().add("driver-tag");
+            String driverName = person.getAssignedDriver().getName().fullName;
+            String driverPhone = person.getAssignedDriver().getPhone().value;
+            driver.setText("DRIVER: " + driverName + "[" + driverPhone + "]");
+        } else {
+            driver.setText("");
+            driver.setVisible(false);
+            driver.setManaged(false);
+        }
 
     }
 }
-

@@ -258,7 +258,7 @@ Format: `mark INDEX STATUS`
 * Marks the person at the specified `INDEX` with the specified `STATUS`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The status **must be** `PENDING`, `PACKED` or `DELIVERED` (not case-sensitive) 
+* The status **must be** `PENDING`, `PACKED` or `DELIVERED` (not case-sensitive)
 
 Examples:
 * `mark 1 delivered`
