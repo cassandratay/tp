@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,13 +19,7 @@ public class CommandBox extends UiPart<Region> {
     private final CommandAssistant commandAssistant = new CommandAssistant();
 
     @FXML
-    private TextField commandTextField;
-
-    @FXML
-    private Label typedTextSpacer;
-
-    @FXML
-    private Label commandSuggestionLabel;
+    private CommandTextField commandTextField;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -84,12 +76,7 @@ public class CommandBox extends UiPart<Region> {
     private void updateCommandAssistance(String commandText) {
         String safeCommandText = commandText == null ? "" : commandText;
         String suggestion = commandAssistant.getSuggestion(safeCommandText);
-        boolean hasSuggestion = !suggestion.isEmpty();
-
-        typedTextSpacer.setText(safeCommandText);
-        typedTextSpacer.setVisible(hasSuggestion);
-        commandSuggestionLabel.setText(suggestion);
-        commandSuggestionLabel.setVisible(hasSuggestion);
+        commandTextField.setSuggestion(suggestion);
     }
 
     /**

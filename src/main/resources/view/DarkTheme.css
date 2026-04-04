@@ -29,22 +29,16 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
-.command-assistance-overlay {
-    -fx-padding: 0 8 0 8;
+.command-text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-padding: 6 8 6 8;
 }
 
-.command-assistance-spacer,
 .command-assistance-text {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
-}
-
-.command-assistance-spacer {
-    -fx-text-fill: transparent;
-}
-
-.command-assistance-text {
-    -fx-text-fill: rgba(255, 255, 255, 0.35);
+    -fx-fill: rgba(255, 255, 255, 0.35);
 }
 
 .tab-pane {
