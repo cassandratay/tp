@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter command here..."/>
+  <HBox alignment="CENTER_LEFT" mouseTransparent="true" pickOnBounds="false"
+        styleClass="command-assistance-overlay" StackPane.alignment="CENTER_LEFT">
+    <Label fx:id="typedTextSpacer" styleClass="command-assistance-spacer" visible="false"/>
+    <Label fx:id="commandSuggestionLabel" styleClass="command-assistance-text" visible="false"/>
+  </HBox>
 </StackPane>
-

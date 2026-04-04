@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
@@ -17,9 +18,16 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final CommandAssistant commandAssistant = new CommandAssistant();
 
     @FXML
     private TextField commandTextField;
+
+    @FXML
+    private Label typedTextSpacer;
+
+    @FXML
+    private Label commandSuggestionLabel;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -28,7 +36,11 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
-        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        commandTextField.textProperty().addListener((unused1, unused2, newValue) -> {
+            setStyleToDefault();
+            updateCommandAssistance(newValue);
+        });
+        updateCommandAssistance(commandTextField.getText());
     }
 
     /**
@@ -67,6 +79,17 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+    }
+
+    private void updateCommandAssistance(String commandText) {
+        String safeCommandText = commandText == null ? "" : commandText;
+        String suggestion = commandAssistant.getSuggestion(safeCommandText);
+        boolean hasSuggestion = !suggestion.isEmpty();
+
+        typedTextSpacer.setText(safeCommandText);
+        typedTextSpacer.setVisible(hasSuggestion);
+        commandSuggestionLabel.setText(suggestion);
+        commandSuggestionLabel.setVisible(hasSuggestion);
     }
 
     /**
