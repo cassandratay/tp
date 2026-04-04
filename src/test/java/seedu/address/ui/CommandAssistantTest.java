@@ -31,14 +31,56 @@ public class CommandAssistantTest {
     }
 
     @Test
+    public void getSuggestion_assignCommandWithGroupedNamesAndPhones_preservesPositionalPattern() {
+        assertEquals(" n/NAME [n/NAME p/PHONE]...",
+                commandAssistant.getSuggestion("assign n/D1 n/D2 p/1111 p/2222"));
+    }
+
+    @Test
     public void getSuggestion_editCommandAfterIndex_showsEditableFields() {
         assertEquals(" [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [o/REMARKS] [ex/EXPIRY_DATE] [t/TAG]...",
                 commandAssistant.getSuggestion("edit 1"));
     }
 
     @Test
+    public void getSuggestion_addBoxCommand_showsMissingFieldsAndRepeatableBoxes() {
+        assertEquals(" [b/BOX_NAME]... ex/EXPIRY_DATE", commandAssistant.getSuggestion("addbox n/John Doe b/box-1"));
+    }
+
+    @Test
+    public void getSuggestion_deleteBoxCommand_showsRepeatableBoxes() {
+        assertEquals(" [b/BOX_NAME]...", commandAssistant.getSuggestion("deletebox n/John Doe b/box-1"));
+    }
+
+    @Test
+    public void getSuggestion_editBoxCommand_showsOptionalEditableFields() {
+        assertEquals(" [nb/NEW_BOX_NAME] [ex/EXPIRY_DATE]",
+                commandAssistant.getSuggestion("editbox n/John Doe b/box-1"));
+    }
+
+    @Test
     public void getSuggestion_deleteCommand_showsAcceptedTargets() {
         assertEquals(" INDEX|EMAIL", commandAssistant.getSuggestion("delete"));
+    }
+
+    @Test
+    public void getSuggestion_filterCommandWithDriverPrefix_showsRepeatableDriverFields() {
+        assertEquals(" [d/MORE_DRIVERS]...", commandAssistant.getSuggestion("filter d/Alex"));
+    }
+
+    @Test
+    public void getSuggestion_exportCommandWithoutPath_showsOptionalPathHint() {
+        assertEquals(" [FILE_PATH.html]", commandAssistant.getSuggestion("export"));
+    }
+
+    @Test
+    public void getSuggestion_markCommandAfterIndex_showsStatusHint() {
+        assertEquals(" STATUS", commandAssistant.getSuggestion("mark 1"));
+    }
+
+    @Test
+    public void getSuggestion_noArgumentCommand_returnsEmptySuggestion() {
+        assertEquals("", commandAssistant.getSuggestion("help"));
     }
 
     @Test
