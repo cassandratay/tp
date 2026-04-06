@@ -28,6 +28,7 @@ import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RemarkCommand;
@@ -108,6 +109,7 @@ public class CommandAssistant {
         assistanceByCommand.put(FilterCommand.COMMAND_WORD, CommandAssistant::suggestForFilter);
         assistanceByCommand.put(FindCommand.COMMAND_WORD, CommandAssistant::suggestForFind);
         assistanceByCommand.put(HelpCommand.COMMAND_WORD, arguments -> "");
+        assistanceByCommand.put(ImportCommand.COMMAND_WORD, CommandAssistant::suggestForImport);
         assistanceByCommand.put(ListCommand.COMMAND_WORD, arguments -> "");
         assistanceByCommand.put(MarkCommand.COMMAND_WORD, CommandAssistant::suggestForMark);
         assistanceByCommand.put(RemarkCommand.COMMAND_WORD, CommandAssistant::suggestForRemark);
@@ -130,16 +132,14 @@ public class CommandAssistant {
     }
 
     private static String suggestForAddBox(String arguments) {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_BOX,
-                PREFIX_EXPIRY_DATE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_NAME, PREFIX_BOX);
 
         StringBuilder suggestion = new StringBuilder();
         appendMissingPrefix(suggestion, argMultimap, PREFIX_NAME, " n/NAME");
-        appendMissingPrefix(suggestion, argMultimap, PREFIX_BOX, " b/BOX_NAME");
+        appendMissingPrefix(suggestion, argMultimap, PREFIX_BOX, " b/BOX_NAME:EXPIRY_DATE");
         if (hasPrefix(argMultimap, PREFIX_BOX)) {
-            suggestion.append(" [b/BOX_NAME]...");
+            suggestion.append(" [b/BOX_NAME:EXPIRY_DATE]...");
         }
-        appendMissingPrefix(suggestion, argMultimap, PREFIX_EXPIRY_DATE, " ex/EXPIRY_DATE");
         return suggestion.toString();
     }
 
@@ -214,18 +214,22 @@ public class CommandAssistant {
 
     private static String suggestForFilter(String arguments) {
         if (arguments.trim().isEmpty()) {
-            return " KEYWORD [MORE_KEYWORDS]... or d/DRIVER [d/MORE_DRIVERS]...";
+            return " BOX_NAME [MORE_BOX_NAMES]... or d/DRIVER_NAME [d/MORE_DRIVER_NAMES]...";
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_DRIVER);
         if (hasPrefix(argMultimap, PREFIX_DRIVER)) {
-            return " [d/MORE_DRIVERS]...";
+            return " [d/MORE_DRIVER_NAMES]...";
         }
-        return "";
+        return " [MORE_BOX_NAMES]...";
     }
 
     private static String suggestForFind(String arguments) {
         return arguments.trim().isEmpty() ? " KEYWORD [MORE_KEYWORDS]..." : "";
+    }
+
+    private static String suggestForImport(String arguments) {
+        return arguments.trim().isEmpty() ? " FILE_PATH.csv" : "";
     }
 
     private static String suggestForMark(String arguments) {

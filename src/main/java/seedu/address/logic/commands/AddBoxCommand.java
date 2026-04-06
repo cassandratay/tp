@@ -33,7 +33,7 @@ public class AddBoxCommand extends Command {
             + "the person identified by the name used in the displayed person list.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_BOX + "BOX_NAME "
+            + PREFIX_BOX + "BOX_NAME:EXPIRY_DATE "
             + "[" + PREFIX_BOX + "BOX_NAME:EXPIRY_DATE]... "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "

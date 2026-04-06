@@ -44,7 +44,8 @@ public class CommandAssistantTest {
 
     @Test
     public void getSuggestion_addBoxCommand_showsMissingFieldsAndRepeatableBoxes() {
-        assertEquals(" [b/BOX_NAME]... ex/EXPIRY_DATE", commandAssistant.getSuggestion("addbox n/John Doe b/box-1"));
+        assertEquals(" [b/BOX_NAME:EXPIRY_DATE]...",
+                commandAssistant.getSuggestion("addbox n/John Doe b/box-1:2026-01-01"));
     }
 
     @Test
@@ -65,12 +66,28 @@ public class CommandAssistantTest {
 
     @Test
     public void getSuggestion_filterCommandWithDriverPrefix_showsRepeatableDriverFields() {
-        assertEquals(" [d/MORE_DRIVERS]...", commandAssistant.getSuggestion("filter d/Alex"));
+        assertEquals(" [d/MORE_DRIVER_NAMES]...", commandAssistant.getSuggestion("filter d/Alex"));
+    }
+
+    @Test
+    public void getSuggestion_filterCommandWithoutArgs_showsBoxOrDriverFormats() {
+        assertEquals(" BOX_NAME [MORE_BOX_NAMES]... or d/DRIVER_NAME [d/MORE_DRIVER_NAMES]...",
+                commandAssistant.getSuggestion("filter"));
+    }
+
+    @Test
+    public void getSuggestion_filterCommandWithBoxKeyword_showsRepeatableBoxFields() {
+        assertEquals(" [MORE_BOX_NAMES]...", commandAssistant.getSuggestion("filter box-1"));
     }
 
     @Test
     public void getSuggestion_exportCommandWithoutPath_showsOptionalPathHint() {
         assertEquals(" [FILE_PATH.html]", commandAssistant.getSuggestion("export"));
+    }
+
+    @Test
+    public void getSuggestion_importCommandWithoutPath_showsCsvPathHint() {
+        assertEquals(" FILE_PATH.csv", commandAssistant.getSuggestion("import"));
     }
 
     @Test
