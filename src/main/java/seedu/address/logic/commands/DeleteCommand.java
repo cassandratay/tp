@@ -70,6 +70,7 @@ public class DeleteCommand extends Command {
             }
 
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            clearDriverAssignments(model);
             model.deletePerson(personToDelete);
             DeliveryAssignmentHashMap.clearAssignments();
 
@@ -77,6 +78,7 @@ public class DeleteCommand extends Command {
         } else if (!isNull(targetEmail) && isNull(targetIndex)) {
             for (Person p : lastShownList) {
                 if (p.getEmail().equals(targetEmail)) {
+                    clearDriverAssignments(model);
                     model.deletePerson(p);
                     DeliveryAssignmentHashMap.clearAssignments();
 
