@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +34,47 @@ public class ImportCommand extends Command {
     private final String filePath;
 
     /**
-     * Creates an ImportCommand to import subscribers from the specified CSV file path.
+     * Creates an ImportCommand to import subscribers from a CSV file in the data/ folder.
+     * <p>
+     * Users must provide only a file name (no directories). All imports are restricted
+     * to the {@code data/} folder for security reasons. Providing directories or relative
+     * paths will result in a {@link CommandException}.
+     * <p>
+     * Only files ending with {@code .csv} are allowed. Empty file names are also rejected.
      *
-     * @param filePath The path to the CSV file to be imported. Must not be null.
+     * @param filePath The name of the CSV file to import from the {@code data/} folder.
+     * @throws CommandException if the file name is invalid, contains directories, or
+     *                          does not end with {@code .csv}
      */
-    public ImportCommand(String filePath) {
+    public ImportCommand(String filePath) throws CommandException {
         requireNonNull(filePath);
-        this.filePath = filePath;
+
+        // Ensure data directory exists
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        if (filePath.isBlank()) {
+            throw new CommandException("File name cannot be empty. All imports must come from the data/ folder.");
+        }
+
+        // Reject paths containing directories
+        File file = new File(filePath);
+        String fileName = file.getName();
+        if (!filePath.equals(fileName)) {
+            throw new CommandException(
+                    "Invalid file path. You can only provide a file name. "
+                            + "All imports must be in the data/ folder."
+            );
+        }
+
+        // Only allow CSV files
+        if (!fileName.toLowerCase().endsWith(".csv")) {
+            throw new CommandException("Invalid file type. Only .csv files are allowed for import.");
+        }
+
+        this.filePath = "data" + File.separator + fileName;
     }
 
     /**

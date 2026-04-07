@@ -109,5 +109,22 @@ public class ExportCommand extends Command {
             assignments.assign(p.getAssignedDriver(), p);
         }
     }
-    
+
+    private static String validatePath(String filePath, String expectedExtension) throws CommandException {
+        try {
+            File file = new File(filePath).getCanonicalFile();
+            File allowedDir = new File("data").getCanonicalFile();
+
+            if (!file.toPath().startsWith(allowedDir.toPath())) {
+                throw new CommandException("Invalid file path: must be within the data/ directory.");
+            }
+            if (!file.getName().toLowerCase().endsWith(expectedExtension)) {
+                throw new CommandException("Invalid file type: must be a " + expectedExtension + " file.");
+            }
+            return file.getPath();
+        } catch (IOException e) {
+            throw new CommandException("Invalid file path: " + e.getMessage());
+        }
+    }
+
 }
