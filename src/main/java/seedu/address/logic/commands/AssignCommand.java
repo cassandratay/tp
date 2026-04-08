@@ -46,8 +46,6 @@ public class AssignCommand extends Command {
      * Creates an AssignCommand to tag all {@code Person}s to a {@code Driver}
      */
     public AssignCommand(Driver... inputDrivers) throws CommandException {
-        DeliveryAssignmentHashMap.clearAssignments();
-
         this.drivers = new Driver[inputDrivers.length];
 
         for (int i = 0; i < inputDrivers.length; i++) {
@@ -72,6 +70,8 @@ public class AssignCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        DeliveryAssignmentHashMap.clearAssignments();
+
         requireNonNull(model);
         int numOfDrivers = drivers.length;
 

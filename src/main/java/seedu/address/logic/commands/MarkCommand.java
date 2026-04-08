@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.commons.phone.Phone;
+import seedu.address.model.delivery.Driver;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Box;
 import seedu.address.model.person.DeliveryStatus;
@@ -97,8 +98,12 @@ public class MarkCommand extends Command {
         Remark remarkCopy = personToMark.getRemark();
         Set<Tag> tagsCopy = personToMark.getTags();
 
+        Driver driverCopy = newDeliveryStatus == DeliveryStatus.DELIVERED
+                ? null
+                : personToMark.getAssignedDriver();
+
         return new Person(nameCopy, phoneCopy, emailCopy, addressCopy,
-                boxesCopy, remarkCopy, newDeliveryStatus, tagsCopy);
+                boxesCopy, remarkCopy, newDeliveryStatus, tagsCopy, driverCopy);
     }
 
     @Override
