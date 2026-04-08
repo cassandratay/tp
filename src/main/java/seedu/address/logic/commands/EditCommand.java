@@ -118,20 +118,16 @@ public class EditCommand extends Command {
 
         // Re-use the existing assigned driver is address is unchanged
         if (editPersonDescriptor.getAddress().isEmpty()) {
-            try {
+            if (personToEdit.hasDriver()) {
                 Driver preassignedDriver = personToEdit.getAssignedDriver();
                 return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBoxes,
                         updatedRemark, updatedDeliveryStatus, updatedTags, preassignedDriver);
-            } catch (DriverNotFoundException e) {
-                return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBoxes,
-                        updatedRemark, updatedDeliveryStatus, updatedTags);
             }
-        } else {
-            // Edited Person has new address, so we create a Person without any Driver assigned
-            return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBoxes,
-                    updatedRemark, updatedDeliveryStatus, updatedTags);
         }
 
+        // Edited Person has new address, so we create a Person without any Driver assigned
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBoxes,
+                updatedRemark, updatedDeliveryStatus, updatedTags);
     }
 
     @Override
