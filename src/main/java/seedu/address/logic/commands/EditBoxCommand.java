@@ -147,7 +147,7 @@ public class EditBoxCommand extends Command {
         Remark remark = personToEdit.getRemark();
         DeliveryStatus deliveryStatus = personToEdit.getDeliveryStatus();
         Set<Tag> tags = personToEdit.getTags();
-        Driver driver = personToEdit.getAssignedDriver();
+        Driver driver = personToEdit.hasDriver() ? personToEdit.getAssignedDriver() : null;
 
         Set<Box> updatedBoxes = new TreeSet<>(personToEdit.getBoxes());
         updatedBoxes.remove(boxToReplace);
