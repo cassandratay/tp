@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.commons.phone.Phone;
+import seedu.address.model.delivery.Driver;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Box;
 import seedu.address.model.person.DeliveryStatus;
@@ -34,6 +35,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String remark;
     private final String deliveryStatus;
+    private final JsonAdaptedDriver driver; // optional
     private final List<JsonAdaptedBox> boxes;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -48,6 +50,7 @@ class JsonAdaptedPerson {
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("remark") String remark,
             @JsonProperty("deliveryStatus") String deliveryStatus,
+            @JsonProperty("driver") JsonAdaptedDriver driver,
             @JsonProperty("boxes") List<JsonAdaptedBox> boxes) {
 
 
@@ -57,6 +60,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.remark = remark;
         this.deliveryStatus = deliveryStatus;
+        this.driver = driver;
         this.boxes = boxes;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -73,6 +77,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         remark = source.getRemark().value;
         deliveryStatus = source.getDeliveryStatus().toString();
+        driver = source.hasDriver() ? new JsonAdaptedDriver(source.getAssignedDriver()) : null;
         boxes = source.getBoxes().stream()
                 .map(JsonAdaptedBox::new)
                 .collect(Collectors.toList());
@@ -144,6 +149,13 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(DeliveryStatus.MESSAGE_CONSTRAINTS);
         }
 
+        final Driver modelDriver;
+        if (driver != null) {
+            modelDriver = driver.toModelType();
+        } else {
+            modelDriver = null;
+        }
+
         if (boxes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Box.class.getSimpleName()));
         }
@@ -155,7 +167,9 @@ class JsonAdaptedPerson {
 
         final Set<Box> modelBoxes = new TreeSet<>(personBoxes);
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBoxes,
-                modelRemark, modelDeliveryStatus, modelTags);
+                modelRemark, modelDeliveryStatus, modelTags, modelDriver);
     }
 }
+

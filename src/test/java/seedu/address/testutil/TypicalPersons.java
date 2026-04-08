@@ -26,6 +26,7 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111, Singapore 123456").withEmail("alice@example.com")
             .withPhone("94351253")
+            .withDriver("Kyle", "91234567")
             .withTags("friends")
             .withBoxes("box-1:2026-12-31").build();
 
@@ -34,6 +35,7 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25, Singapore 546311")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
+            .withDriver("Kyle", "91234567")
             .withTags("owesMoney", "friends")
             .withBoxes("box-1:2026-12-31", "box-2:2026-12-31").build();
 
@@ -42,6 +44,7 @@ public class TypicalPersons {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withAddress("wall street 111111")
+            .withDriver("Kyle", "91234567")
             .withBoxes("box-3:2026-12-31").build();
 
     public static final Person DANIEL = new PersonBuilder()
@@ -49,6 +52,7 @@ public class TypicalPersons {
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withAddress("10th street 012345")
+            .withDriver("Kyle", "91234567")
             .withTags("friends")
             .withBoxes("box-2:2026-12-31", "box-3:2026-12-31").build();
 
@@ -57,6 +61,7 @@ public class TypicalPersons {
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withAddress("michegan ave 642901")
+            .withDriver("Kyle", "91234567")
             .withBoxes("box-2:2026-12-31").build();
 
     public static final Person FIONA = new PersonBuilder()
@@ -64,6 +69,7 @@ public class TypicalPersons {
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo 654312")
+            .withDriver("Kyle", "91234567")
             .withBoxes("box-1:2026-12-31", "box-3:2026-12-31").build();
 
     public static final Person GEORGE = new PersonBuilder()
@@ -71,6 +77,7 @@ public class TypicalPersons {
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withAddress("4th street 746293")
+            .withDriver("Kyle", "91234567")
             .withBoxes("box-3:2026-12-31").build();
 
     // Manually added

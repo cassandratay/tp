@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -19,9 +18,9 @@ public class PersonHasBoxPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return person.getBoxes().stream()
-                .map(Box::getBoxName)
+                .map(box -> box.getBoxName().toLowerCase())
                 .anyMatch(boxName -> keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(boxName, keyword)));
+                .anyMatch(keyword -> boxName.contains(keyword.toLowerCase())));
     }
 
     @Override

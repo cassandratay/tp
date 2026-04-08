@@ -20,12 +20,25 @@ import seedu.address.model.delivery.Driver;
  */
 public class AssignCommandParser implements Parser<AssignCommand> {
 
+    private static final String DRIVER_NAME_REGEX = "n/[^/]+";
+    private static final String DRIVER_PHONE_REGEX = "p/\\S+";
+    private static final String ASSIGN_ARGS_REGEX =
+            "\\s*" + DRIVER_NAME_REGEX + "\\s+" + DRIVER_PHONE_REGEX
+                    + "(\\s+" + DRIVER_NAME_REGEX + "\\s+" + DRIVER_PHONE_REGEX + ")*\\s*";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AssignCommand
      * and returns an AssignCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AssignCommand parse(String args) throws ParseException {
+
+        String trimmedArgs = args.trim();
+
+        if (trimmedArgs.isEmpty() || !trimmedArgs.matches(ASSIGN_ARGS_REGEX)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignCommand.MESSAGE_USAGE));
+        }
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE);
 

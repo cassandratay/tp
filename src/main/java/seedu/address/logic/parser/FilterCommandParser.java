@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DRIVER;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -37,7 +38,17 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
             }
 
-            return new FilterCommand(new DriverAssignedToPersonPredicate(driverKeywords));
+            List<String> splitKeywords = driverKeywords.stream()
+                    .flatMap(k -> Arrays.stream(k.trim().split("\\s+")))
+                    .filter(k -> !k.isEmpty())
+                    .collect(Collectors.toList());
+
+            if (splitKeywords.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+            }
+
+            return new FilterCommand(new DriverAssignedToPersonPredicate(splitKeywords));
         }
 
         String[] boxKeywords = trimmedArgs.split("\\s+");

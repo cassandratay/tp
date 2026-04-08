@@ -19,7 +19,8 @@ public class ExpiryDate {
             + "dd/MM/yyyy\n"
             + "Example: "
             + "2026-12-31, or "
-            + "31/12/2026.";
+            + "31/12/2026.\n"
+            + "It should also be a date that has not passed yet.";
 
     public static final DateTimeFormatter STANDARD_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final List<DateTimeFormatter> FORMATS = List.of(
@@ -70,7 +71,6 @@ public class ExpiryDate {
     public static boolean isValidExpiryDate(String test) {
         requireNonNull(test);
         String trimmed = test.trim();
-
         for (DateTimeFormatter formatter : FORMATS) {
             try {
                 // this line may accept invalid dates like 2026-12-30, and parses it to return 2026-12-28.
@@ -78,7 +78,7 @@ public class ExpiryDate {
                 String reformatted = date.format(formatter);
 
                 // this block prevents the above comment from being accepted.
-                if (trimmed.equals(reformatted)) {
+                if (trimmed.equals(reformatted) && date.isAfter(LocalDate.now())) {
                     return true;
                 }
             } catch (DateTimeParseException e) {
