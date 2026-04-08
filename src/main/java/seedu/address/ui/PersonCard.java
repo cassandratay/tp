@@ -92,7 +92,18 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         remarkTitle.setText("Remarks");
         remark.setText(person.getRemark().value);
-        deliveryStatus.setText(person.getDeliveryStatus().deliveryStatus);
+        String status = person.getDeliveryStatus().deliveryStatus;
+        deliveryStatus.setText(status);
+        switch (status) {
+        case "Packed":
+            deliveryStatus.getStyleClass().add("status-packed");
+            break;
+        case "Delivered":
+            deliveryStatus.getStyleClass().add("status-delivered");
+            break;
+        default:
+            break;
+        }
         person.getBoxes().stream()
                 .sorted()
                 .forEach(box -> boxes.getChildren().add(new BoxCard(box).getRoot()));
@@ -114,7 +125,7 @@ public class PersonCard extends UiPart<Region> {
             driver.getStyleClass().add("driver-tag");
             String driverName = person.getAssignedDriver().getName().fullName;
             String driverPhone = person.getAssignedDriver().getPhone().value;
-            driver.setText("DRIVER: " + driverName + "[" + driverPhone + "]");
+            driver.setText("DRIVER: " + driverName + " - " + driverPhone);
         } else {
             driver.setText("");
             driver.setVisible(false);

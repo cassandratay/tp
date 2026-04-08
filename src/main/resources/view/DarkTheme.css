@@ -393,13 +393,25 @@
 }
 
 .list-cell .delivery-status-label {
-    -fx-background-color: #ffff00;
+    -fx-background-color: #ff3707;
     -fx-background-radius: 8;
-    -fx-border-color: #c97a2b;
+    -fx-border-color: #b32605;
     -fx-border-width: 1;
-    -fx-border-radius: 4;
+    -fx-border-radius: 8;
     -fx-padding: 1 8 1 8;
     -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+
+.list-cell .status-packed {
+    -fx-background-color: #ffa716;
+    -fx-border-color: #c47d0d;
+    -fx-text-fill: black;
+}
+
+.list-cell .status-delivered {
+    -fx-background-color: #63ff2c;
+    -fx-border-color: #44b51d;
     -fx-text-fill: black;
 }
 

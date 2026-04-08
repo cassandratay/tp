@@ -15,7 +15,7 @@ import seedu.address.model.person.DeliveryStatus;
  */
 public class MarkCommandParser implements Parser<MarkCommand> {
 
-    private static final Pattern MARK_ARGS_FORMAT = Pattern.compile("(?<index>\\S+)(?<newStatus>.*)");
+    private static final Pattern MARK_ARGS_FORMAT = Pattern.compile("(?<index>\\S+)\\s+(?<newStatus>\\S+)");
 
     /**
      * Parses the given {@code String} of arguments in the context of the MarkCommand

@@ -73,10 +73,13 @@ public class AssignCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        int numOfDrivers = drivers.length;
         List<List<Person>> sortedSubscribers = ClusterAssigner.groupIntoClusters(
-                    model.getFilteredPersonList(),
-                    drivers.length);
+                    model.getAddressBook().getPersonList(),
+                    numOfDrivers);
+
+        int numOfExcessDrivers = numOfDrivers - model.getAddressBook().getPersonList().size();
+        boolean hasExcessDrivers = numOfExcessDrivers > 0;
 
         if (sortedSubscribers.size() != drivers.length) {
             // End here is algorithm is wrong (mapped to wrong no. of drivers)
@@ -91,7 +94,9 @@ public class AssignCommand extends Command {
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(hasExcessDrivers
+                ? MESSAGE_SUCCESS + "\n" + String.format("Note: %d Driver(s) not utilised!", numOfExcessDrivers)
+                : MESSAGE_SUCCESS);
 
     }
 

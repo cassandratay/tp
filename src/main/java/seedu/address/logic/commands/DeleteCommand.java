@@ -70,16 +70,16 @@ public class DeleteCommand extends Command {
             }
 
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            clearDriverAssignments(model);
             model.deletePerson(personToDelete);
-            clearDriverAssignments(model); // We should re-cluster to optimise delivery for new list
             DeliveryAssignmentHashMap.clearAssignments();
 
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
         } else if (!isNull(targetEmail) && isNull(targetIndex)) {
             for (Person p : lastShownList) {
                 if (p.getEmail().equals(targetEmail)) {
+                    clearDriverAssignments(model);
                     model.deletePerson(p);
-                    clearDriverAssignments(model); // We should re-cluster to optimise delivery for new list
                     DeliveryAssignmentHashMap.clearAssignments();
 
                     return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(p)));
