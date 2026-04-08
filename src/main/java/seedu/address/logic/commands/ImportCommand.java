@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -36,13 +37,39 @@ public class ImportCommand extends Command {
     private final String filePath;
 
     /**
-     * Creates an ImportCommand to import subscribers from the specified CSV file path.
+     * Creates an ImportCommand to import subscribers from a CSV file in the data/ folder.
+     * <p>
+     * Users must provide only a file name (no directories or paths). All imports are
+     * restricted to the {@code data/} folder. Providing path separators or {@code ..}
+     * in the file name will result in a {@link CommandException}.
+     * <p>
+     * Only files ending with {@code .csv} are allowed. Empty file names are also rejected.
      *
-     * @param filePath The path to the CSV file to be imported. Must not be null.
+     * @param fileName the name of the CSV file to import from the {@code data/} folder
+     * @throws CommandException if the file name is empty, contains path separators or
+     *                          {@code ..}, or does not end with {@code .csv}
      */
-    public ImportCommand(String filePath) {
-        requireNonNull(filePath);
-        this.filePath = filePath;
+    public ImportCommand(String fileName) throws CommandException {
+        requireNonNull(fileName);
+
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        if (fileName.isBlank()) {
+            throw new CommandException("File name cannot be empty.");
+        }
+
+        if (!fileName.toLowerCase().endsWith(".csv")) {
+            throw new CommandException("Invalid file type. Only .csv files are allowed for import.");
+        }
+
+        if (fileName.contains("/") || fileName.contains("\\") || fileName.contains("..")) {
+            throw new CommandException("Invalid file name. Please provide a file name only, not a path.");
+        }
+
+        this.filePath = "data" + File.separator + fileName;
     }
 
     /**

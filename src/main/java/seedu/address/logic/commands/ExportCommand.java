@@ -33,27 +33,41 @@ public class ExportCommand extends Command {
     private final DeliveryAssignmentHashMap assignments = DeliveryAssignmentHashMap.getInstance();
 
     /**
-     * Creates an ExportCommand with the specified file path.
+     * Creates an ExportCommand with the specified file name.
      * <p>
-     * If the provided file path is {@code null} or empty, the default path
-     * {@code data/delivery_assignments.txt} is used. The command ensures
+     * If the provided file name is {@code null} or empty, the default file
+     * {@code data/delivery_assignments.html} is used. The command ensures
      * that the {@code data/} directory exists before exporting.
+     * <p>
+     * Users are only allowed to provide a file name (no directories or paths).
+     * All files are saved inside the {@code data/} folder. Providing a path,
+     * directories, or {@code ..} in the file name will result in a {@link CommandException}.
      *
-     * @param filePath the file path to export the delivery assignments to
+     * @param filePath the name of the file to export the delivery assignments to;
+     *                 must be a valid HTML file name ending with {@code .html}
+     * @throws CommandException if the file name contains path separators, {@code ..},
+     *                          or does not end with {@code .html}
      */
     public ExportCommand(String filePath) throws CommandException {
-        if (filePath == null || filePath.isBlank()) {
-            // Ensure the data folder exists
-            File dir = new File(DEFAULT_DIR);
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
-            this.filePath = DEFAULT_DIR + File.separator + DEFAULT_FILENAME;
-        } else if (!filePath.toLowerCase().endsWith(".html")) {
-            throw new CommandException("Invalid file type. Please provide a file ending with .html");
-        } else {
-            this.filePath = filePath;
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdirs();
         }
+
+        if (filePath == null || filePath.isBlank()) {
+            this.filePath = "data" + File.separator + DEFAULT_FILENAME;
+            return;
+        }
+
+        if (filePath.contains("/") || filePath.contains("\\") || filePath.contains("..")) {
+            throw new CommandException("Invalid file name. Please provide a file name only, not a path.");
+        }
+
+        if (!filePath.toLowerCase().endsWith(".html")) {
+            throw new CommandException("Invalid file type. Please provide a file name ending with .html");
+        }
+
+        this.filePath = "data" + File.separator + filePath;
     }
 
     @Override

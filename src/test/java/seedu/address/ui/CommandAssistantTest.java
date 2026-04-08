@@ -81,13 +81,13 @@ public class CommandAssistantTest {
     }
 
     @Test
-    public void getSuggestion_exportCommandWithoutPath_showsOptionalPathHint() {
-        assertEquals(" [FILE_PATH.html]", commandAssistant.getSuggestion("export"));
+    public void getSuggestion_exportCommandWithoutPath_showsDefaultDataFolderHint() {
+        assertEquals(" [FILE_NAME.html]", commandAssistant.getSuggestion("export"));
     }
 
     @Test
-    public void getSuggestion_importCommandWithoutPath_showsCsvPathHint() {
-        assertEquals(" FILE_PATH.csv", commandAssistant.getSuggestion("import"));
+    public void getSuggestion_importCommandWithoutPath_showsDataFolderCsvHint() {
+        assertEquals(" FILE_NAME.csv", commandAssistant.getSuggestion("import"));
     }
 
     @Test

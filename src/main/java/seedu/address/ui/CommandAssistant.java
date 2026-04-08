@@ -209,7 +209,7 @@ public class CommandAssistant {
     }
 
     private static String suggestForExport(String arguments) {
-        return arguments.trim().isEmpty() ? " [FILE_PATH.html]" : "";
+        return arguments.trim().isEmpty() ? " [FILE_NAME.html]" : "";
     }
 
     private static String suggestForFilter(String arguments) {
@@ -229,7 +229,7 @@ public class CommandAssistant {
     }
 
     private static String suggestForImport(String arguments) {
-        return arguments.trim().isEmpty() ? " FILE_PATH.csv" : "";
+        return arguments.trim().isEmpty() ? " FILE_NAME.csv" : "";
     }
 
     private static String suggestForMark(String arguments) {
