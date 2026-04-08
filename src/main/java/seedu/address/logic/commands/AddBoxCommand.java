@@ -30,8 +30,8 @@ public class AddBoxCommand extends Command {
 
     public static final String COMMAND_WORD = "addbox";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds one or more boxes with a fixed expiry date to "
-            + "the person identified by the name used in the displayed person list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds one or more boxes with a fixed subscription "
+            + "to the person identified by the name used in the displayed person list.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_BOX + "BOX_NAME:NUMBER_OF_MONTHS "
@@ -108,7 +108,7 @@ public class AddBoxCommand extends Command {
         Remark remark = personToEdit.getRemark();
         DeliveryStatus deliveryStatus = personToEdit.getDeliveryStatus();
         Set<Tag> tags = personToEdit.getTags();
-        Driver driver = personToEdit.getAssignedDriver();
+        Driver driver = personToEdit.hasDriver() ? personToEdit.getAssignedDriver() : null;
 
         Set<Box> updatedBoxes = new HashSet<>(personToEdit.getBoxes());
         updatedBoxes.addAll(boxesToAdd);
