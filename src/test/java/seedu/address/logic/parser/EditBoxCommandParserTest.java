@@ -8,16 +8,19 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPIRY_DATE_D
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BOX_NAME_BOX2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPIRY_DATE_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditBoxCommand;
 import seedu.address.logic.commands.EditBoxCommand.EditBoxDescriptor;
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.person.Box;
-import seedu.address.model.person.ExpiryDate;
+import seedu.address.testutil.DateTestUtil;
 import seedu.address.testutil.EditBoxDescriptorBuilder;
 
 public class EditBoxCommandParserTest {
@@ -30,6 +33,16 @@ public class EditBoxCommandParserTest {
 
     private EditBoxCommandParser parser = new EditBoxCommandParser();
 
+    @BeforeEach
+    public void setUpClock() {
+        DateTestUtil.useFixedClock();
+    }
+
+    @AfterEach
+    public void resetClock() {
+        DateTestUtil.resetClock();
+    }
+
     @Test
     public void parse_allFieldsSpecified_success() {
         Name targetName = new Name("Amy Bee");
@@ -39,7 +52,7 @@ public class EditBoxCommandParserTest {
 
         EditBoxDescriptor descriptor = new EditBoxDescriptorBuilder()
                 .withBoxName(VALID_BOX_NAME_BOX2)
-                .withExpiryDate("2026-12-31")
+                .withExpiryDate(VALID_EXPIRY_DATE_AMY)
                 .build();
         EditBoxCommand expectedCommand = new EditBoxCommand(targetName, targetBoxName, descriptor);
 
@@ -67,7 +80,7 @@ public class EditBoxCommandParserTest {
         String userInput = PREAMBLE_WHITESPACE + NAME_DESC_AMY + BOX_NAME_DESC_BOX1 + EXPIRY_DATE_DESC_AMY;
 
         EditBoxDescriptor descriptor = new EditBoxDescriptorBuilder()
-                .withExpiryDate("2026-12-31")
+                .withExpiryDate(VALID_EXPIRY_DATE_AMY)
                 .build();
         EditBoxCommand expectedCommand = new EditBoxCommand(targetName, targetBoxName, descriptor);
 
@@ -81,9 +94,9 @@ public class EditBoxCommandParserTest {
     }
 
     @Test
-    public void parse_invalidNewExpiryDate_failure() {
+    public void parse_invalidNewNumOfMonths_failure() {
         String userInput = PREAMBLE_WHITESPACE + NAME_DESC_AMY + BOX_NAME_DESC_BOX1 + INVALID_EXPIRY_DATE_DESC;
-        assertParseFailure(parser, userInput, ExpiryDate.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_NUM_OF_MONTHS);
     }
 
     @Test

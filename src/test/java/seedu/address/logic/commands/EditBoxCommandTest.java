@@ -11,6 +11,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditBoxCommand.EditBoxDescriptor;
@@ -28,11 +30,22 @@ import seedu.address.model.person.ExpiryDate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.DateTestUtil;
 import seedu.address.testutil.EditBoxDescriptorBuilder;
 
 public class EditBoxCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @BeforeEach
+    public void setUpClock() {
+        DateTestUtil.useFixedClock();
+    }
+
+    @AfterEach
+    public void tearDownClock() {
+        DateTestUtil.resetClock();
+    }
 
     @Test
     public void execute_boxNameSpecified_success() {
@@ -45,7 +58,7 @@ public class EditBoxCommandTest {
                 targetPerson.getName(), "box-1", descriptor
         );
 
-        Box editedBox = new Box("box-3", new ExpiryDate("2026-12-31"));
+        Box editedBox = new Box("box-3", new ExpiryDate("2026-06-30"));
         Person editedPerson = createEditedPerson(targetPerson, "box-1", editedBox);
 
         String expectedMessage = String.format(EditBoxCommand.MESSAGE_EDIT_BOX_SUCCESS, editedBox,
