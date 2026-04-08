@@ -20,6 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.commons.phone.Phone;
+import seedu.address.model.delivery.Driver;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Box;
 import seedu.address.model.person.DeliveryStatus;
@@ -43,12 +44,12 @@ public class EditBoxCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_BOX + "OLD_BOX_NAME "
             + "[" + PREFIX_NEW_BOX + "NEW_BOX_NAME] "
-            + "[" + PREFIX_EXPIRY_DATE + "EXPIRY_DATE]\n"
+            + "[" + PREFIX_EXPIRY_DATE + "NUMBER_OF_MONTHS]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_BOX + "box-1 "
             + PREFIX_NEW_BOX + "box-2"
-            + PREFIX_EXPIRY_DATE + "2026-01-01";
+            + PREFIX_EXPIRY_DATE + "3";
 
     public static final String MESSAGE_EDIT_BOX_SUCCESS = "Edited box %1$s of Person: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -146,6 +147,7 @@ public class EditBoxCommand extends Command {
         Remark remark = personToEdit.getRemark();
         DeliveryStatus deliveryStatus = personToEdit.getDeliveryStatus();
         Set<Tag> tags = personToEdit.getTags();
+        Driver driver = personToEdit.getAssignedDriver();
 
         Set<Box> updatedBoxes = new TreeSet<>(personToEdit.getBoxes());
         updatedBoxes.remove(boxToReplace);
@@ -157,7 +159,7 @@ public class EditBoxCommand extends Command {
         }
 
         updatedBoxes.add(editedBox);
-        return new Person(name, phone, email, address, updatedBoxes, remark, deliveryStatus, tags);
+        return new Person(name, phone, email, address, updatedBoxes, remark, deliveryStatus, tags, driver);
     }
 
     @Override

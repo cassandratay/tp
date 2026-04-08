@@ -14,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.commons.name.Name;
 import seedu.address.model.commons.phone.Phone;
+import seedu.address.model.delivery.Driver;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Box;
 import seedu.address.model.person.DeliveryStatus;
@@ -33,12 +34,12 @@ public class AddBoxCommand extends Command {
             + "the person identified by the name used in the displayed person list.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_BOX + "BOX_NAME:EXPIRY_DATE "
-            + "[" + PREFIX_BOX + "BOX_NAME:EXPIRY_DATE]... "
+            + PREFIX_BOX + "BOX_NAME:NUMBER_OF_MONTHS "
+            + "[" + PREFIX_BOX + "BOX_NAME:NUMBER_OF_MONTHS]... "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_BOX + "box-1:2026-01-01 "
-            + PREFIX_BOX + "box-2:2026-12-31";
+            + PREFIX_BOX + "box-1:2 "
+            + PREFIX_BOX + "box-2:3";
 
     public static final String MESSAGE_SUCCESS = "Added %1$s to Person: %2$s";
     public static final String MESSAGE_EXISTING_BOX_NAME = "One or more of the box names added already exists under "
@@ -107,10 +108,11 @@ public class AddBoxCommand extends Command {
         Remark remark = personToEdit.getRemark();
         DeliveryStatus deliveryStatus = personToEdit.getDeliveryStatus();
         Set<Tag> tags = personToEdit.getTags();
+        Driver driver = personToEdit.getAssignedDriver();
 
         Set<Box> updatedBoxes = new HashSet<>(personToEdit.getBoxes());
         updatedBoxes.addAll(boxesToAdd);
-        return new Person(name, phone, email, address, updatedBoxes, remark, deliveryStatus, tags);
+        return new Person(name, phone, email, address, updatedBoxes, remark, deliveryStatus, tags, driver);
     }
 
     @Override
