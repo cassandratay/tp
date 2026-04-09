@@ -179,9 +179,9 @@ Tom's status updates to `Delivered` in the result panel. The output panel confir
 
 **Step 5 — Delete the test entry**
 
-To safely delete Tom without worrying about his current index, use his email directly:
+Run `list` to see all subscribers and note Tom Baker's index number at the bottom. Then delete him using that index — for example, if Tom is index 9:
 ```
-delete tombaker@email.com
+delete 9
 ```
 Tom Baker is removed. The output panel confirms the deletion. You are now ready to manage your real subscribers.
 
