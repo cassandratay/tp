@@ -118,6 +118,7 @@
         "your-first-cli-tutorial": "Your first CLI tutorial",
         "key-concepts": "Key Concepts",
         "features": "Features",
+        "notes-about-the-command-format": "Notes about the command format:",
         "viewing-help-help": "Viewing help : help",
         "adding-a-subscriber-add": "Adding a subscriber : add",
         "listing-all-subscribers-list": "Listing all subscribers : list",
