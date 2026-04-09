@@ -15,6 +15,14 @@ import seedu.address.model.person.Person;
  */
 public class ExportUtil {
 
+    private static int getStatusOrder(Person p) {
+        return switch (p.getDeliveryStatus()) {
+        case PENDING -> 0;
+        case PACKED -> 1;
+        case DELIVERED -> 2;
+        };
+    }
+
     /**
      * Exports delivery assignments to a nicely formatted HTML file.
      * <p>
@@ -56,22 +64,25 @@ public class ExportUtil {
     }
 
     private static String generateDriverTable(Driver driver, List<Person> persons) {
+        persons.sort((p1, p2) -> getStatusOrder(p1) - getStatusOrder(p2));
+
         StringBuilder table = new StringBuilder();
         table.append("<table>\n")
                 .append("<caption>Driver: ").append(escapeHtml(driver.getName().toString().toUpperCase()))
                 .append(" - ").append(escapeHtml(driver.getPhone().toString()))
                 .append("</caption>\n")
                 .append("<thead>\n<tr>\n")
-                .append("<th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Boxes</th>\n")
+                .append("<th>Status</th><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Boxes</th>\n")
                 .append("</tr>\n</thead>\n<tbody>\n");
 
         for (Person p : persons) {
             table.append("<tr>\n")
+                    .append("<td>").append(escapeHtml(p.getDeliveryStatus().toString())).append("</td>\n")
                     .append("<td>").append(escapeHtml(p.getName().toString())).append("</td>")
                     .append("<td>").append(escapeHtml(p.getPhone().toString())).append("</td>")
                     .append("<td>").append(escapeHtml(p.getEmail().toString())).append("</td>")
                     .append("<td>").append(escapeHtml(p.getAddress().toString())).append("</td>")
-                    .append("<td>").append(formatBoxes(p)).append("</td>\n")
+                    .append("<td>").append(formatBoxes(p)).append("</td>")
                     .append("</tr>\n");
         }
 

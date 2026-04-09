@@ -38,8 +38,9 @@ th, td {
     word-break: break-word;
 }
 
-th:nth-child(1), td:nth-child(1) { width: 15%; } /* Name */
-th:nth-child(2), td:nth-child(2) { width: 10%; } /* Phone */
-th:nth-child(3), td:nth-child(3) { width: 20%; } /* Email */
-th:nth-child(4), td:nth-child(4) { width: 35%; } /* Address */
+th:nth-child(1), td:nth-child(1) { width: 5%; } /* Status */
+th:nth-child(2), td:nth-child(2) { width: 15%; } /* Name */
+th:nth-child(3), td:nth-child(3) { width: 10%; } /* Phone */
+th:nth-child(4), td:nth-child(4) { width: 15%; } /* Email */
+th:nth-child(5), td:nth-child(5) { width: 35%; } /* Address */
 th:nth-child(5), td:nth-child(5) { width: 20%; } /* Boxes */
