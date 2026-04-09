@@ -95,7 +95,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.getValidationMessage("1"
                 + INVALID_ADDRESS_DESC)); // invalid address
         assertParseFailure(parser, "1" + INVALID_ORDER_DESCRIPTION_DESC,
-                Remark.MESSAGE_CONSTRAINTS); // invalid Remark
+                Remark.MESSAGE_INVALID_CHARACTERS); // invalid Remark
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email

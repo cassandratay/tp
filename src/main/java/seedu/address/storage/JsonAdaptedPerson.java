@@ -133,8 +133,11 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
-        if (!Remark.isValidRemark(remark)) {
-            throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
+        if (!remark.matches(Remark.VALIDATION_REGEX)) {
+            throw new IllegalValueException(Remark.MESSAGE_INVALID_CHARACTERS);
+        }
+        if (remark.length() > Remark.MAX_LENGTH) {
+            throw new IllegalValueException(Remark.MESSAGE_TOO_LONG);
         }
         final Remark modelRemark = new Remark(remark);
 

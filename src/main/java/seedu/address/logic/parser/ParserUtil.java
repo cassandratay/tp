@@ -148,9 +148,14 @@ public class ParserUtil {
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
-        if (!Remark.isValidRemark(trimmedRemark)) {
-            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+
+        if (!trimmedRemark.matches(Remark.VALIDATION_REGEX)) {
+            throw new ParseException(Remark.MESSAGE_INVALID_CHARACTERS);
         }
+        if (trimmedRemark.length() > Remark.MAX_LENGTH) {
+            throw new ParseException(Remark.MESSAGE_TOO_LONG);
+        }
+
         return new Remark(trimmedRemark);
     }
 

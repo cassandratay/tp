@@ -236,7 +236,7 @@ public class AddCommandParserTest {
         // invalid Remark
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_ORDER_DESCRIPTION_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + BOX_DESC_BOX1,
-                Remark.MESSAGE_CONSTRAINTS);
+                Remark.MESSAGE_INVALID_CHARACTERS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

@@ -15,26 +15,33 @@ public class RemarkTest {
     }
 
     @Test
-    public void constructor_invalidRemark_throwsIllegalArgumentException() {
-        String invalidRemark = "#cake";
-        assertThrows(IllegalArgumentException.class, () -> new Remark(invalidRemark));
+    public void constructor_invalidCharacters_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Remark("#cake"));
     }
 
     @Test
-    public void isValidRemark() {
-        // null Remark
-        assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
+    public void constructor_tooLong_throwsIllegalArgumentException() {
+        // 41 characters — one over the limit
+        String tooLong = "a".repeat(Remark.MAX_LENGTH + 1);
+        assertThrows(IllegalArgumentException.class, () -> new Remark(tooLong));
+    }
 
-        // invalid Remarks
-        assertFalse(Remark.isValidRemark("")); // empty string
-        assertFalse(Remark.isValidRemark(" ")); // spaces only
-        assertFalse(Remark.isValidRemark("#")); // only non-alphanumeric characters
-        assertFalse(Remark.isValidRemark("cake!")); // contains non-alphanumeric characters
+    @Test
+    public void constructor_exactMaxLength_success() {
+        // exactly 40 characters — should pass
+        String exactLength = "a".repeat(Remark.MAX_LENGTH);
+        Remark remark = new Remark(exactLength);
+        assertEquals(exactLength, remark.value);
+    }
 
-        // valid Remarks
-        assertTrue(Remark.isValidRemark("2 cakes")); // alphanumeric with spaces
-        assertTrue(Remark.isValidRemark("12345")); // numbers only
-        assertTrue(Remark.isValidRemark("Large Latte")); // letters with capitals
+    @Test
+    public void constructor_validRemark_success() {
+        // alphanumeric with spaces
+        assertEquals("2 cakes", new Remark("2 cakes").value);
+        // numbers only
+        assertEquals("12345", new Remark("12345").value);
+        // letters with capitals
+        assertEquals("Large Latte", new Remark("Large Latte").value);
     }
 
     @Test

@@ -5,33 +5,46 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's Remark in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidRemark(String)}
  */
 public class Remark {
 
     public static final String DEFAULT_REMARK = "No remark";
-    public static final String MESSAGE_CONSTRAINTS =
-            "Remarks should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final int MAX_LENGTH = 40;
+
+    public static final String MESSAGE_INVALID_CHARACTERS =
+            "Remarks should only contain alphanumeric characters and spaces, and should not be blank";
+    public static final String MESSAGE_TOO_LONG =
+            "Remarks must be at most " + MAX_LENGTH + " characters long";
+
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String value;
 
     /**
-     * Constructs an {@code Remark}.
+     * Constructs a {@code Remark}.
      *
-     * @param description A valid Remark.
+     * <p>A valid remark must:</p>
+     * <ul>
+     *     <li>Contain only alphanumeric characters and spaces</li>
+     *     <li>Not be blank</li>
+     *     <li>Not exceed {@link #MAX_LENGTH} characters</li>
+     * </ul>
+     *
+     * @param description A valid remark string.
+     * @throws IllegalArgumentException if {@code description} contains invalid
+     *     characters or exceeds {@link #MAX_LENGTH} characters.
      */
     public Remark(String description) {
         requireNonNull(description);
-        checkArgument(isValidRemark(description), MESSAGE_CONSTRAINTS);
-        this.value = description;
-    }
 
-    /**
-     * Returns true if a given string is a valid Remark.
-     */
-    public static boolean isValidRemark(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!description.matches(VALIDATION_REGEX)) {
+            checkArgument(false, MESSAGE_INVALID_CHARACTERS);
+        }
+        if (description.length() > MAX_LENGTH) {
+            checkArgument(false, MESSAGE_TOO_LONG);
+        }
+
+        this.value = description;
     }
 
     @Override
