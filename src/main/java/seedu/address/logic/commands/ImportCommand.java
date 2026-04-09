@@ -26,7 +26,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.util.ImportUtil;
 
 /**
- * Imports subscribers from a CSV file and adds them to the model using AddCommand.
+ * Imports persons from a CSV file and adds them to the model using {@code AddCommand}.
  */
 public class ImportCommand extends Command {
 
@@ -37,7 +37,7 @@ public class ImportCommand extends Command {
     private final String filePath;
 
     /**
-     * Creates an ImportCommand to import subscribers from a CSV file in the data/ folder.
+     * Creates an import command for a CSV file in the {@code data/} folder.
      * <p>
      * Users must provide only a file name (no directories or paths). All imports are
      * restricted to the {@code data/} folder. Providing path separators or {@code ..}
@@ -73,14 +73,15 @@ public class ImportCommand extends Command {
     }
 
     /**
-     * Executes the import command by reading subscriber data from a CSV file and adding valid entries
+     * Executes the import command by reading person data from a CSV file and adding valid entries
      * to the model.
      * <p>
      * Each row in the CSV file is parsed into a {@code Person} object. Invalid or duplicate rows
-     * are skipped silently. The total number of successfully added subscribers is returned in the result.
+     * are skipped and reported in the result message. The total number of successfully added persons
+     * is also returned in the result.
      *
-     * @param model The model which the imported subscribers will be added to. Must not be null.
-     * @return A {@code CommandResult} containing a success message with the number of imported subscribers.
+     * @param model The model to which the imported persons will be added. Must not be null.
+     * @return A {@code CommandResult} containing the number of successful imports and any failed rows.
      * @throws CommandException If the CSV file cannot be read or parsed.
      */
     @Override

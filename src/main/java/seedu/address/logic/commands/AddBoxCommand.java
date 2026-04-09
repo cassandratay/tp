@@ -50,7 +50,10 @@ public class AddBoxCommand extends Command {
     private final Set<Box> boxesToAdd;
 
     /**
-     * Creates an AddBoxCommand to add the boxes to a specified subscriber.
+     * Creates an add-box command for the specified person name and boxes.
+     *
+     * @param subscriberName The name of the person to add boxes to.
+     * @param boxesToAdd The boxes to add to the person.
      */
     public AddBoxCommand(Name subscriberName, Set<Box> boxesToAdd) {
         requireNonNull(subscriberName);

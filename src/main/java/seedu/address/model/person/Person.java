@@ -86,15 +86,16 @@ public class Person {
 
     /**
      * Constructs a {@code Person} with the given details, with an assigned {@code Driver}.
-     * @param name
-     * @param phone
-     * @param email
-     * @param address
-     * @param boxes
-     * @param remark
-     * @param deliveryStatus
-     * @param tags
-     * @param driver
+     *
+     * @param name The person's name.
+     * @param phone The person's phone number.
+     * @param email The person's email address.
+     * @param address The person's address.
+     * @param boxes The set of boxes associated with the person.
+     * @param remark Additional remarks about the person.
+     * @param deliveryStatus The delivery status of the person.
+     * @param tags The set of tags associated with the person.
+     * @param driver The assigned driver for the person.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Box> boxes,
                   Remark remark, DeliveryStatus deliveryStatus, Set<Tag> tags, Driver driver) {
@@ -177,8 +178,9 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same identity and stored data fields,
+     * excluding any assigned driver.
+     * This defines a stronger notion of equality between two persons for persisted person data.
      */
     @Override
     public boolean equals(Object other) {

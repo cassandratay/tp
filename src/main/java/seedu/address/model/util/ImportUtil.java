@@ -7,12 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Utility class for importing subscribers from CSV.
+ * Utility class for parsing person data from CSV files.
  */
 public class ImportUtil {
 
     /**
-     * Reads CSV file and returns list of rows (as String arrays), skipping the header.
+     * Reads a CSV file and returns its data rows as string arrays, excluding the header row.
+     * Malformed rows with too few columns are skipped.
+     *
+     * @param filePath The path to the CSV file to read.
+     * @return A list of parsed CSV rows.
+     * @throws IOException If the file cannot be read or a row has unmatched quotes.
      */
     public static List<String[]> parseCsv(String filePath) throws IOException {
         List<String[]> rowsList = new ArrayList<>();
@@ -42,6 +47,10 @@ public class ImportUtil {
 
     /**
      * Parses a single CSV row, supporting quoted fields and escaped quotes.
+     *
+     * @param line The CSV row to parse.
+     * @return The parsed fields in the row.
+     * @throws IOException If the row contains unmatched quotes.
      */
     private static String[] parseCsvRow(String line) throws IOException {
         List<String> fields = new ArrayList<>();

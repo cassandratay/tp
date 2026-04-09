@@ -86,8 +86,9 @@ public class Box implements Comparable<Box> {
     }
 
     /**
-     * Formats state as text for viewing
-     * @return Formatted package name
+     * Returns the box name and expiry date in a compact display format.
+     *
+     * @return A string in the form {@code [boxName|expiryDate]}.
      */
     @Override
     public String toString() {

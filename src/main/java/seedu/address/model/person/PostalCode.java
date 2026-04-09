@@ -74,7 +74,7 @@ public class PostalCode {
      *
      * @param address The address string to extract the postal code from.
      * @return The postal code as a string.
-     * @throws IllegalArgumentException if the postal code is not found in the address.
+     * @throws IllegalArgumentException If the address contains no postal code or more than one postal code.
      */
     public static String extractPostalCode(String address) {
         requireNonNull(address);

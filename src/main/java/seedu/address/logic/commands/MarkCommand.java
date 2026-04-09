@@ -22,7 +22,7 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
- * Marks a person as "delivered" using it's displayed index from the address book.
+ * Updates a person's delivery status using the displayed index from the address book.
  */
 public class MarkCommand extends Command {
 
@@ -45,7 +45,7 @@ public class MarkCommand extends Command {
     public final DeliveryStatus newDeliveryStatus;
 
     /**
-     * Marks a person's delivery status in the address book.
+     * Creates a command that updates a person's delivery status in the address book.
      * <p>
      * The command identifies a person using the index displayed in the most recent
      * person listing and updates their {@link DeliveryStatus} to the specified value.

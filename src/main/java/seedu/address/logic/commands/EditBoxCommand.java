@@ -31,7 +31,7 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of a box of an existing subscriber in the address book.
+ * Edits the details of one box belonging to an existing person in the address book.
  */
 public class EditBoxCommand extends Command {
 
@@ -63,9 +63,11 @@ public class EditBoxCommand extends Command {
     private final EditBoxDescriptor editBoxDescriptor;
 
     /**
-     * @param subscriberName of the subscriber in the filtered person list to edit
-     * @param boxName of the box of the subscriber specified
-     * @param editBoxDescriptor details of the new box to edit the subscriber's box with
+     * Creates an edit-box command for one box belonging to the specified person.
+     *
+     * @param subscriberName The name of the person whose box should be edited.
+     * @param boxName The current name of the box to edit.
+     * @param editBoxDescriptor The replacement details to apply to the box.
      */
     public EditBoxCommand(Name subscriberName, String boxName, EditBoxDescriptor editBoxDescriptor) {
         requireNonNull(subscriberName);
@@ -118,8 +120,7 @@ public class EditBoxCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Box} with the details of {@code boxToEdit}
-     * edited with {@code editBoxDescriptor}
+     * Creates a box by applying the descriptor's edited fields to the original box.
      */
     private static Box createEditedBox(Box boxToEdit, EditBoxDescriptor editBoxDescriptor) {
         assert boxToEdit != null;
@@ -131,8 +132,7 @@ public class EditBoxCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit} and the
-     * updated box {@code editedBox}
+     * Creates a person using the original person's details with one box replaced by the edited box.
      */
     private static Person createEditedPerson(Person personToEdit, Box boxToReplace, Box editedBox)
             throws CommandException {

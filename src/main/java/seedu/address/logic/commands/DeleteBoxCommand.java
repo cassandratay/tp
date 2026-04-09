@@ -50,9 +50,10 @@ public class DeleteBoxCommand extends Command {
     private final Set<String> targetBoxNames;
 
     /**
-     * Creates a DeleteBoxCommand for a given subscriber name and the names of boxes to delete
-     * @param targetName of the person to delete boxes from
-     * @param targetBoxNames of the boxes to delete
+     * Creates a delete-box command for the specified person name and box names.
+     *
+     * @param targetName The name of the person to delete boxes from.
+     * @param targetBoxNames The names of the boxes to delete.
      */
     public DeleteBoxCommand(Name targetName, Set<String> targetBoxNames) {
         requireNonNull(targetName);

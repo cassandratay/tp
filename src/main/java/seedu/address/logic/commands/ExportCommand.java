@@ -13,11 +13,11 @@ import seedu.address.model.delivery.util.ExportUtil;
 import seedu.address.model.person.Person;
 
 /**
- * Exports the current delivery assignments to a formatted text file.
+ * Exports the current delivery assignments to a formatted HTML file.
  * <p>
- * Each driver will appear as a heading, followed by their assigned subscribers.
- * If no file path is provided, the command saves the export to the default file:
- * {@code data/delivery_assignments.txt}.
+ * Each driver appears as a heading followed by their assigned subscribers.
+ * If no file path is provided, the command saves the export to the default file
+ * {@code data/delivery_assignments.html}.
  */
 public class ExportCommand extends Command {
 
@@ -87,9 +87,10 @@ public class ExportCommand extends Command {
     }
 
     /**
-     * Iterates through all the {@code Person}s in the address book and creates a mapping of the Driver to the Person
-     * @param model
-     * @throws NotExportableException
+     * Populates the delivery-assignment mapping from the persons currently stored in the model.
+     *
+     * @param model The model containing the persons to export.
+     * @throws NotExportableException If any person does not have an assigned driver.
      */
     private void getDriverMapping(Model model) throws NotExportableException {
         requireNonNull(model);

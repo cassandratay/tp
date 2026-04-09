@@ -25,7 +25,7 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
- * Assigned declared drivers to existing subscribers in the address book.
+ * Assigns the provided drivers to persons in the address book based on delivery clusters.
  */
 public class AssignCommand extends Command {
 
@@ -43,7 +43,10 @@ public class AssignCommand extends Command {
     private final DeliveryAssignmentHashMap assignments = DeliveryAssignmentHashMap.getInstance();
 
     /**
-     * Creates an AssignCommand to tag all {@code Person}s to a {@code Driver}
+     * Creates an assign command with the given drivers.
+     *
+     * @param inputDrivers The drivers to assign across the clustered persons.
+     * @throws CommandException If duplicate drivers are provided.
      */
     public AssignCommand(Driver... inputDrivers) throws CommandException {
         DeliveryAssignmentHashMap.clearAssignments();
@@ -110,10 +113,11 @@ public class AssignCommand extends Command {
     }
 
     /**
-     * Creates a copy of the input Person but with a new Driver
-     * @param personToAssign
-     * @param assignedDriver
-     * @return Person with new {@code Driver} assigned
+     * Creates a copy of the given person with a newly assigned driver.
+     *
+     * @param personToAssign The person to copy.
+     * @param assignedDriver The driver to assign to the copied person.
+     * @return A copied person with the given {@code Driver} assigned.
      */
     private Person createPersonWithDriver(Person personToAssign, Driver assignedDriver) {
         Name nameCopy = personToAssign.getName();

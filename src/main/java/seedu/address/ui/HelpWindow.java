@@ -46,6 +46,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     /**
      * Shows the help window.
+     *
      * @throws IllegalStateException
      *     <ul>
      *         <li>
@@ -58,7 +59,7 @@ public class HelpWindow extends UiPart<Stage> {
      *             if this method is called on the primary stage.
      *         </li>
      *         <li>
-     *             if {@code dialogStage} is already showing.
+     *             if this help window is already showing.
      *         </li>
      *     </ul>
      */

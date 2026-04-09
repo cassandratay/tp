@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonHasBoxPredicate;
 
 /**
- * Filters and lists all persons in address book whose boxes match any of the argument keywords.
+ * Filters and lists persons in the address book by box keywords or assigned-driver keywords.
  * Keyword matching is case insensitive.
  */
 public class FilterCommand extends Command {

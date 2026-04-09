@@ -19,15 +19,16 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
- * Utility class to clear all drivers assigned in address book
+ * Utility class for clearing all drivers assigned in the address book.
  */
 public class ClearDriversUtil {
 
     private ClearDriversUtil() {}
 
     /**
-     * Clears all Driver assignments foe every subscriber in existing address book
-     * @param model
+     * Clears all driver assignments for every subscriber in the current address book.
+     *
+     * @param model The model whose persons should have their assigned drivers removed.
      */
     public static void clearDriverAssignments(Model model) {
         requireNonNull(model);
@@ -39,9 +40,10 @@ public class ClearDriversUtil {
     }
 
     /**
-     * Creates a copy of the input Person without an assigned Driver
-     * @param personToCopy
-     * @return Person without {@code Driver} assigned
+     * Creates a copy of the given person without an assigned driver.
+     *
+     * @param personToCopy The person to copy.
+     * @return A copied person without a {@code Driver} assigned.
      */
     private static Person createPersonWithoutDriver(Person personToCopy) {
         Name nameCopy = personToCopy.getName();
