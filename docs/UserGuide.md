@@ -192,9 +192,9 @@ Tom Baker is removed. The output panel confirms the deletion. You are now ready 
 Before using Client2Door, it helps to understand three core ideas:
 
 **Subscriber**
-A subscriber is a customer who receives regular deliveries from your business. Each subscriber has: 
+A subscriber is a customer who receives regular deliveries from your business. Each subscriber has:
 1. A Name
-2. Phone number 
+2. Phone number
 3. Email
 4. Delivery address
 5. An optional remark (e.g. delivery preferences or notes).
