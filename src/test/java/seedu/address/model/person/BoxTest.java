@@ -36,13 +36,13 @@ public class BoxTest {
 
         // invalid box names — VALIDATION_REGEX = "^[a-z]+-\d{1}$"
         assertFalse(Box.isValidBoxName("")); // empty string
-        assertFalse(Box.isValidBoxName("box-12")); // two digits — regex allows only 1 digit
         assertFalse(Box.isValidBoxName("Box-1")); // uppercase letter not allowed
         assertFalse(Box.isValidBoxName("-1")); // no letter before hyphen
         assertFalse(Box.isValidBoxName("box-")); // no digit after hyphen
         assertFalse(Box.isValidBoxName("box1")); // missing hyphen
         assertFalse(Box.isValidBoxName("BOX-1")); // all uppercase
         assertFalse(Box.isValidBoxName("box -1")); // space inside
+        assertFalse(Box.isValidBoxName("box_-1")); // cannot end [type] with an underscore
 
         // valid box names
         assertTrue(Box.isValidBoxName("box-1")); // standard
@@ -50,6 +50,10 @@ public class BoxTest {
         assertTrue(Box.isValidBoxName("z-9")); // single letter, digit 9
         assertTrue(Box.isValidBoxName("abc-5")); // multiple letters, single digit
         assertTrue(Box.isValidBoxName("parcel-3")); // longer type name
+        assertTrue(Box.isValidBoxName("box-12")); // two digits
+        assertTrue(Box.isValidBoxName("box-1231321")); // many digits
+        assertTrue(Box.isValidBoxName("box_box-1231321")); // 1 underscore
+        assertTrue(Box.isValidBoxName("box_a_b_c_d-1231321")); // multiple underscores
     }
 
     @Test
