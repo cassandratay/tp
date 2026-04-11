@@ -52,7 +52,7 @@ strong.expected-label { color: #0f766e; }
 
 ## Who is this guide for?
 
-Client2Door is built for **small business owners who run recurring delivery or subscription services** — such as meal kit boxes, pastry subscriptions, or monthly packages — and who prefer the speed of a Command Line Interface (CLI) over clicking through menus.
+Client2Door is built for **small business owners who run recurring delivery or subscription services in Singapore** — such as meal kit boxes, pastry subscriptions, or monthly packages — and who prefer the speed of a Command Line Interface (CLI) over clicking through menus.
 
 If you find yourself juggling a growing list of subscribers, tracking which boxes need to go out, and coordinating drivers for dispatch, Client2Door is designed to make that faster and less error-prone.
 
@@ -196,8 +196,10 @@ A subscriber is a customer who receives regular deliveries from your business. E
 1. A Name
 2. Phone number
 3. Email
-4. Delivery address
+4. Delivery address 
 5. An optional remark (e.g. delivery preferences or notes).
+
+> **Note:** Addresses are validated by finding a 6-digit postal code, with the Singapore context kept in mind
 
 **Box**
 A box represents a single recurring delivery package assigned to a subscriber. Each subscriber must have at least one box. Boxes have a name in the format `[type]-[number]` where the type uses underscores for multi-word names (e.g. `box-1`, `pastry-2`, `meal_kit-1`) and an expiry date — after which the subscription is considered lapsed. A subscriber can hold multiple boxes if they have ordered more than one package.
@@ -436,7 +438,7 @@ Before filtering by driver:
 
 ![Filter before (driver)](../docs/images/Release1.5-FilterBeforeDriver.png)
 
-After running `filter d/driver 1`, only that driver's subscribers are shown:
+After running `filter d/David`, only that driver's subscribers are shown:
 
 ![Filter after (driver)](../docs/images/Release1.5-FilterAfterDriver.png)
 
