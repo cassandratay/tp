@@ -201,7 +201,11 @@ A subscriber is a customer who receives regular deliveries from your business. E
 5. At least one Box (subscription package)
 6. An optional remark (e.g. delivery preferences or notes).
 
-> **Note:** Addresses are validated by finding a 6-digit postal code, with the Singapore context kept in mind
+> **Note:** 
+> 
+>`Name` can only have alphabetic characters, hyphens, apostrophes and spaces. (Excluded slashes to prevent incorrect parsing)
+> 
+> `Address` is validated by finding a 6-digit postal code, with the Singapore context kept in mind!
 
 **Box**
 A box represents a single recurring delivery package assigned to a subscriber. Each subscriber must have at least one box. Boxes have a name in the format `[type]-[number]` where the type uses underscores for multi-word names (e.g. `box-1`, `pastry-2`, `meal_kit-1`) and an expiry date — after which the subscription is considered lapsed. A subscriber can hold multiple boxes if they have ordered more than one package.

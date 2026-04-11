@@ -10,13 +10,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphabets, hyphen, apostrophe and spaces, and it should not be blank.\n"
+            + "Examples: Brian O'Connor, Le-Jay \n"
+            + "Invalid Examples: Brian O ' Connor, Le'-Jay";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alpha}]+(?:[ '-][\\p{Alpha}]+)*";
 
     public final String fullName;
 
@@ -35,7 +37,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.trim().matches(VALIDATION_REGEX);
     }
 
     /**
@@ -46,9 +48,15 @@ public class Name {
         StringBuilder sb = new StringBuilder();
         for (String word : words) {
             if (!word.isEmpty()) {
-                sb.append(Character.toUpperCase(word.charAt(0)))
-                        .append(word.substring(1).toLowerCase())
-                        .append(" ");
+                String[] parts = word.toLowerCase().split("((?<=['-])|(?=['-]))");
+                for (String part : parts) {
+                    if (part.equals("'") || part.equals("-")) {
+                        sb.append(part);
+                    } else {
+                        sb.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1));
+                    }
+                }
+                sb.append(" ");
             }
         }
         return sb.toString().trim();

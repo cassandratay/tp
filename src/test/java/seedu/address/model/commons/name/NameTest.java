@@ -29,27 +29,25 @@ public class NameTest {
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("peter*")); // contains invalid non-alphanumeric characters
+        assertFalse(Name.isValidName("peter the 2nd")); // alphanumeric characters
+        assertFalse(Name.isValidName("222222")); //numbers
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("David Roger Jackson Ray Jr Son of Mohammod")); // long names
     }
 
     @Test
     public void isValidName_singleCharacter_valid() {
         assertTrue(Name.isValidName("a")); // single alphanumeric char
         assertTrue(Name.isValidName("Z")); // single uppercase char
-        assertTrue(Name.isValidName("1")); // single digit
     }
 
     @Test
-    public void isValidName_leadingSpace_invalid() {
-        assertFalse(Name.isValidName(" Alice")); // starts with space — regex requires alnum first
-        assertFalse(Name.isValidName(" 1")); // digit preceded by space
+    public void isValidName_leadingSpace_valid() {
+        assertTrue(Name.isValidName(" Alice")); // starts with space but after is alpha
     }
 
     @Test
