@@ -12,10 +12,11 @@ import java.util.Objects;
 public class Box implements Comparable<Box> {
 
     public static final String MESSAGE_CONSTRAINTS = "Box names should follow the format '[type]-[number]',"
-            + " where type consists of only lowercase letters and number is a single digit number";
+            + " where type consists of only lowercase letters with underscores to separate words, and number is a"
+            + " positive integer.";
     public static final String MESSAGE_INVALID_BOX_WITH_EXPIRY_FORMAT =
             "Boxes must be in the format b/BOX_NAME:MONTHS_SUBSCRIBED";
-    public static final String VALIDATION_REGEX = "^[a-z]+-\\d{1}$";
+    public static final String VALIDATION_REGEX = "^[a-z]+(?:_[a-z]+)*-\\d+$";
 
     public final String boxName;
     public final ExpiryDate expiryDate;
