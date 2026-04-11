@@ -495,6 +495,7 @@ Format: `deletebox n/NAME b/BOX_NAME [b/BOX_NAME]…`
 
 * The subscriber is identified by their exact `NAME`.
 * At least one box must be specified.
+* If there are multiple boxes with the same name specified, only one will be detected. Refer to the example below.
 * See also: [`addbox`](#adding-one-or-more-boxes-to-a-subscriber-addbox) to add boxes.
 
 > **Warning:** If you delete all boxes belonging to a subscriber, the subscriber will also be permanently deleted from Client2Door.
@@ -502,6 +503,7 @@ Format: `deletebox n/NAME b/BOX_NAME [b/BOX_NAME]…`
 Examples:
 * `deletebox n/Sarah Tan b/box-1` — removes one box from Sarah Tan.
 * `deletebox n/Wei Ming b/box-1 b/box-2` — removes two boxes. If these are Wei Ming's only boxes, Wei Ming will also be deleted.
+* `deletebox n/Wei Ming b/box-1 b/box-1` — removes only one box, box-1. The second `box-1` will be ignored.
 
 **Expected output:** The output panel confirms which boxes were removed.
 
