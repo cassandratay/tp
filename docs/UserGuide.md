@@ -197,8 +197,9 @@ A subscriber is a customer who receives regular deliveries from your business. E
 1. A Name
 2. Phone number
 3. Email
-4. Delivery address 
-5. An optional remark (e.g. delivery preferences or notes).
+4. Delivery address
+5. At least one Box (subscription package)
+6. An optional remark (e.g. delivery preferences or notes).
 
 > **Note:** Addresses are validated by finding a 6-digit postal code, with the Singapore context kept in mind
 
@@ -372,6 +373,8 @@ Format: `delete INDEX`
 * The `INDEX` refers to the number shown next to the subscriber's name in the current list. It **must be a positive integer** (1, 2, 3, …).
 
 > **Warning:** Deletion is permanent and cannot be undone. Use [`find`](#finding-subscribers-find) to confirm you have the right subscriber before deleting. Consider running [`export`](#exporting-driver-delivery-assignments-export) before bulk deletions to save a copy of your data.
+
+> **Warning:** Deleting a subscriber clears all driver assignments for every subscriber. Re-run [`assign`](#assigning-drivers-assign) after deleting if driver assignments are needed.
 
 Examples:
 * `list` then `delete 2` — deletes the 2nd subscriber in the full list.
@@ -547,13 +550,14 @@ Examples:
 
 Generates a shareable HTML file listing all drivers and their assigned subscribers.
 
-Format: `export [FILE_PATH]`
+Format: `export [FILE_NAME.html]`
 
 ![ExportedHTML.png](../docs/images/exportedHTML.png)
 
-* If `FILE_PATH` is omitted, the file is saved to `data/delivery_assignments.html` in your Client2Door folder.
-* If a file already exists at the specified path, it will be overwritten.
-* `FILE_PATH` must end with `.html`.
+* If `FILE_NAME.html` is omitted, the file is saved to `data/delivery_assignments.html` in your Client2Door folder.
+* Provide only the file name, not a path — all exports are saved to the `data/` folder automatically.
+* If a file with the same name already exists, it will be overwritten.
+* `FILE_NAME.html` must end with `.html`.
 * Requires at least one driver to have been assigned via [`assign`](#assigning-drivers-assign) first.
 
 > **Tip:** Open the exported `.html` file in any web browser to view a clean, printable summary. You can share it with your drivers directly.
@@ -562,7 +566,7 @@ Format: `export [FILE_PATH]`
 
 Examples:
 * `export` — saves to `data/delivery_assignments.html`.
-* `export data/march-delivery.html` — saves to a named file for a specific run.
+* `export march-delivery.html` — saves to `data/march-delivery.html`.
 
 **Expected output:** The output panel confirms the file has been saved and shows the file path.
 
@@ -582,6 +586,8 @@ Format: `import FILE_NAME.csv`
 * Invalid or duplicate rows are skipped and reported in the output panel.
 * Imported subscribers start with delivery status `Pending`.
 * Tags are not imported from the CSV file.
+
+> **Warning:** Running `import` clears all existing driver assignments. Re-run [`assign`](#assigning-drivers-assign) after importing if driver assignments are needed.
 
 **CSV format:**
 
@@ -692,7 +698,7 @@ A: All previous driver assignments for every subscriber are replaced. The `assig
 | **Edit Box** | `editbox n/NAME b/OLD_BOX_NAME [nb/NEW_BOX_NAME] [ex/MONTHS_SUBSCRIBED]`                | `editbox n/Sarah Tan b/box-1 nb/box-2 ex/3`                                 |
 | **Delete Box** | `deletebox n/NAME b/BOX_NAME [b/BOX_NAME]…`                                             | `deletebox n/Sarah Tan b/box-1`                                             |
 | **Assign** | `assign n/NAME p/PHONE [n/NAME p/PHONE]…`                                               | `assign n/David Lim p/91234567 n/Priya Nair p/98765432`                     |
-| **Export** | `export [FILE_PATH]`                                                                    | `export data/march-delivery.html`                                           |
+| **Export** | `export [FILE_NAME.html]`                                                               | `export march-delivery.html`                                                |
 | **Import** | `import FILE_NAME.csv`                                                                  | `import april-subscribers.csv`                                              |
 | **Clear** | `clear`                                                                                 | `clear`                                                                     |
 | **Help** | `help`                                                                                  | `help`                                                                      |
