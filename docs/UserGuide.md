@@ -245,15 +245,16 @@ Every subscriber has a delivery status that reflects where their order is in the
 
 ### **Parameter reference:**
 
-| Prefix | Parameter                          | Description                                                                                 |
-|--------|------------------------------------|---------------------------------------------------------------------------------------------|
-| `n/`   | `NAME`                             | Full name of the subscriber                                                                 |
-| `p/`   | `PHONE`                            | Contact number — digits only, at least 3 digits, must not start with 0                     |
-| `e/`   | `EMAIL`                            | Email address                                                                               |
-| `a/`   | `ADDRESS`                          | Delivery address                                                                            |
+| Prefix | Parameter  | Description                                                                                 |
+|--------|------------|---------------------------------------------------------------------------------------------|
+| `n/`   | `NAME`     | Full name of the subscriber                                                                 |
+| `p/`   | `PHONE`    | Contact number — digits only, at least 3 digits, must not start with 0                      |
+| `e/`   | `EMAIL`    | Email address                                                                               |
+| `a/`   | `ADDRESS`  | Delivery address                                                                            |
 | `b/`   | `BOX_NAME`<br/>`MONTHS_SUBSCRIBED` | Box name and number of months until subscription ends; At least 1 box subscription required |
-| `r/`   | `REMARK`                           | Optional delivery note — defaults to `No remark` if omitted                                 |
-| `t/`   | `TAG`                              | Optional tag(s) — can be repeated                                                           |
+| `nb/`  | `BOX_NAME` | New box name — only used in the `editbox` command                                           |
+| `r/`   | `REMARK`   | Optional delivery note — defaults to `No remark` if omitted                                 |
+| `t/`   | `TAG`      | Optional tag(s) — can be repeated                                                           |
 
 ---
 
