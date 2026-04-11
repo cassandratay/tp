@@ -10,7 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphabetic characters, hyphen, apostrophe and spaces, and it should not be blank.\n";
+            "Names should only contain alphabets, hyphen, apostrophe and spaces, and it should not be blank.\n"
+            + "Examples: Brian O'Connor, Le-Jay \n"
+            + "Invalid Examples: Brian O ' Connor, Le'-Jay";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -35,7 +37,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.trim().matches(VALIDATION_REGEX);
     }
 
     /**
