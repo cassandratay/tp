@@ -594,10 +594,11 @@ Format: `import FILE_NAME.csv`
 * The file name must end with `.csv`.
 * The first row of the CSV file is treated as a header and is skipped automatically.
 * Valid rows are imported as new subscribers and added to your existing data.
-* Invalid or duplicate rows are skipped and reported in the output panel.
+* Rows with invalid data will be listed with the reason it failed to import
 * Imported subscribers start with delivery status `Pending`.
-* Tags are not imported from the CSV file.
+* Tags cannot be imported from the CSV file.
 
+> **Warning:** The imported CSV file must be generated using this [google form template](https://forms.gle/5ViAVCQkdpJJt7Y89)
 > **Warning:** Running `import` clears all existing driver assignments. Re-run [`assign`](#assigning-drivers-assign) after importing if driver assignments are needed.
 
 **CSV format:**
