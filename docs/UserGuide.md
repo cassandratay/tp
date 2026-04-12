@@ -560,20 +560,21 @@ Examples:
 ### Exporting driver delivery assignments : `export`
 
 Generates a shareable HTML file listing all drivers and their assigned subscribers.
+The HTML file is stored in the `data/` folder.
 
 Format: `export [FILE_NAME.html]`
 
 ![ExportedHTML.png](../docs/images/exportedHTML.png)
 
-* If `FILE_NAME.html` is omitted, the file is saved to `data/delivery_assignments.html` in your Client2Door folder.
-* Provide only the file name, not a path — all exports are saved to the `data/` folder automatically.
+* If not `FILE_NAME.html` is provided, the exported HTML will be saved as `delivery_assignments.html` by default.
+* Provide only the file name, not a path. For example, use `export april-deliveries.html`, not `export data/april-deliveries.html`.
 * If a file with the same name already exists, it will be overwritten.
 * `FILE_NAME.html` must end with `.html`.
-* Requires at least one driver to have been assigned via [`assign`](#assigning-drivers-assign) first.
+* Requires all subscribers to have been assigned a driver via [`assign`](#assigning-drivers-assign) first.
 
 > **Tip:** Open the exported `.html` file in any web browser to view a clean, printable summary. You can share it with your drivers directly.
 
-> **Warning:** If no driver assignments exist, the export will fail with an error message. Run [`assign`](#assigning-drivers-assign) first.
+> **Warning:** If any subscriber is missing an assigned driver, the export will fail with an error message. Run [`assign`](#assigning-drivers-assign) first.
 
 Examples:
 * `export` — saves to `data/delivery_assignments.html`.
