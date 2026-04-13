@@ -1076,7 +1076,7 @@ testers are expected to do more *exploratory* testing.
     "email" : "alexyeoh@example.com",
     "address" : "Blk 30 Geylang Street 29, #06-40, Singapore 123456",
     "tags" : [ "friends" ],
-    "remark" : "2 iced coffees",
+    "remark" : "Leave at doorstep",
     "deliveryStatus" : "Delivered",
     "driver" : null,
     "boxes" : [ {
@@ -1089,7 +1089,7 @@ testers are expected to do more *exploratory* testing.
     "email" : "berniceyu@example.com",
     "address" : "Blk 30 Lorong 3 Serangoon Gardens, Singapore 123456, #07-18",
     "tags" : [ "colleagues", "friends" ],
-    "remark" : "3 cupcakes",
+    "remark" : "Ring doorbell",
     "deliveryStatus" : "Pending",
     "driver" : null,
     "boxes" : [ {
@@ -1105,7 +1105,7 @@ testers are expected to do more *exploratory* testing.
     "email" : "charlotte@example.com",
     "address" : "Blk 11 Ang Mo Kio Street 74, #11-04, Singapore 123456",
     "tags" : [ "neighbours" ],
-    "remark" : "1 vanilla cake",
+    "remark" : "Allergic to nuts",
     "deliveryStatus" : "Packed",
     "driver" : null,
     "boxes" : [ {
@@ -1118,7 +1118,7 @@ testers are expected to do more *exploratory* testing.
     "email" : "lidavid@example.com",
     "address" : "Blk 436 Serangoon Gardens Street 26, #16-43, Singapore 123456",
     "tags" : [ "family" ],
-    "remark" : "4 chicken pies",
+    "remark" : "Leave at riser",
     "deliveryStatus" : "Delivered",
     "driver" : null,
     "boxes" : [ {
@@ -1131,7 +1131,7 @@ testers are expected to do more *exploratory* testing.
     "email" : "irfan@example.com",
     "address" : "Blk 47 Tampines Street 20, #17-35, Singapore 123456",
     "tags" : [ "classmates" ],
-    "remark" : "2 baguettes",
+    "remark" : "Do not ring doorbell",
     "deliveryStatus" : "Delivered",
     "driver" : null,
     "boxes" : [ {
@@ -1144,7 +1144,7 @@ testers are expected to do more *exploratory* testing.
     "email" : "royb@example.com",
     "address" : "Blk 45 Aljunied Street 85, #11-31, Singapore 123456",
     "tags" : [ "colleagues" ],
-    "remark" : "6 donuts",
+    "remark" : "Ask security guard for delivery",
     "deliveryStatus" : "Pending",
     "driver" : null,
     "boxes" : [ {
