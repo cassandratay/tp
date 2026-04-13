@@ -64,7 +64,11 @@
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-person": "Deleting a person",
-        "saving-data": "Saving data"
+        "adding-a-subscriber": "Adding a subscriber",
+        "assigning-drivers": "Assigning drivers",
+        "exporting-delivery-assignments": "Exporting delivery assignments",
+        "saving-data": "Saving data",
+        "example-format-of-the-data-file": "Example format of the data file"
       },
       "headingKeywords": {}
     },
@@ -119,6 +123,7 @@
         "key-concepts": "Key Concepts",
         "features": "Features",
         "notes-about-the-command-format": "Notes about the command format:",
+        "parameter-reference": "Parameter reference:",
         "viewing-help-help": "Viewing help : help",
         "adding-a-subscriber-add": "Adding a subscriber : add",
         "listing-all-subscribers-list": "Listing all subscribers : list",
@@ -133,6 +138,7 @@
         "deleting-boxes-deletebox": "Deleting boxes : deletebox",
         "assigning-drivers-assign": "Assigning drivers : assign",
         "exporting-driver-delivery-assignments-export": "Exporting driver delivery assignments : export",
+        "importing-subscribers-import": "Importing subscribers : import",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
         "saving-the-data": "Saving the data",
@@ -151,7 +157,7 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "client2door": "Client2Door"
       },
       "headingKeywords": {}
     },
