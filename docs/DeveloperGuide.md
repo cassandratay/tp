@@ -975,26 +975,11 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app the same way as the first time.<br>
        Expected: The most recent window size and location is retained.
 
-### Deleting a person
-
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. State of address book remains the same
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
 ### Adding a subscriber
 
-1. Adding a subscriber while all persons are being shown
+1. Adding a subscriber while all subscribers are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Ensure there is no existing subscriber with the same details.
+    1. Prerequisites: List all subscribers using the `list` command. Ensure there is no existing subscriber with the same details.
 
     2. Test case: `add n/John Doe p/91234567 e/johndoe@email.com a/Blk 123 Tampines St 11 #05-67 Singapore 521123 b/box-1:2`<br>
        Expected: New subscriber is added to the list. Details of the added subscriber shown in the status message.
@@ -1005,20 +990,92 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect add commands to try: `add`, `add n/John Doe`, `add n/John Doe p/91234567 e/invalid-email a/Blk 123 Tampines St 11 #05-67 Singapore 521123 b/box-1:2`, `add n/John Doe p/91234567 e/johndoe@email.com a/No postal code b/box-1:2`<br>
        Expected: Similar to previous.
 
-### Assigning drivers
+### Editing a subscriber
 
-1. Assigning drivers while all persons are being shown
+1. Editing a subscriber while all subscribers are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all subscribers using the `list` command. At least one subscriber in the list.
 
-    2. Test case: `assign n/David Lim p/91234567 n/Priya Nair p/98765432`<br>
-       Expected: All persons are assigned to one of the provided drivers. Updated driver assignments are reflected in the list. Success message shown in the status message.
+    2. Test case: `edit 1 p/97777777 e/alexyeoh_new@email.com`<br>
+       Expected: First subscriber is updated with the new phone number and email. Updated details shown in the status message.
 
-    3. Test case: `assign n/Patrick Loh p/87171717 n/Ali Chow p/88234567`<br>
-       Expected: Updated new driver assignments are reflected in the list. Success message shown in the status message.
+    3. Test case: `edit 1 r/prefers evening delivery`<br>
+       Expected: First subscriber's remark is updated. Updated details shown in the status message.
 
-    4. Possible incorrect assign commands to try: `assign`, `assign n/David Lim`, `assign p/91234567`, `assign n/David Lim p/000`, `assign n/ p/91234567`<br>
-       Expected: No driver assignments are made. Error details shown in the status message. State of address book remains the same.
+    4. Test case: `edit 0 p/91234567`<br>
+       Expected: No subscriber is edited. Error details shown in the status message. State of address book remains the same.
+
+    5. Other incorrect edit commands to try: `edit`, `edit 1`, `edit x p/91234567`, `edit 1 e/invalid-email`, `edit 1 a/No postal code`<br>
+       Expected: Similar to previous.
+
+### Deleting a subscriber
+
+1. Deleting a subscriber while all subscribers are being shown
+
+   1. Prerequisites: List all subscribers using the `list` command. At least one subscriber in the list.
+
+   1. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+   1. Test case: `delete 0`<br>
+      Expected: No subscriber is deleted. Error details shown in the status message. State of address book remains the same
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Updating a subscriber's remark
+
+1. Updating a subscriber's remark while all subscribers are being shown
+
+    1. Prerequisites: List all subscribers using the `list` command. At least one subscriber in the list.
+
+    2. Test case: `remark 1 r/leave at door and ring bell`<br>
+       Expected: First subscriber's remark is updated. Updated details shown in the status message.
+
+    3. Test case: `remark 0 r/some remark`<br>
+       Expected: No subscriber is updated. Error details shown in the status message. State of address book remains the same.
+
+    4. Other incorrect remark commands to try: `remark 1 no prefix`, `remark x r/test`, `remark 1`<br>
+       Expected: Similar to previous.
+
+### Adding boxes to a subscriber
+
+1. Adding one or more boxes to an existing subscriber
+
+    1. Prerequisites: A subscriber named `Alex Yeoh` exists.
+
+    2. Test case: `addbox n/Alex Yeoh b/box-3:4`<br>
+       Expected: `box-3` is added to Alex Yeoh with the appropriate subscription duration. Updated details shown in the status message.
+
+    3. Test case: `addbox n/Alex Yeoh b/box-4:2 b/box-5:2`<br>
+       Expected: Both boxes are added to Alex Yeoh. Updated details shown in the status message.
+
+    4. Test case: `addbox n/Unknown Person b/box-1:2`<br>
+       Expected: No box is added. Subscriber not found error shown.
+
+    5. Other incorrect addbox commands to try: `addbox`, `addbox n/Alex Yeoh`, `addbox n/Alex Yeoh b/box-1`, `addbox n/Alex Yeoh b/:2`, `addbox n/Alex Yeoh b/box-1:0`<br>
+       Expected: Similar to previous.
+
+### Editing a box
+
+1. Editing a box belonging to a subscriber
+
+    1. Prerequisites: A subscriber named `Alex Yeoh` exists with a box named `box-1`.
+
+    2. Test case: `editbox n/Alex Yeoh b/box-1 nb/box-2`<br>
+       Expected: `box-1` under Alex Yeoh is renamed to `box-2`. Updated details shown in the status message.
+
+    3. Test case: `editbox n/Alex Yeoh b/box-1 ex/3`<br>
+       Expected: `box-1` under Alex Yeoh has its subscription duration updated. Updated details shown in the status message.
+
+    4. Test case: `editbox n/Alex Yeoh b/nosuchbox nb/box-2`<br>
+       Expected: No box is edited. Box not found error shown.
+
+    5. Test case: `editbox n/Alex Yeoh b/box-1`<br>
+       Expected: No box is edited. Error details shown in the status message as no editable field is provided.
+
+    6. Other incorrect editbox commands to try: `editbox`, `editbox n/Alex Yeoh`, `editbox n/Alex Yeoh b/box-1 ex/0`, `editbox n/Unknown Person b/box-1 nb/box-2`<br>
+       Expected: Similar to previous.
 
 ### Deleting boxes from a subscriber
 
@@ -1035,14 +1092,114 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `deletebox n/Alex Yeoh b/nosuchbox-1`<br>
        Expected: No change. Box does not exist error shown.
 
-    5. Test case: `deletebox n/Unknown Person b/box-1`<br>
+    5. Test case: `deletebox n/Unknown Subscriber b/box-1`<br>
        Expected: No change. Subscriber not found error shown.
+
+### Finding subscribers
+
+1. Finding subscribers by keyword
+
+    1. Prerequisites: List all subscribers using the `list` command. Ensure there are subscribers with searchable names in the list.
+
+    2. Test case: `find Alex`<br>
+       Expected: Only subscribers with name containing `Alex` are shown. Status message shows the number of persons listed.
+
+    3. Test case: `find Alex Bernice`<br>
+       Expected: Subscribers with names containing either `Alex` or `Bernice` are shown.
+
+    4. Test case: `find NoSuchName`<br>
+       Expected: No subscribers are shown. Status message indicates that 0 persons are listed.
+
+    5. Other incorrect find commands to try: `find`, `find @@@`<br>
+       Expected: Similar to previous or format error shown in the status message.
+
+### Assigning drivers
+
+1. Assigning drivers while all subscribers are being shown
+
+    1. Prerequisites: List all subscribers using the `list` command. Multiple subscribers in the list.
+
+    2. Test case: `assign n/David Lim p/91234567 n/Priya Nair p/98765432`<br>
+       Expected: All subscribers are assigned to one of the provided drivers. Updated driver assignments are reflected in the list. Success message shown in the status message.
+
+    3. Test case: `assign n/Patrick Loh p/87171717 n/Ali Chow p/88234567`<br>
+       Expected: Updated new driver assignments are reflected in the list. Success message shown in the status message.
+
+    4. Possible incorrect assign commands to try: `assign`, `assign n/David Lim`, `assign p/91234567`, `assign n/David Lim p/000`, `assign n/ p/91234567`<br>
+       Expected: No driver assignments are made. Error details shown in the status message. State of address book remains the same.
+
+>**Note:** if the number of declared drivers exceed the number of subscribers, there will be a message indicating the number of excess drivers
+
+### Marking delivery status
+
+1. Updating the delivery status of a subscriber
+
+    1. Prerequisites: List all subscribers using the `list` command. At least one subscriber in the list.
+
+    2. Test case: `mark 1 packed`<br>
+       Expected: First subscriber's delivery status is updated to `Packed`. Updated details shown in the status message.
+
+    3. Test case: `mark 1 delivered`<br>
+       Expected: First subscriber's delivery status is updated to `Delivered`. Updated details shown in the status message.
+
+    4. Test case: `mark 0 pending`<br>
+       Expected: No subscriber is updated. Error details shown in the status message. State of address book remains the same.
+
+    5. Other incorrect mark commands to try: `mark`, `mark 1`, `mark x packed`, `mark 1 unknownstatus`<br>
+       Expected: Similar to previous.
+
+### Filtering subscribers
+
+1. Filtering subscribers by box type or assigned driver
+
+    1. Prerequisites: List all subscribers using the `list` command. Ensure there are subscribers with at least one box type or assigned driver available for filtering.
+
+    2. Test case: `filter box-1`<br>
+       Expected: Only subscribers who have `box-1` are shown. Status message shows the number of matching subscribers listed.
+
+    3. Test case: `filter d/David Lim`<br>
+       Expected: Only subscribers assigned to driver David Lim are shown. Status message shows the number of matching subscribers listed.
+
+    4. Test case: `filter NoSuchBox`<br>
+       Expected: No subscribers are shown. Status message indicates that 0 subscribers are listed.
+
+    5. Other incorrect filter commands to try: `filter`, `filter d/`, `filter d`<br>
+       Expected: Similar to previous or format error shown in the status message.
+
+### Importing subscribers
+
+1. Importing subscribers from a CSV file
+
+    1. Prerequisites: A valid CSV file named `sample.csv` exists in the `data` folder.
+
+    2. Test case: `import sample.csv`<br>
+       Expected: Valid subscribers from `sample.csv` are imported into the list. Status message shows how many subscribers were imported.
+
+    3. Test case: `import missing.csv`<br>
+       Expected: No subscribers are imported. Error details shown in the status message. State of address book remains the same.
+
+    4. Other incorrect import commands to try: `import`, `import sample`, `import data/sample.csv`, `import sample.txt`<br>
+       Expected: Similar to previous.
+
+>**Note:** The CSV file must in the correct format as described [here](UserGuide.md#importing-subscribers--import) in the User Guide!
+
+### Clearing all subscribers
+
+1. Clearing all subscribers from the address book
+
+    1. Prerequisites: List all subscribers using the `list` command. At least a subscriber in the list.
+
+    2. Test case: `clear`<br>
+       Expected: All subscribers are removed from the list. Success message shown in the status message.
+
+    3. Other clear commands to try: `clear 123`, `clear abc`<br>
+       Expected: Similar to previous, since extraneous parameters for `clear` are ignored.
 
 ### Exporting delivery assignments
 
 1. Exporting delivery assignments after drivers have been assigned
 
-    1. Prerequisites: Assign drivers first using the `assign` command. At least one person in the list has a driver assigned.
+    1. Prerequisites: Assign drivers first using the `assign` command. At least one subscriber in the list has a driver assigned.
 
     2. Test case: `export`<br>
        Expected: A `delivery_assignments.html` file is generated at the default location (`data` folder). Success message shown in the status message with the file path.
