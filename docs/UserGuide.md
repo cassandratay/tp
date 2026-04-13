@@ -555,6 +555,7 @@ Examples:
 
 **Expected output:** Every subscriber in Client2Door is tagged with their assigned driver. The output panel confirms how many subscribers were assigned and to which drivers. The subscriber list resets to show all subscribers.
 
+>**Note:** Running the commands that change the number of subscribers (such as `add` and `delete`) or `edit` (when address is changed) will clear drivers assignment to ensure the clustering algorithm applies to the full list of subscribers and there is efficient distribution of workload to drivers
 ---
 
 ### Exporting driver delivery assignments : `export`
