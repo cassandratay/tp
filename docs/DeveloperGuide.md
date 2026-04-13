@@ -990,21 +990,6 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect add commands to try: `add`, `add n/John Doe`, `add n/John Doe p/91234567 e/invalid-email a/Blk 123 Tampines St 11 #05-67 Singapore 521123 b/box-1:2`, `add n/John Doe p/91234567 e/johndoe@email.com a/No postal code b/box-1:2`<br>
        Expected: Similar to previous.
 
-### Deleting a subscriber
-
-1. Deleting a subscriber while all subscribers are being shown
-
-   1. Prerequisites: List all subscribers using the `list` command. At least one subscriber in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-
-   1. Test case: `delete 0`<br>
-      Expected: No subscriber is deleted. Error details shown in the status message. State of address book remains the same
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
 ### Editing a subscriber
 
 1. Editing a subscriber while all subscribers are being shown
@@ -1023,6 +1008,21 @@ testers are expected to do more *exploratory* testing.
     5. Other incorrect edit commands to try: `edit`, `edit 1`, `edit x p/91234567`, `edit 1 e/invalid-email`, `edit 1 a/No postal code`<br>
        Expected: Similar to previous.
 
+### Deleting a subscriber
+
+1. Deleting a subscriber while all subscribers are being shown
+
+   1. Prerequisites: List all subscribers using the `list` command. At least one subscriber in the list.
+
+   1. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+   1. Test case: `delete 0`<br>
+      Expected: No subscriber is deleted. Error details shown in the status message. State of address book remains the same
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
 ### Updating a subscriber's remark
 
 1. Updating a subscriber's remark while all subscribers are being shown
@@ -1037,23 +1037,6 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect remark commands to try: `remark 1 no prefix`, `remark x r/test`, `remark 1`<br>
        Expected: Similar to previous.
-
-### Assigning drivers
-
-1. Assigning drivers while all subscribers are being shown
-
-    1. Prerequisites: List all subscribers using the `list` command. Multiple subscribers in the list.
-
-    2. Test case: `assign n/David Lim p/91234567 n/Priya Nair p/98765432`<br>
-       Expected: All subscribers are assigned to one of the provided drivers. Updated driver assignments are reflected in the list. Success message shown in the status message.
-
-    3. Test case: `assign n/Patrick Loh p/87171717 n/Ali Chow p/88234567`<br>
-       Expected: Updated new driver assignments are reflected in the list. Success message shown in the status message.
-
-    4. Possible incorrect assign commands to try: `assign`, `assign n/David Lim`, `assign p/91234567`, `assign n/David Lim p/000`, `assign n/ p/91234567`<br>
-       Expected: No driver assignments are made. Error details shown in the status message. State of address book remains the same.
-
->**Note:** if the number of declared drivers exceed the number of subscribers, there will be a message indicating the number of excess drivers
 
 ### Adding boxes to a subscriber
 
@@ -1129,6 +1112,23 @@ testers are expected to do more *exploratory* testing.
 
     5. Other incorrect find commands to try: `find`, `find @@@`<br>
        Expected: Similar to previous or format error shown in the status message.
+
+### Assigning drivers
+
+1. Assigning drivers while all subscribers are being shown
+
+    1. Prerequisites: List all subscribers using the `list` command. Multiple subscribers in the list.
+
+    2. Test case: `assign n/David Lim p/91234567 n/Priya Nair p/98765432`<br>
+       Expected: All subscribers are assigned to one of the provided drivers. Updated driver assignments are reflected in the list. Success message shown in the status message.
+
+    3. Test case: `assign n/Patrick Loh p/87171717 n/Ali Chow p/88234567`<br>
+       Expected: Updated new driver assignments are reflected in the list. Success message shown in the status message.
+
+    4. Possible incorrect assign commands to try: `assign`, `assign n/David Lim`, `assign p/91234567`, `assign n/David Lim p/000`, `assign n/ p/91234567`<br>
+       Expected: No driver assignments are made. Error details shown in the status message. State of address book remains the same.
+
+>**Note:** if the number of declared drivers exceed the number of subscribers, there will be a message indicating the number of excess drivers
 
 ### Marking delivery status
 
