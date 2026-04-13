@@ -97,7 +97,7 @@ public class AssignCommand extends Command {
 
     }
 
-    private List<List<Person>> sortAllSubscribers(Model model, int numOfDrivers) throws CommandException{
+    private List<List<Person>> sortAllSubscribers(Model model, int numOfDrivers) throws CommandException {
         requireNonNull(model);
         List<Person> currentSubscribers = model.getAddressBook().getPersonList();
         if (currentSubscribers.isEmpty()) {
