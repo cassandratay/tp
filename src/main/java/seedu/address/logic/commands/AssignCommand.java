@@ -34,6 +34,7 @@ public class AssignCommand extends Command {
     public static final String MESSAGE_DUPLICATE_DRIVER = "There are duplicate drivers!";
     public static final String MESSAGE_SUCCESS = "Drivers added and assigned successfully!";
     public static final String MESSAGE_FAIL = "Assignment of drivers failed!";
+    public static final String MESSAGE_EMPTY_LIST = "There are no subscribers to assign drivers to!";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Assigns drivers to subscriber clusters.\n"
             + "Parameters: n/NAME p/PHONE [n/NAME p/PHONE]...\n"
@@ -96,9 +97,13 @@ public class AssignCommand extends Command {
 
     }
 
-    private List<List<Person>> sortAllSubscribers(Model model, int numOfDrivers) {
+    private List<List<Person>> sortAllSubscribers(Model model, int numOfDrivers) throws CommandException{
         requireNonNull(model);
-        return ClusterAssigner.groupIntoClusters(model.getAddressBook().getPersonList(), numOfDrivers);
+        List<Person> currentSubscribers = model.getAddressBook().getPersonList();
+        if (currentSubscribers.isEmpty()) {
+            throw new CommandException(MESSAGE_EMPTY_LIST);
+        }
+        return ClusterAssigner.groupIntoClusters(currentSubscribers, numOfDrivers);
     }
 
     private void assignDriversToPartitions(Model model, List<List<Person>> sortedSubscribers) {
