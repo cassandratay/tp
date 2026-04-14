@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -38,7 +39,7 @@ public class AssignCommandTest {
     }
 
     @Test
-    public void execute_excessDrivers_showsNote() throws Exception {
+    public void execute_excessDrivers_showsExactUnusedDriverNote() throws Exception {
         // 8 drivers but only 7 typical persons → 1 excess
         Driver d1 = new Driver(new Name("Driver One"), new Phone("91111111"));
         Driver d2 = new Driver(new Name("Driver Two"), new Phone("92222222"));
@@ -51,7 +52,9 @@ public class AssignCommandTest {
         AssignCommand command = new AssignCommand(d1, d2, d3, d4, d5, d6, d7, d8);
 
         CommandResult result = command.execute(model);
-        assertTrue(result.getFeedbackToUser().contains("not utilised"));
+
+        assertEquals(AssignCommand.MESSAGE_SUCCESS + "\nNote: 1 Driver(s) not utilised!",
+                result.getFeedbackToUser());
     }
 
     @Test
@@ -122,5 +125,37 @@ public class AssignCommandTest {
         Driver d = new Driver(new Name("Kyle"), new Phone("91234567"));
         AssignCommand command = new AssignCommand(d);
         assertTrue(command.toString().contains("toAssignDrivers"));
+    }
+
+    @Test
+    public void constructor_equivalentDuplicateDrivers_throwsCommandException() {
+        Driver firstDriver = new Driver(new Name("Kyle"), new Phone("91234567"));
+        Driver secondDriver = new Driver(new Name("Kyle"), new Phone("91234567"));
+
+        assertThrows(CommandException.class, AssignCommand.MESSAGE_DUPLICATE_DRIVER, () ->
+                new AssignCommand(firstDriver, secondDriver));
+    }
+
+    @Test
+    public void execute_emptySubscriberList_throwsCommandException() throws Exception {
+        Model emptyModel = new ModelManager(new AddressBook(), new UserPrefs());
+        Driver driver = new Driver(new Name("Kyle"), new Phone("91234567"));
+        AssignCommand command = new AssignCommand(driver);
+
+        assertThrows(CommandException.class, AssignCommand.MESSAGE_EMPTY_LIST, () -> command.execute(emptyModel));
+    }
+
+    @Test
+    public void execute_filteredList_assignsAllSubscribersAndResetsFilter() throws Exception {
+        Driver driver = new Driver(new Name("Kyle"), new Phone("91234567"));
+        AssignCommand command = new AssignCommand(driver);
+
+        model.updateFilteredPersonList(person -> false);
+        assertEquals(0, model.getFilteredPersonList().size());
+
+        CommandResult result = command.execute(model);
+
+        assertEquals(AssignCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        assertEquals(model.getAddressBook().getPersonList().size(), model.getFilteredPersonList().size());
     }
 }
