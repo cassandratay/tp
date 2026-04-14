@@ -73,6 +73,20 @@ public class ImportUtilTest {
     }
 
     @Test
+    public void parseCsv_whitespaceAroundFields_isTrimmed() throws Exception {
+        String csv = "h1,h2,h3,h4,h5,h6,h7,h8,h9\n"
+                + " 0 , \"Alice\" , 91234567 , alice@example.com , 123 Road 123456 , box-1 , 12 , remark , extra \n";
+        Path file = writeCsv(csv);
+
+        List<String[]> rows = ImportUtil.parseCsv(file.toString());
+        assertEquals(1, rows.size());
+        assertEquals("0", rows.get(0)[0]);
+        assertEquals("Alice", rows.get(0)[1]);
+        assertEquals("91234567", rows.get(0)[2]);
+        assertEquals("123 Road 123456", rows.get(0)[4]);
+    }
+
+    @Test
     public void parseCsv_quotedFieldContainingComma_preservesField() throws Exception {
         String csv = "h1,h2,h3,h4,h5,h6,h7,h8,h9\n"
                 + "0,Alice,91234567,alice@example.com,\"123 Orchard Road, #05-01 Singapore 238888\""

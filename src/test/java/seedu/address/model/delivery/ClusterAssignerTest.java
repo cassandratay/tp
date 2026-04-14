@@ -68,6 +68,11 @@ public class ClusterAssignerTest {
     }
 
     @Test
+    public void groupIntoClusters_nullListAndInvalidDriverCount_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> ClusterAssigner.groupIntoClusters(null, 0));
+    }
+
+    @Test
     public void groupIntoClusters_emptyList_returnsEmptyList() {
         List<List<Person>> result = ClusterAssigner.groupIntoClusters(new ArrayList<>(), 3);
         assertTrue(result.isEmpty());
@@ -147,6 +152,17 @@ public class ClusterAssignerTest {
 
         assertEquals(1, clusters.size());
         assertEquals(1, clusters.get(0).size());
+    }
+
+    @Test
+    public void groupIntoClusters_evenDivision_distributesEqually() {
+        List<Person> persons = new ArrayList<>(TypicalPersons.getTypicalPersons().subList(0, 6));
+        List<List<Person>> clusters = ClusterAssigner.groupIntoClusters(persons, 3);
+
+        assertEquals(3, clusters.size());
+        assertEquals(2, clusters.get(0).size());
+        assertEquals(2, clusters.get(1).size());
+        assertEquals(2, clusters.get(2).size());
     }
 
 }

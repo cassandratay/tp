@@ -46,17 +46,23 @@ public class DriverTest {
     }
 
     @Test
-    public void equals_differentName_returnsTrue() {
+    public void equals_differentName_returnsFalse() {
         Driver a = new Driver(new Name("Kyle"), VALID_PHONE);
         Driver b = new Driver(new Name("John"), VALID_PHONE);
-        assertTrue(a.equals(b));
+        assertFalse(a.equals(b));
     }
 
     @Test
-    public void equals_differentPhone_returnsTrue() {
+    public void equals_differentPhone_returnsFalse() {
         Driver a = new Driver(VALID_NAME, new Phone("91234567"));
         Driver b = new Driver(VALID_NAME, new Phone("98765432"));
-        assertTrue(a.equals(b));
+        assertFalse(a.equals(b));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        Driver driver = new Driver(VALID_NAME, VALID_PHONE);
+        assertFalse(driver.equals("not a driver"));
     }
 
     @Test

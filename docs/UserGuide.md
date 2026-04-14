@@ -539,7 +539,7 @@ Splits **all subscribers** in Client2Door into groups and assigns a driver to ea
 
 Format: `assign n/NAME p/PHONE [n/NAME p/PHONE]…`
 
-* Assigns drivers to **all subscribers** in Client2Door — the current view does not affect who gets assigned.
+* Assigns drivers to **all subscribers** in Client2Door regardless of their delivery status — including those already marked `Delivered`. This is intentional so that completed deliveries remain attributed to the driver who fulfilled them.
 * The number of `n/… p/…` pairs determines how many groups are created. Subscribers are divided roughly equally.
 * Driver phone numbers follow the same rules as subscriber phone numbers — digits only, at least 3 digits, must not start with 0.
 * All driver phone numbers and names must be unique within the command (i.e., no two drivers have the same name or same phone number).

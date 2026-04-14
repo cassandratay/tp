@@ -92,6 +92,15 @@ public class DeliveryAssignmentHashMapTest {
     }
 
     @Test
+    public void getDriversKeySet_isUnmodifiable() {
+        DeliveryAssignmentHashMap map = DeliveryAssignmentHashMap.getInstance();
+        Person person = new PersonBuilder().build();
+        map.assign(DRIVER_A, person);
+
+        assertThrows(UnsupportedOperationException.class, () -> map.getDriversKeySet().add(DRIVER_B));
+    }
+
+    @Test
     public void getDriverForPerson_assignedPerson_returnsDriver() {
         DeliveryAssignmentHashMap map = DeliveryAssignmentHashMap.getInstance();
         Person person = new PersonBuilder().build();
@@ -99,6 +108,18 @@ public class DeliveryAssignmentHashMapTest {
 
         Driver result = map.getDriverForPerson(person);
         assertEquals(DRIVER_A, result);
+    }
+
+    @Test
+    public void getDriverForPerson_assignedToLaterDriver_returnsLaterDriver() {
+        DeliveryAssignmentHashMap map = DeliveryAssignmentHashMap.getInstance();
+        Person p1 = new PersonBuilder().withName("Alice Test").build();
+        Person p2 = new PersonBuilder().withName("Bob Test").build();
+
+        map.assign(DRIVER_A, p1);
+        map.assign(DRIVER_B, p2);
+
+        assertEquals(DRIVER_B, map.getDriverForPerson(p2));
     }
 
     @Test
