@@ -41,7 +41,7 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
-JsonAdaptedPerson --> "*" JsonAdaptedBox
+JsonAdaptedPerson --> "1..*" JsonAdaptedBox
 JsonAdaptedPerson --> "0..1" JsonAdaptedDriver
 
 @enduml
