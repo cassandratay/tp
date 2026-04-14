@@ -286,7 +286,7 @@ Examples:
 
 **Expected output:** The subscriber appears in the result panel at the bottom, and the output panel confirms:
 
-![Add command result](../docs/images/Release1.5Add.png)
+![Add command result](../docs/images/Release1.6Add.png)
 
 ---
 
@@ -322,7 +322,7 @@ Examples:
 
 **Expected output:** The output panel confirms the edit and shows the subscriber's updated details. The subscriber list resets to show all subscribers.
 
-![Edit command result](../docs/images/Release1.5Edit.png)
+![Edit command result](../docs/images/Release1.6Edit.png)
 
 ---
 
@@ -344,7 +344,7 @@ Examples:
 
 **Expected output:** The output panel confirms the remark has been updated. The subscriber list resets to show all subscribers.
 
-![Remark command result](../docs/images/Release1.5Remark.png)
+![Remark command result](../docs/images/Release1.6Remark.png)
 
 ---
 
@@ -391,7 +391,7 @@ Examples:
 
 **Expected output:** The subscriber is removed from the list. The output panel confirms the deletion.
 
-![Delete command result](../docs/images/Release1.3Delete.png)
+![Delete command result](../docs/images/Release1.6Delete.png)
 
 ---
 
@@ -449,7 +449,7 @@ Before filtering, all subscribers are shown:
 
 After running `filter box-1`, only matching subscribers remain:
 
-![Filter after (box)](../docs/images/Release1.5-FilterAfter.png)
+![Filter after (box)](../docs/images/Release1.6-FilterAfter.png)
 
 **Expected output — filtering by driver:**
 
@@ -482,7 +482,7 @@ Suppose the current date is `8 April 2026`,
 
 **Expected output:** The output panel confirms the boxes have been added and shows the subscriber's updated details.
 
-![Addbox command result](../docs/images/Release1.5-AddBox.png)
+![Addbox command result](../docs/images/Release1.6-AddBox.png)
 
 ---
 
@@ -505,7 +505,7 @@ Examples:
 
 **Expected output:** The output panel confirms the update and shows the box's new details. The subscriber list resets to show all subscribers.
 
-![Editbox command result](../docs/images/Release1.5-EditBox.png)
+![Editbox command result](../docs/images/Release1.6-EditBox.png)
 
 ---
 
@@ -529,7 +529,7 @@ Examples:
 
 **Expected output:** The output panel confirms which boxes were removed. The subscriber list resets to show all subscribers.
 
-![Deletebox command result](../docs/images/Release1.5-DeleteBox.png)
+![Deletebox command result](../docs/images/Release1.6-DeleteBox.png)
 
 ---
 
@@ -553,9 +553,12 @@ Examples:
 * `assign n/David Lim p/91234567 n/Priya Nair p/98765432` — splits all subscribers between two drivers.
 * `assign n/David Lim p/91234567 n/Priya Nair p/98765432 n/Ali Hassan p/81234567` — splits all subscribers across three drivers.
 
+>**Note:** Running the commands that change the number of subscribers (such as `add` and `delete`) or `edit` (when address is changed) will clear drivers assignment to ensure the clustering algorithm applies to the full list of subscribers and there is efficient distribution of workload to drivers
+
 **Expected output:** Every subscriber in Client2Door is tagged with their assigned driver. The output panel confirms how many subscribers were assigned and to which drivers. The subscriber list resets to show all subscribers.
 
->**Note:** Running the commands that change the number of subscribers (such as `add` and `delete`) or `edit` (when address is changed) will clear drivers assignment to ensure the clustering algorithm applies to the full list of subscribers and there is efficient distribution of workload to drivers
+![Assign command result](../docs/images/Release1.6Assign.png)
+
 ---
 
 ### Exporting driver delivery assignments : `export`
