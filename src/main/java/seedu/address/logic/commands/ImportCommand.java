@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -121,6 +122,8 @@ public class ImportCommand extends Command {
         int remarkIndex = row.length - 2;
 
         Set<Box> boxes = new TreeSet<>();
+        Set<String> seenBoxNames = new HashSet<>();
+
         for (int i = 5; i < remarkIndex; i += 2) {
             String boxName = row[i].trim();
 
@@ -128,11 +131,19 @@ public class ImportCommand extends Command {
                 continue; //skip box if blank (user did not order a 2nd, 3rd etc. bow)
             }
 
+            if (seenBoxNames.contains(boxName)) {
+                throw new IllegalArgumentException("Duplicate box name: " + boxName);
+            }
+
+            seenBoxNames.add(boxName);
+
             int subscribedMonths = Integer.parseInt(row[i + 1].trim());
             LocalDate expiry = LocalDate.now()
                     .plusMonths(subscribedMonths)
                     .with(TemporalAdjusters.lastDayOfMonth());
+
             ExpiryDate expiryDate = new ExpiryDate(expiry.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
             boxes.add(new Box(boxName, expiryDate));
         }
 

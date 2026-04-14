@@ -604,6 +604,8 @@ Format: `import FILE_NAME.csv`
 
 > **Tip:** Running `import` clears all existing driver assignments. Re-run [`assign`](#assigning-drivers-assign) after importing if driver assignments are needed.
 
+> **Note:** Each subscriber can only subscribe to 1 of each type of box to prevent scalping.
+
 **CSV format:**
 
 Each data row must have at least 9 columns in this order:
