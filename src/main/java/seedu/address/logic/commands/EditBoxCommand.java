@@ -53,6 +53,7 @@ public class EditBoxCommand extends Command {
             + PREFIX_EXPIRY_DATE + "3";
 
     public static final String MESSAGE_EDIT_BOX_SUCCESS = "Edited box %1$s of Person: %2$s";
+    public static final String MESSAGE_NO_CHANGE = "No changes were made — the box already has these values.";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_BOX = "This box already exists for the subscriber.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No subscriber with the given name was found.";
@@ -87,6 +88,11 @@ public class EditBoxCommand extends Command {
         Person personToEdit = findSubscriber(model);
         Box boxToEdit = findBox(personToEdit);
         Box editedBox = createEditedBox(boxToEdit, editBoxDescriptor);
+
+        if (boxToEdit.equals(editedBox)) {
+            throw new CommandException(MESSAGE_NO_CHANGE);
+        }
+
         Person editedPerson = createEditedPerson(personToEdit, boxToEdit, editedBox);
 
         ensureNoDuplicatePerson(model, personToEdit, editedPerson);

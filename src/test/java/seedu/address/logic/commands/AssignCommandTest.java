@@ -62,6 +62,24 @@ public class AssignCommandTest {
     }
 
     @Test
+    public void constructor_sameDriverNameDifferentPhone_throwsCommandException() {
+        Driver first = new Driver(new Name("Kyle"), new Phone("91234567"));
+        Driver second = new Driver(new Name("Kyle"), new Phone("98765432"));
+
+        assertThrows(CommandException.class, AssignCommand.MESSAGE_DUPLICATE_DRIVER, () ->
+                new AssignCommand(first, second));
+    }
+
+    @Test
+    public void constructor_sameDriverPhoneDifferentName_throwsCommandException() {
+        Driver first = new Driver(new Name("Kyle"), new Phone("91234567"));
+        Driver second = new Driver(new Name("John"), new Phone("91234567"));
+
+        assertThrows(CommandException.class, AssignCommand.MESSAGE_DUPLICATE_DRIVER, () ->
+                new AssignCommand(first, second));
+    }
+
+    @Test
     public void equals_sameDrivers_returnsTrue() throws Exception {
         Driver d = new Driver(new Name("Kyle"), new Phone("91234567"));
         AssignCommand a = new AssignCommand(d);

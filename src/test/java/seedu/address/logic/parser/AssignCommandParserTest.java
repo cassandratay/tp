@@ -64,4 +64,16 @@ public class AssignCommandParserTest {
         assertParseFailure(parser, " n/John Doe p/91234567 n/John Doe p/91234567",
                 AssignCommand.MESSAGE_DUPLICATE_DRIVER);
     }
+
+    @Test
+    public void parse_sameDriverNameDifferentPhone_throwsParseException() {
+        assertParseFailure(parser, " n/John Doe p/91234567 n/John Doe p/98765432",
+                AssignCommand.MESSAGE_DUPLICATE_DRIVER);
+    }
+
+    @Test
+    public void parse_sameDriverPhoneDifferentName_throwsParseException() {
+        assertParseFailure(parser, " n/John Doe p/91234567 n/Jane Tan p/91234567",
+                AssignCommand.MESSAGE_DUPLICATE_DRIVER);
+    }
 }

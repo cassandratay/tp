@@ -46,17 +46,56 @@ public class DriverTest {
     }
 
     @Test
-    public void equals_differentName_returnsTrue() {
+    public void equals_differentName_returnsFalse() {
         Driver a = new Driver(new Name("Kyle"), VALID_PHONE);
         Driver b = new Driver(new Name("John"), VALID_PHONE);
-        assertTrue(a.equals(b));
+        assertFalse(a.equals(b));
     }
 
     @Test
-    public void equals_differentPhone_returnsTrue() {
+    public void equals_differentPhone_returnsFalse() {
         Driver a = new Driver(VALID_NAME, new Phone("91234567"));
         Driver b = new Driver(VALID_NAME, new Phone("98765432"));
-        assertTrue(a.equals(b));
+        assertFalse(a.equals(b));
+    }
+
+    @Test
+    public void isSameDriver_sameName_returnsTrue() {
+        Driver a = new Driver(VALID_NAME, new Phone("91234567"));
+        Driver b = new Driver(VALID_NAME, new Phone("98765432"));
+        assertTrue(a.isSameDriver(b));
+    }
+
+    @Test
+    public void isSameDriver_samePhone_returnsTrue() {
+        Driver a = new Driver(new Name("Kyle"), VALID_PHONE);
+        Driver b = new Driver(new Name("John"), VALID_PHONE);
+        assertTrue(a.isSameDriver(b));
+    }
+
+    @Test
+    public void isSameDriver_sameObject_returnsTrue() {
+        Driver driver = new Driver(VALID_NAME, VALID_PHONE);
+        assertTrue(driver.isSameDriver(driver));
+    }
+
+    @Test
+    public void isSameDriver_null_returnsFalse() {
+        Driver driver = new Driver(VALID_NAME, VALID_PHONE);
+        assertFalse(driver.isSameDriver(null));
+    }
+
+    @Test
+    public void isSameDriver_differentNameAndPhone_returnsFalse() {
+        Driver a = new Driver(new Name("Kyle"), new Phone("91234567"));
+        Driver b = new Driver(new Name("John"), new Phone("98765432"));
+        assertFalse(a.isSameDriver(b));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        Driver driver = new Driver(VALID_NAME, VALID_PHONE);
+        assertFalse(driver.equals("not a driver"));
     }
 
     @Test

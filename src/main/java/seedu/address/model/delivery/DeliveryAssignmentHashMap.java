@@ -54,7 +54,13 @@ public class DeliveryAssignmentHashMap {
      * @param p the {@code Person} to be assigned
      */
     public void assign(Driver d, Person p) {
-        List<Person> list = assignments.computeIfAbsent(d, k -> new ArrayList<>());
+        Driver storedDriver = findMatchingDriver(d);
+        if (storedDriver == null) {
+            storedDriver = d;
+            assignments.put(storedDriver, new ArrayList<>());
+        }
+
+        List<Person> list = assignments.get(storedDriver);
 
         if (!list.contains(p)) {
             list.add(p);
@@ -86,7 +92,8 @@ public class DeliveryAssignmentHashMap {
      * @throws DriverNotFoundException if the driver does not exist in the assignments map
      */
     public List<Person> getDeliveryListFor(Driver d) {
-        List<Person> list = assignments.get(d);
+        Driver storedDriver = findMatchingDriver(d);
+        List<Person> list = storedDriver == null ? null : assignments.get(storedDriver);
         if (list != null) {
             return list;
         } else {
@@ -125,5 +132,14 @@ public class DeliveryAssignmentHashMap {
      */
     public static void clearAssignments() {
         assignments = new HashMap<>();
+    }
+
+    private Driver findMatchingDriver(Driver driver) {
+        for (Driver storedDriver : assignments.keySet()) {
+            if (storedDriver.isSameDriver(driver)) {
+                return storedDriver;
+            }
+        }
+        return null;
     }
 }

@@ -67,7 +67,7 @@ public class AssignCommand extends Command {
 
     private boolean inputHasDuplicate(Driver toAdd, int limit) {
         for (int i = 0; i < limit; i++) {
-            if (drivers[i].equals(toAdd)) {
+            if (drivers[i].isSameDriver(toAdd)) {
                 return true;
             }
         }

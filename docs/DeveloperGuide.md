@@ -169,6 +169,8 @@ The following class diagram shows the structure of the clustering logic:
 
 The `AssignCommand` calls `ClusterAssigner#groupIntoClusters()` to get the partitioned list of lists of `Person`s. It will then call `Model#setPerson()` to edit all the `Person`s in the address book. The clustering logic uses `GeographicalComparator`, `DistrictMapper` and `DistrictRanker` to sort subscribers geographically from west to east before partitioning.
 
+During validation, Client2Door treats two drivers as duplicates if either their names match or their phone numbers match. This business-level identity check is separate from `Driver#equals()`, which remains strict and requires both name and phone number to match.
+
 ### Delete box feature
 
 The following sequence diagram shows how a `deleteBox` operation goes through the Logic component:
@@ -338,6 +340,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | small business owner                       | edit a customer delivery entry                                                 | correct mistakes and handle last-minute changes                  |
 | `* *`    | small business owner                      | add remarks to a delivery (e.g. reason for failed delivery)                    | avoid repeating the same mistakes |
 | `* *`    | small business owner                       | import and export customers and order details                                  | avoid retyping existing data                                |
+| `* * *`  | small business owner                       | assign drivers to subscribers for a delivery run                               | distribute deliveries across my drivers efficiently         |
+| `* * *`  | small business owner                       | export driver delivery assignments to a shareable file                         | send each driver their delivery list without manual copying |
+| `* * *`  | small business owner                       | add, edit, and delete subscription boxes for a subscriber                      | keep each subscriber's order details accurate and up to date |
+| `* * *`  | small business owner                       | filter subscribers by box type or assigned driver                              | quickly review which subscribers belong to a specific group |
 | `* *`    | small business owner                       | group customers staying in the same block/estate/area                          | complete all deliveries in that area without revisiting |
 | `* *`    | small business owner who prefers commands over a graphical interface | generate a route grouped by location using a single command                    | minimize repeated trips easily |
 | `* *`    | small business owner                       | highlight blatantly erroneous entries                                          | reduce administrative workload (data checking)                    |
@@ -496,7 +502,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2d. Startup owner specifies duplicate drivers.
+* 2d. Startup owner specifies duplicate drivers (i.e. two drivers share the same name or the same phone number).
 
     * 2d1. Client2Door shows a duplicate driver error message.
 

@@ -10,7 +10,9 @@ import seedu.address.model.commons.phone.Phone;
 
 /**
  * Represents a Driver in Client2Door.
- * A Driver is identified by a {@link Name} and a {@link Phone} number.
+ * A Driver stores a {@link Name} and a {@link Phone} number.
+ * Exact object equality requires both fields to match, while business-level duplicate checks may
+ * treat drivers with the same name or phone number as the same driver.
  * This class is immutable.
  */
 public class Driver {
@@ -41,6 +43,22 @@ public class Driver {
     }
 
     /**
+     * Returns true if this driver should be treated as the same business entity as {@code other}.
+     * Drivers are considered the same when either their name or phone number matches.
+     */
+    public boolean isSameDriver(Driver other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (other == null) {
+            return false;
+        }
+
+        return name.equals(other.name) || phone.equals(other.phone);
+    }
+
+    /**
      * Compares this driver to the specified object. The result is {@code true} if and only if
      * the argument is not {@code null}, is a {@code Driver} object, and has the same
      * {@code Name} and {@code Phone} as this driver.
@@ -63,7 +81,8 @@ public class Driver {
         Driver otherDriver = (Driver) other;
 
         return name.equals(otherDriver.name)
-                || phone.equals(otherDriver.phone);
+                && phone.equals(otherDriver.phone);
+
     }
 
     @Override
